@@ -1,17 +1,24 @@
 package ru.slisarenko;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        var array = List.of(3,3,6,4,4,8,8,1,1,1).toArray();
+        var map = getMapCountOfElements(array);
+        map.forEach((k, v) -> System.out.println(k + " : " + v));
+    }
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+    public static <T> Map<T, Long> getMapCountOfElements (T[] array) {
+        if (array == null || array.length == 0) {
+            return new HashMap<>();
         }
+        return Arrays.stream(array).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }
