@@ -18,6 +18,8 @@ public class Main {
         builder.write(" => Итого");
 
         System.out.println(builder.getText());
+        builder.restoreStateByKey(3);
+        System.out.println(builder.getText());
         builder.restoreStateByKey(2);
         System.out.println(builder.getText());
         builder.restoreStateByKey(1);
