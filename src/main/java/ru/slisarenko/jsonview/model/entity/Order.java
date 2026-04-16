@@ -18,11 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import ru.slisarenko.jsonview.model.enums.StatusOrder;
 
 
@@ -31,7 +29,6 @@ import ru.slisarenko.jsonview.model.enums.StatusOrder;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 public class Order implements BaseEntity<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,5 +61,6 @@ public class Order implements BaseEntity<Long>{
     public void addProduct(Product product) {
         this.products.add(product);
         this.totalPrice.add(product.getPrice());
+        product.setOrder(this);
     }
 }

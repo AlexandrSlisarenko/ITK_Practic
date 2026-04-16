@@ -1,8 +1,6 @@
 package ru.slisarenko.jsonview.service;
 
-import com.sun.source.tree.AssertTree;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import org.junit.jupiter.api.Assertions;
@@ -13,8 +11,6 @@ import ru.slisarenko.jsonview.model.entity.Customer;
 import ru.slisarenko.jsonview.model.entity.Order;
 import ru.slisarenko.jsonview.model.entity.Product;
 import ru.slisarenko.jsonview.model.enums.StatusOrder;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class CustomerServiceTest {
@@ -28,7 +24,6 @@ class CustomerServiceTest {
 
         var testCustomer = createCustomer();
         testCustomer = customerService.createOrderForNewCustomer(testCustomer);
-        System.out.println("Example = " + testCustomer.toString());
         Assertions.assertNotNull(testCustomer);
         Assertions.assertNotNull(testCustomer.getId());
         Assertions.assertNotNull(testCustomer.getOrders().get(0).getId());

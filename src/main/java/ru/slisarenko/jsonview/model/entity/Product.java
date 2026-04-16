@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Table(name = "product")
@@ -22,7 +21,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @Builder
-@ToString
 public class Product implements BaseEntity<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
