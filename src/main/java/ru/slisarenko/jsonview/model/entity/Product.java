@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "product")
@@ -21,12 +22,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
+@ToString
 public class Product implements BaseEntity<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
@@ -35,4 +37,5 @@ public class Product implements BaseEntity<Long>{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
+
 }

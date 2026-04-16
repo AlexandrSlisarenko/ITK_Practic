@@ -7,13 +7,20 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedSubgraph;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.NamedEntityGraph;
 
 @Entity
 @Table(name = "customer")
@@ -21,6 +28,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
+@ToString
 public class Customer implements BaseEntity<Long> {
 
     @Id
@@ -33,6 +41,7 @@ public class Customer implements BaseEntity<Long> {
     @Column(name = "email")
     private String email;
 
+    @Builder.Default
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 }

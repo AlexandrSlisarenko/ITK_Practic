@@ -14,20 +14,24 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import ru.slisarenko.jsonview.model.enums.StatusOrder;
 
 
 @Entity
-@Table(name = "order")
+@Table(name = "customer_order")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class Order implements BaseEntity<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +39,7 @@ public class Order implements BaseEntity<Long>{
     @Setter
     private Long id;
 
-    @Column
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     @Getter
     @Setter
@@ -43,17 +47,19 @@ public class Order implements BaseEntity<Long>{
 
     @Getter
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Product> products;
+    @Builder.Default
+    private List<Product> products = new ArrayList<>();
 
     @Getter
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @Column(name = "totalprice", nullable = false)
     @Getter
-    private BigDecimal totalPrice;
+    @Builder.Default
+    private BigDecimal totalPrice = BigDecimal.ZERO;
 
     public void addProduct(Product product) {
         this.products.add(product);
