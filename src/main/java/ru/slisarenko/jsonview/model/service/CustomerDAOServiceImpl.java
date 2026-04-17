@@ -5,6 +5,7 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.slisarenko.jsonview.exceptions.CustomerNotFoundException;
 import ru.slisarenko.jsonview.model.entity.Customer;
 import ru.slisarenko.jsonview.model.repository.CustomerRepository;
 import ru.slisarenko.jsonview.model.repository.OrderRepository;
@@ -19,23 +20,15 @@ public class CustomerDAOServiceImpl implements DAOService<Customer> {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
 
-
-    @Transactional(readOnly = true)
     @Override
-    public Optional<Customer> getById(Long id) {
-        return this.customerRepository.findById(id);
+    public Optional<Customer> findById(Long id) {
+        return this.customerRepository.findCustomerWithOrdersById(id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<Customer> getAll() {
         return this.customerRepository.findAll();
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<Customer> getAll(Long id) {
-        return List.of();
     }
 
     @Override
@@ -53,8 +46,17 @@ public class CustomerDAOServiceImpl implements DAOService<Customer> {
     }
 
     @Override
-    public boolean delete(Customer entity) {
-        var deleteCustomer = this.customerRepository.findById(entity.getId());
+    public Customer updateInfo(Customer entity) {
+        var customerFromDB = this.customerRepository.findById(entity.getId())
+                .orElseThrow(() -> new CustomerNotFoundException(entity.getId()));
+        customerFromDB.setName(entity.getName());
+        customerFromDB.setEmail(entity.getEmail());
+        return this.customerRepository.save(customerFromDB);
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        var deleteCustomer = this.customerRepository.findById(id);
         if (deleteCustomer.isPresent()) {
             this.customerRepository.delete(deleteCustomer.get());
             return true;
@@ -66,12 +68,14 @@ public class CustomerDAOServiceImpl implements DAOService<Customer> {
     @Transactional(readOnly = true)
     @Override
     public List<Customer> getAllInformation() {
-        var information = this.customerRepository.findAllProjectedBy();
+        var information = this.customerRepository.findAllCustomerBy();
         return information.stream().map(element -> Customer.builder()
                 .id(element.getId())
                 .name(element.getName())
                 .email(element.getEmail())
                 .build()).toList();
+
+
     }
 
     @Transactional(readOnly = true)

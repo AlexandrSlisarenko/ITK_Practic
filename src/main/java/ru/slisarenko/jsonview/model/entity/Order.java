@@ -1,5 +1,6 @@
 package ru.slisarenko.jsonview.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,6 +22,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.slisarenko.jsonview.controller.Views.CustomerDetails;
 import ru.slisarenko.jsonview.model.enums.StatusOrder;
 
 
@@ -36,6 +38,7 @@ public class Order implements BaseEntity<Long>{
     @Setter
     private Long id;
 
+    @JsonView(CustomerDetails.class)
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     @Getter
@@ -47,12 +50,14 @@ public class Order implements BaseEntity<Long>{
     @Builder.Default
     private List<Product> products = new ArrayList<>();
 
+
     @Getter
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @JsonView(CustomerDetails.class)
     @Column(name = "totalprice", nullable = false)
     @Getter
     @Builder.Default
@@ -60,7 +65,7 @@ public class Order implements BaseEntity<Long>{
 
     public void addProduct(Product product) {
         this.products.add(product);
-        this.totalPrice.add(product.getPrice());
+        this.totalPrice = this.totalPrice.add(product.getPrice());
         product.setOrder(this);
     }
 }

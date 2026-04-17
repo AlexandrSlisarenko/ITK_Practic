@@ -10,7 +10,7 @@ import ru.slisarenko.jsonview.model.entity.CustomerInformation;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    List<CustomerInformation> findAllProjectedBy();
+    List<CustomerInformation> findAllCustomerBy();
 
     @EntityGraph(attributePaths = {"orders"})
     Optional<Customer> findCustomerWithOrdersById(Long id);
