@@ -3,7 +3,7 @@ package ru.slisarenko.spring_data_jdbc.mapper;
 import org.springframework.jdbc.core.RowMapper;
 import ru.slisarenko.spring_data_jdbc.entityes.BookEntity;
 
-public class BookMapper {
+public class MapperResultSetToEntity {
 
     public static final RowMapper<BookEntity> BOOK_ROW_MAPPER = (rs, rowNum) -> {
         BookEntity book = new BookEntity();

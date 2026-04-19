@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.slisarenko.spring_data_jdbc.entityes.BookEntity;
+import ru.slisarenko.spring_data_jdbc.exceptions.BookNotfoundException;
 
 import static ru.slisarenko.spring_data_jdbc.constants.SqlQueries.DELETE_BY_ID_SQL;
 import static ru.slisarenko.spring_data_jdbc.constants.SqlQueries.INSERT_SQL;
@@ -16,7 +17,7 @@ import static ru.slisarenko.spring_data_jdbc.constants.SqlQueries.SELECT_ALL_SQL
 import static ru.slisarenko.spring_data_jdbc.constants.SqlQueries.SELECT_BY_ID_SQL;
 import static ru.slisarenko.spring_data_jdbc.constants.SqlQueries.SELECT_COUNT_SQL;
 import static ru.slisarenko.spring_data_jdbc.constants.SqlQueries.UPDATE_SQL;
-import static ru.slisarenko.spring_data_jdbc.mapper.BookMapper.BOOK_ROW_MAPPER;
+import static ru.slisarenko.spring_data_jdbc.mapper.MapperResultSetToEntity.BOOK_ROW_MAPPER;
 
 @Repository
 @RequiredArgsConstructor
@@ -27,8 +28,38 @@ public class BookRepository {
         if (book.getId() == null) {
             return insert(book);
         } else {
-            return update(book);
+            if(this.existsById(book.getId())) {
+                return update(book);
+            } else {
+                throw new BookNotfoundException(book.getId());
+            }
         }
+    }
+
+    public Optional<BookEntity> findById(Long id) {
+        try {
+            var book = jdbcTemplate.queryForObject(SELECT_BY_ID_SQL, BOOK_ROW_MAPPER, id);
+            return Optional.ofNullable(book);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    public List<BookEntity> findAll() {
+        return jdbcTemplate.query(SELECT_ALL_SQL, BOOK_ROW_MAPPER);
+    }
+
+    public void deleteById(Long id) {
+        if(this.existsById(id)) {
+            jdbcTemplate.update(DELETE_BY_ID_SQL, id);
+        } else {
+            throw new BookNotfoundException(id);
+        }
+    }
+
+    private boolean existsById(Long id) {
+        var count = jdbcTemplate.queryForObject(SELECT_COUNT_SQL, Integer.class, id);
+        return count != null && count > 0;
     }
 
     private BookEntity insert(BookEntity book) {
@@ -47,27 +78,5 @@ public class BookRepository {
     private BookEntity update(BookEntity book) {
         jdbcTemplate.update(UPDATE_SQL, book.getTitle(), book.getAuthor(), book.getPublicationYear(), book.getId());
         return book;
-    }
-
-    public Optional<BookEntity> findById(Long id) {
-        try {
-            var book = jdbcTemplate.queryForObject(SELECT_BY_ID_SQL, BOOK_ROW_MAPPER, id);
-            return Optional.ofNullable(book);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
-
-    public List<BookEntity> findAll() {
-        return jdbcTemplate.query(SELECT_ALL_SQL, BOOK_ROW_MAPPER);
-    }
-
-    public void deleteById(Long id) {
-        jdbcTemplate.update(DELETE_BY_ID_SQL, id);
-    }
-
-    public boolean existsById(Long id) {
-        var count = jdbcTemplate.queryForObject(SELECT_COUNT_SQL, Integer.class, id);
-        return count != null && count > 0;
     }
 }
