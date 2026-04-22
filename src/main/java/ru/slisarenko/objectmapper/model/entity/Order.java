@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 import ru.slisarenko.objectmapper.model.enums.OrderStatus;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders_customer")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -55,8 +55,7 @@ public class Order {
     @Column(name = "total_price", nullable = false)
     private BigDecimal totalPrice;
 
-
-    @Column(name = "order_tatus", nullable = false)
+    @Column(name = "order_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 

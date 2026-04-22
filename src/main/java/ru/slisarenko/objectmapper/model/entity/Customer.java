@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long customerId;
 
     @Column(name = "first_name", nullable = false)
@@ -36,10 +36,10 @@ public class Customer {
     private String lastName;
 
     @Email
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email",  nullable = false, unique = true)
     private String email;
 
-    @Column(name = "contact_number", unique = true, nullable = false)
+    @Column(name = "contact_number", nullable = false, unique = true)
     private String contactNumber;
 
     @Builder.Default

@@ -10,5 +10,5 @@ public record CustomerResponseDTO(Long customerId,
                                   String lastName,
                                   String email,
                                   String contactNumber,
-                                  List<Order> orders) {
+                                  List<Long> orders) {
 }

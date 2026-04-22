@@ -1,5 +1,6 @@
 package ru.slisarenko.objectmapper.service.implementations;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,15 +10,14 @@ import ru.slisarenko.objectmapper.model.entity.Order;
 import ru.slisarenko.objectmapper.model.entity.Product;
 import ru.slisarenko.objectmapper.model.enums.OrderStatus;
 import ru.slisarenko.objectmapper.model.repository.OrderRepository;
-import ru.slisarenko.objectmapper.service.dto.OrderRequestDTO;
 import ru.slisarenko.objectmapper.service.dto.OrderResponseDTO;
-import ru.slisarenko.objectmapper.service.dto.ProductDTO;
 import ru.slisarenko.objectmapper.service.exception.NotFoundCustomer;
 import ru.slisarenko.objectmapper.service.exception.NotFoundOrder;
 import ru.slisarenko.objectmapper.service.exception.NotFoundProduct;
 import ru.slisarenko.objectmapper.service.interfaces.CustomerService;
 import ru.slisarenko.objectmapper.service.interfaces.OrderService;
 import ru.slisarenko.objectmapper.service.interfaces.ProductService;
+import ru.slisarenko.objectmapper.service.mapper.MapperJson;
 import ru.slisarenko.objectmapper.service.mapper.OrderMapper;
 
 @Service
@@ -28,11 +28,12 @@ public class OrderServiceImpl implements OrderService {
     private final CustomerService customerService;
     private final OrderMapper mapper;
     private final ProductService productService;
+    private final MapperJson jsonMapper;
 
     @Override
-    public OrderResponseDTO createOrder(OrderRequestDTO orderRequestDTO) {
+    public String createOrder(String jsonRequestDto) throws JsonProcessingException {
 
-
+        var orderRequestDTO = this.jsonMapper.deserializeOrderRequestDto(jsonRequestDto);
         var customer = this.customerService.getCustomerToCreateOrder(orderRequestDTO.emailOrContactNumber())
                 .orElseThrow(() -> new NotFoundCustomer(orderRequestDTO.emailOrContactNumber()));
 
@@ -50,26 +51,28 @@ public class OrderServiceImpl implements OrderService {
                 .build();
 
         newOrder = this.orderRepository.save(newOrder);
-
-        return this.mapper.toDto(newOrder);
+        var orderResponseDTO = this.mapper.toDto(newOrder);
+        return this.jsonMapper.serializeOrderResponseDto(orderResponseDTO);
     }
 
     @Override
-    public OrderResponseDTO getOrder(Long orderId) {
+    public String getOrder(Long orderId) throws JsonProcessingException {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new NotFoundOrder(orderId));
-        List<ProductDTO> productsDTO = order.getProducts().stream()
-                .map(productService::mappingProductToDTO)
+        List<Long> productsDTO = order.getProducts().stream()
+                .map(Product::getProductId)
                 .toList();
 
-        return OrderResponseDTO.builder()
-                .customer(order.getCustomer())
+        var responseOrder =  OrderResponseDTO.builder()
+                .customerId(order.getCustomer().getCustomerId())
                 .orderDate(order.getOrderDate())
                 .orderStatus(order.getOrderStatus())
                 .totalPrice(order.getTotalPrice())
                 .shippingAddress(order.getShippingAddress())
-                .products(productsDTO)
+                .productIds(productsDTO)
                 .build();
+
+        return this.jsonMapper.serializeOrderResponseDto(responseOrder);
 
     }
 }

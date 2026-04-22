@@ -1,13 +1,12 @@
 package ru.slisarenko.objectmapper.service.interfaces;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.Optional;
 import ru.slisarenko.objectmapper.model.entity.Customer;
-import ru.slisarenko.objectmapper.service.dto.CustomerCreateDTO;
 import ru.slisarenko.objectmapper.service.dto.CustomerRequestDTO;
-import ru.slisarenko.objectmapper.service.dto.CustomerResponseDTO;
 
 public interface CustomerService {
-    CustomerResponseDTO getAllInformation(CustomerRequestDTO emailOrContactNumber);
+    String getCustomerInformation(String emailOrContactNumber) throws JsonProcessingException;
     Optional<Customer> getCustomerToCreateOrder(String emailOrContactNumber);
-    CustomerResponseDTO createCustomer(CustomerCreateDTO customerIn);
+    String createCustomer(String jsonCustomer) throws JsonProcessingException;
 }
