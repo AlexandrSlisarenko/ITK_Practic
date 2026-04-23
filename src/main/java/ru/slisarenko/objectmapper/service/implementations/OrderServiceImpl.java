@@ -64,6 +64,7 @@ public class OrderServiceImpl implements OrderService {
                 .toList();
 
         var responseOrder =  OrderResponseDTO.builder()
+                .orderId(order.getOrderId())
                 .customerId(order.getCustomer().getCustomerId())
                 .orderDate(order.getOrderDate())
                 .orderStatus(order.getOrderStatus())

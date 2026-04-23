@@ -12,6 +12,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.slisarenko.objectmapper.config.JsonQueryTestStringStatic.CUSTOMER_CREATE_ERROR_JSON;
+import static ru.slisarenko.objectmapper.config.JsonQueryTestStringStatic.CUSTOMER_CREATE_JSON;
+import static ru.slisarenko.objectmapper.config.JsonQueryTestStringStatic.CUSTOMER_INFORMATION_JSON;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -20,25 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class CustomerControllerTest {
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private CustomerController customerController;
 
-    private static final String CUSTOMER_CREATE_JSON = """
-            {"firstName":"testCustomer",
-             "lastName":"testCustomer",
-             "email":"testCustomer@mail.ru",
-             "contactNumber":"+7(951)555-55-55"}
-            """;
-    private static final String CUSTOMER_CREATE_ERROR_JSON = """
-            {"firstName":"testCustomer",
-             "lastName":"testCustomer",
-             "email":"testCustomermail.ru",
-             "contactNumber":"rrrr"}
-            """;
-    private static final String CUSTOMER_INFORMATION_JSON = """
-            {"email":"testCustomer@mail.ru",
-             "contactNumber":"+7(951)555-55-55"}
-            """;
 
     @Test
     void createCustomerTest() {
@@ -72,9 +57,6 @@ class CustomerControllerTest {
                     .andExpect(jsonPath("$.email").value("testCustomer@mail.ru"))
                     .andExpect(jsonPath("$.contactNumber").value("+7(951)555-55-55"))
                     .andReturn();
-
-            this.customerController.createCustomer(CUSTOMER_CREATE_JSON);
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

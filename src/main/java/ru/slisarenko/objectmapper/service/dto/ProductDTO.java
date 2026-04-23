@@ -21,6 +21,6 @@ public record ProductDTO(Long productId,
                          BigDecimal price,
 
                          @NotNull(message = "Quantity in stock is required")
-                         @Min(value = 0, message = "Quantity cannot be negative")
+                         @Min(value = 1, message = "Quantity cannot be negative")
                          Integer quantityInStock) {
 }

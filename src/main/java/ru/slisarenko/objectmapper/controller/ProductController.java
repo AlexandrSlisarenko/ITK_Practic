@@ -53,7 +53,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable Long id, @Valid @RequestBody String jsonRequestDto) throws JsonProcessingException {
         var json = productService.updateProduct(id, jsonRequestDto);
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(json);
     }
@@ -61,6 +61,6 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }

@@ -75,7 +75,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDetails> handleGeneric(Exception ex, WebRequest request) {
-        ErrorDetails error = new ErrorDetails(LocalDateTime.now(), "Internal server error", request.getDescription(false));
+        var error = ErrorDetails.builder()
+                .message("Internal server error =>" + ex.getMessage())
+                .timestamp(LocalDateTime.now())
+                .details(Arrays.toString(ex.getStackTrace()))
+                .url(request.getDescription(false))
+                .build();
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

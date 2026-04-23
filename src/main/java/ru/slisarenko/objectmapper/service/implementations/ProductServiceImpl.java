@@ -28,10 +28,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public String getProducts(int page, int size) throws JsonProcessingException {
-        var products = this.productRepository.findAll().stream()
+        Pageable pageable = PageRequest.of(page, size);
+        var products = this.productRepository.findAll(pageable).stream()
                 .map(productMapper::toDTO)
                 .toList();
-        Pageable pageable = PageRequest.of(page, size);
         Page<ProductDTO> orderPage = new PageImpl<>(products, pageable, products.size());
         return mapperJson.serializeListProductDto(orderPage);
     }
