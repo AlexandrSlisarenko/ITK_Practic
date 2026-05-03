@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.slisarenko.jsonview.controller.Views.CustomerDetails;
 import ru.slisarenko.jsonview.controller.Views.CustomerSummary;
 import ru.slisarenko.jsonview.service.CustomerService;
+import ru.slisarenko.jsonview.service.dto.CustomerCreateDataDTO;
 import ru.slisarenko.jsonview.service.dto.CustomerInformationDTO;
+import ru.slisarenko.jsonview.service.dto.CustomerInformationDetailDTO;
 import ru.slisarenko.jsonview.service.dto.OrderRequestDTO;
 
 @RestController
@@ -29,26 +31,26 @@ public class CustomerController {
 
     @GetMapping
     @JsonView(CustomerSummary.class)
-    public ResponseEntity<Page<CustomerInformationDTO>> getAllCustomers(@RequestParam int page, @RequestParam int size) {
+    public ResponseEntity<Page<CustomerInformationDetailDTO>> getAllCustomers(@RequestParam int page, @RequestParam int size) {
         return new ResponseEntity<>(this.customerService.getInformationAllCustomers(page, size), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     @JsonView(CustomerDetails.class)
-    public ResponseEntity<CustomerInformationDTO> getCustomerDetails(@PathVariable int id) {
+    public ResponseEntity<CustomerInformationDetailDTO> getCustomerDetails(@PathVariable int id) {
         return new ResponseEntity<>(this.customerService.getCustomerById((long) id), HttpStatus.OK);
     }
 
     @PostMapping("/add")
     @JsonView(CustomerSummary.class)
-    public ResponseEntity<CustomerInformationDTO> createCustomers(@RequestBody CustomerInformationDTO request) {
+    public ResponseEntity<CustomerInformationDTO> createCustomers(@RequestBody CustomerCreateDataDTO request) {
         return new ResponseEntity<>(this.customerService.createNewCustomer(request), HttpStatus.CREATED);
     }
 
     @PostMapping("/add_order")
     @JsonView(CustomerDetails.class)
-    public ResponseEntity<CustomerInformationDTO> addOrderFromCustomers(@RequestBody OrderRequestDTO request) {
-        return new ResponseEntity<>(this.customerService.addOrderFromCustomer(request), HttpStatus.OK);
+    public ResponseEntity<CustomerInformationDetailDTO> addOrderFromCustomers(@RequestBody OrderRequestDTO request) {
+        return new ResponseEntity<>(this.customerService.addOrderForCustomer(request), HttpStatus.OK);
     }
 
     @PutMapping
@@ -61,9 +63,4 @@ public class CustomerController {
     public ResponseEntity<Boolean> deleteCustomerDetails(@PathVariable int id) {
         return new ResponseEntity<>(this.customerService.deleteCustomer((long) id), HttpStatus.OK);
     }
-
-
-
-
-
 }

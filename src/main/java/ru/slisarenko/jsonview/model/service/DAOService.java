@@ -1,16 +1,21 @@
 package ru.slisarenko.jsonview.model.service;
 
-import java.util.List;
 import java.util.Optional;
-import ru.slisarenko.jsonview.model.entity.BaseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import ru.slisarenko.jsonview.model.entity.Customer;
+import ru.slisarenko.jsonview.model.entity.Product;
 
-public interface DAOService<T extends BaseEntity> {
+public interface DAOService {
 
-    Optional<T> findById(Long id);
-    List<T> getAll();
-    T saveOrUpdate(T entity);
-    T updateInfo(T entity);
+    Optional<Customer> findCustomerById(Long id);
+    boolean existsCustomerById(Long id);
+    Customer saveOrUpdate(Customer entity);
+    Customer updateInfo(Customer entity);
     boolean delete(Long id);
-    List<T> getAllInformation();
-    Optional<T> findEntityWithFullInformationById(Long id);
+    Page<Customer> getAllInformation(Pageable pageable);
+    Optional<Customer> findEntityWithFullInformationById(Long id);
+
+    Optional<Product> findProductById(Long id);
+    Product saveOrUpdate(Product entity);
 }

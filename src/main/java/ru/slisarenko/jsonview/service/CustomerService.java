@@ -7,11 +7,13 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.slisarenko.jsonview.exceptions.CustomerNotFoundException;
-import ru.slisarenko.jsonview.model.entity.Customer;
+import ru.slisarenko.jsonview.exceptions.ProductNotFoundException;
 import ru.slisarenko.jsonview.model.entity.Order;
 import ru.slisarenko.jsonview.model.enums.StatusOrder;
 import ru.slisarenko.jsonview.model.service.DAOService;
+import ru.slisarenko.jsonview.service.dto.CustomerCreateDataDTO;
 import ru.slisarenko.jsonview.service.dto.CustomerInformationDTO;
+import ru.slisarenko.jsonview.service.dto.CustomerInformationDetailDTO;
 import ru.slisarenko.jsonview.service.dto.OrderRequestDTO;
 import ru.slisarenko.jsonview.service.mapper.CustomerDataMapper;
 
@@ -19,58 +21,58 @@ import ru.slisarenko.jsonview.service.mapper.CustomerDataMapper;
 @RequiredArgsConstructor
 public class CustomerService {
 
-    private final DAOService<Customer> customerDAOService;
+    private final DAOService serviceDAO;
     private final CustomerDataMapper customerDataMapper;
 
-    public Customer createOrderForNewCustomer(Customer request) {
-
-        return customerDAOService.saveOrUpdate(request);
-    }
-
-    public CustomerInformationDTO createNewCustomer(CustomerInformationDTO request) {
+    public CustomerInformationDTO createNewCustomer(CustomerCreateDataDTO request) {
         var customerRequest = this.customerDataMapper.toModelCreateCustomer(request);
-        var customerFromDb = customerDAOService.saveOrUpdate(customerRequest);
+        var customerFromDb = serviceDAO.saveOrUpdate(customerRequest);
         return customerDataMapper.toCustomerInformationDTO(customerFromDb);
     }
 
     public boolean deleteCustomer(Long id) {
-        return customerDAOService.delete(id);
+        return serviceDAO.delete(id);
     }
 
 
     public CustomerInformationDTO updateInformCustomer(CustomerInformationDTO updateRequest) {
         var customer = customerDataMapper.toModelUpdateCustomer(updateRequest);
-        return this.customerDataMapper.toCustomerInformationUpdate(customerDAOService.updateInfo(customer));
+        return this.customerDataMapper.toCustomerInformationDTO(serviceDAO.updateInfo(customer));
     }
 
-    public Page<CustomerInformationDTO> getInformationAllCustomers(int page, int size) {
+    public Page<CustomerInformationDetailDTO> getInformationAllCustomers(int page, int size) {
         var pageable = PageRequest.of(page, size);
-        var information = customerDAOService.getAllInformation().stream()
-                .map(customerDataMapper::toCustomerInformationDTO)
+        var information = serviceDAO.getAllInformation(pageable).stream()
+                .map(customerDataMapper::toCustomerInformationDetailDTO)
                 .collect(Collectors.toList());
         return new PageImpl<>(information, pageable, information.size());
 
     }
 
-    public CustomerInformationDTO getCustomerById(Long id) {
-        var result = checkId(id);
-        return customerDataMapper.toCustomerInformationDTO(result);
+    public CustomerInformationDetailDTO getCustomerById(Long id) {
+        if(checkId(id)) {
+            var result = this.serviceDAO.findEntityWithFullInformationById(id).get();
+            return customerDataMapper.toCustomerInformationDetailDTO(result);
+        }
+        throw new CustomerNotFoundException(id);
     }
 
-    public CustomerInformationDTO addOrderFromCustomer(OrderRequestDTO requestOrder) {
-        var customer = this.customerDAOService.findById(requestOrder.customerId())
+    public CustomerInformationDetailDTO addOrderForCustomer(OrderRequestDTO requestOrder) {
+        var customer = this.serviceDAO.findCustomerById(requestOrder.customerId())
                 .orElseThrow(() -> new CustomerNotFoundException(requestOrder.customerId()));
+        var products = requestOrder.productsId().stream().map(productId -> this.serviceDAO.findProductById(productId)
+                .orElseThrow(() -> new ProductNotFoundException(productId))).toList();
         var newOrder = Order.builder()
                 .status(StatusOrder.CREATED)
                 .customer(customer)
                 .build();
-        requestOrder.products().stream().map(this.customerDataMapper::toModelProduct).forEach(newOrder::addProduct);
+        products.forEach(newOrder::addProduct);
         customer.addOrder(newOrder);
-        return this.customerDataMapper.toCustomerInformationDTO(customer);
+        customer = this.serviceDAO.saveOrUpdate(customer);
+        return this.customerDataMapper.toCustomerInformationDetailDTO(customer);
     }
 
-    public Customer checkId(Long id) {
-        return this.customerDAOService.findById(id)
-                .orElseThrow(() -> new CustomerNotFoundException(id));
+    public boolean checkId(Long id) {
+        return this.serviceDAO.existsCustomerById(id);
     }
 }
