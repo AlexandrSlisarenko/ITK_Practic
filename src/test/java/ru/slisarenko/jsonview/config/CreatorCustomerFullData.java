@@ -3,12 +3,12 @@ package ru.slisarenko.jsonview.config;
 import java.util.ArrayList;
 import org.springframework.stereotype.Component;
 import ru.slisarenko.jsonview.model.entity.Customer;
-import ru.slisarenko.jsonview.service.dto.CustomerInformationDTO;
+import ru.slisarenko.jsonview.service.dto.CustomerInformationDetailDTO;
 
 @Component
 public class CreatorCustomerFullData {
 
-    public Customer createEmptyCustomer(Long id,String name, String email) {
+    /*public Customer createEmptyCustomer(Long id,String name, String email) {
         return Customer.builder()
                 .id(id)
                 .email(email)
@@ -19,12 +19,12 @@ public class CreatorCustomerFullData {
 
 
 
-    public CustomerInformationDTO getCreateRequestDTO(Long id,String name, String email) {
-        return  CustomerInformationDTO.builder()
+    public CustomerInformationDetailDTO getCreateRequestDTO(Long id, String name, String email) {
+        return  CustomerInformationDetailDTO.builder()
                 .id(id)
-                .orders(new ArrayList<>())
+                .ordersId(new ArrayList<>())
                 .email(email)
                 .name(name)
                 .build();
-    }
+    }*/
 }

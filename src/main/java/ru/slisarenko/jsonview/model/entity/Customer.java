@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedAttributeNode;
 import jakarta.persistence.NamedEntityGraph;
+import jakarta.persistence.NamedSubgraph;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
@@ -26,7 +27,14 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
-@NamedEntityGraph(name = "Customer.withOrders", attributeNodes = @NamedAttributeNode("orders"))
+@NamedEntityGraph(name = "Customer.withOrders", attributeNodes = {
+        @NamedAttributeNode(value = "orders", subgraph = "ordersSubgraph")
+}, subgraphs = {
+        @NamedSubgraph(name = "ordersSubgraph", attributeNodes = {
+                @NamedAttributeNode("status"),
+                @NamedAttributeNode("totalPrice")
+        })
+})
 public class Customer implements BaseEntity<Long> {
 
     @Id

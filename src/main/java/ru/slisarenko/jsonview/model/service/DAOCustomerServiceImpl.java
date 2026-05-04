@@ -8,41 +8,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.slisarenko.jsonview.exceptions.CustomerNotFoundException;
 import ru.slisarenko.jsonview.model.entity.Customer;
-import ru.slisarenko.jsonview.model.entity.Product;
 import ru.slisarenko.jsonview.model.repository.CustomerRepository;
-import ru.slisarenko.jsonview.model.repository.ProductRepository;
+import ru.slisarenko.jsonview.service.dto.CustomerInformationDTO;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class DAOServiceImpl implements DAOService {
+public class DAOCustomerServiceImpl implements DAOCustomerService {
 
     private final CustomerRepository customerRepository;
-    private final ProductRepository productRepository;
 
     @Transactional(readOnly = true)
     @Override
     public Optional<Customer> findCustomerById(Long id) {
-        return this.customerRepository.findCustomerWithOrdersById(id);
+        return this.customerRepository.findById(id);
     }
-
-    @Transactional(readOnly = true)
-    @Override
-    public boolean existsCustomerById(Long id) {
-        return this.customerRepository.existsById(id);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public Optional<Product> findProductById(Long id) {
-        return this.productRepository.findById(id);
-    }
-
-    @Override
-    public Product saveOrUpdate(Product entity) {
-        return this.productRepository.save(entity);
-    }
-
 
     @Override
     public Customer saveOrUpdate(Customer entity) {
@@ -77,8 +57,8 @@ public class DAOServiceImpl implements DAOService {
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Customer> findEntityWithFullInformationById(Long id) {
-        return this.customerRepository.findCustomerWithOrdersById(id);
+    public Optional<CustomerInformationDTO> findEntityWithFullInformationById(Long id) {
+       return this.customerRepository.findCustomerWithOrdersById(id);
     }
 
 

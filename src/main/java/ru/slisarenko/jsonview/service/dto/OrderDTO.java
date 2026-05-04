@@ -7,6 +7,7 @@ import ru.slisarenko.jsonview.controller.Views.CustomerDetails;
 import ru.slisarenko.jsonview.model.enums.StatusOrder;
 
 @Builder
-public record OrderDTO(@JsonView(CustomerDetails.class) StatusOrder status,
+public record OrderDTO(@JsonView(CustomerDetails.class) Long id,
+                       @JsonView(CustomerDetails.class) StatusOrder status,
                        @JsonView(CustomerDetails.class) BigDecimal totalPrice) {
 }

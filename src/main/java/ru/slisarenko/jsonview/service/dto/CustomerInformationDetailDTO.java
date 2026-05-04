@@ -10,5 +10,5 @@ import ru.slisarenko.jsonview.controller.Views.CustomerSummary;
 public record CustomerInformationDetailDTO(@JsonView(CustomerSummary.class) Long id,
                                            @JsonView(CustomerSummary.class) String name,
                                            @JsonView(CustomerSummary.class) String email,
-                                           @JsonView(CustomerDetails.class) List<Long> ordersId) {
+                                           @JsonView(CustomerDetails.class) List<OrderDTO> orders) {
 }

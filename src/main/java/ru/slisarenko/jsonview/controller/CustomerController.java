@@ -20,6 +20,7 @@ import ru.slisarenko.jsonview.service.CustomerService;
 import ru.slisarenko.jsonview.service.dto.CustomerCreateDataDTO;
 import ru.slisarenko.jsonview.service.dto.CustomerInformationDTO;
 import ru.slisarenko.jsonview.service.dto.CustomerInformationDetailDTO;
+import ru.slisarenko.jsonview.service.dto.OrderDTO;
 import ru.slisarenko.jsonview.service.dto.OrderRequestDTO;
 
 @RestController
@@ -31,14 +32,14 @@ public class CustomerController {
 
     @GetMapping
     @JsonView(CustomerSummary.class)
-    public ResponseEntity<Page<CustomerInformationDetailDTO>> getAllCustomers(@RequestParam int page, @RequestParam int size) {
+    public ResponseEntity<Page<CustomerInformationDTO>> getAllCustomers(@RequestParam int page, @RequestParam int size) {
         return new ResponseEntity<>(this.customerService.getInformationAllCustomers(page, size), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     @JsonView(CustomerDetails.class)
-    public ResponseEntity<CustomerInformationDetailDTO> getCustomerDetails(@PathVariable int id) {
-        return new ResponseEntity<>(this.customerService.getCustomerById((long) id), HttpStatus.OK);
+    public ResponseEntity<CustomerInformationDetailDTO> getCustomerDetails(@PathVariable Long id) {
+        return new ResponseEntity<>(this.customerService.getCustomerById(id), HttpStatus.OK);
     }
 
     @PostMapping("/add")
@@ -49,7 +50,7 @@ public class CustomerController {
 
     @PostMapping("/add_order")
     @JsonView(CustomerDetails.class)
-    public ResponseEntity<CustomerInformationDetailDTO> addOrderFromCustomers(@RequestBody OrderRequestDTO request) {
+    public ResponseEntity<OrderDTO> addOrderFromCustomers(@RequestBody OrderRequestDTO request) {
         return new ResponseEntity<>(this.customerService.addOrderForCustomer(request), HttpStatus.OK);
     }
 

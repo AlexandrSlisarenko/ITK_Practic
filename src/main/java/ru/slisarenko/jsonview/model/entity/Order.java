@@ -33,7 +33,6 @@ import ru.slisarenko.jsonview.model.enums.StatusOrder;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@NamedEntityGraph(name = "Order.withProducts", attributeNodes = @NamedAttributeNode("products"))
 public class Order implements BaseEntity<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,5 +69,6 @@ public class Order implements BaseEntity<Long>{
         this.products.add(product);
         this.totalPrice = this.totalPrice.add(product.getPrice());
         product.setOrder(this);
+
     }
 }

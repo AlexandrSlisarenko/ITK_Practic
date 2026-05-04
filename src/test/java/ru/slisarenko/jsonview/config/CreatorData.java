@@ -9,7 +9,9 @@ import ru.slisarenko.jsonview.model.entity.Customer;
 import ru.slisarenko.jsonview.model.entity.Order;
 import ru.slisarenko.jsonview.model.entity.Product;
 import ru.slisarenko.jsonview.model.enums.StatusOrder;
-import ru.slisarenko.jsonview.service.CustomerService;
+import ru.slisarenko.jsonview.model.service.DAOCustomerService;
+import ru.slisarenko.jsonview.model.service.DAOProductService;
+import ru.slisarenko.jsonview.service.dto.CustomerCreateDataDTO;
 import ru.slisarenko.jsonview.service.dto.CustomerInformationDTO;
 import ru.slisarenko.jsonview.service.dto.OrderRequestDTO;
 import ru.slisarenko.jsonview.service.dto.ProductDTO;
@@ -17,26 +19,26 @@ import ru.slisarenko.jsonview.service.dto.ProductDTO;
 @Component
 public class CreatorData {
     @Autowired
-    private CustomerService customerService;
+    private DAOCustomerService customerDAO;
+
+    @Autowired
+    private DAOProductService productDAO;
 
     private Random random = new Random();
 
 
 
-    public Customer getNewTestCustomerFromDB(){
-        return customerService.createOrderForNewCustomer(createCustomer());
-    }
+   /* public Customer getNewTestCustomerFromDB(){
+        return serviceDAO.saveOrUpdate(createCustomer());
+    }*/
 
 
     public Customer createCustomer() {
-        var order = createOrder();
-        var number = random.nextInt();
-        order.addProduct(createProduct(number));
-        return Customer.builder()
-                .email("test" + number + "@mail.ru")
-                .name("Test Customer " + number)
-                .orders(List.of(order))
+       var customer = Customer.builder()
+                .email("test_email@test.ru")
+                .name("test_name")
                 .build();
+       return this.customerDAO.saveOrUpdate(customer);
     }
 
     private Order createOrder() {
@@ -46,16 +48,33 @@ public class CreatorData {
     }
 
     private Product createProduct(int price) {
-        return Product.builder()
+        var product = Product.builder()
                 .name("Coffee with milk")
                 .price(BigDecimal.valueOf(price))
                 .build();
+        return this.productDAO.saveOrUpdate(product);
+    }
+
+    public Long getNewProductId() {
+        var product = Product.builder()
+                .name("Coffee with milk")
+                .price(BigDecimal.valueOf(10L))
+                .build();
+        return this.productDAO.saveOrUpdate(product).getId();
     }
 
 
 
-    public CustomerInformationDTO getCreateRequestDTO(String name, String email) {
+    public CustomerCreateDataDTO getCreateRequestDTO(String name, String email) {
+        return  CustomerCreateDataDTO.builder()
+                .email(email)
+                .name(name)
+                .build();
+    }
+
+    public CustomerInformationDTO getCustomerInformationDTO(Long id, String name, String email) {
         return  CustomerInformationDTO.builder()
+                .id(id)
                 .email(email)
                 .name(name)
                 .build();
@@ -69,10 +88,10 @@ public class CreatorData {
                 .build();
     }
 
-    public OrderRequestDTO getOrderRequestDTO(Long customerId, List<ProductDTO> products) {
+    public OrderRequestDTO getOrderRequestDTO(Long customerId, List<Long> productsId) {
         return OrderRequestDTO.builder()
                 .customerId(customerId)
-                .products(products)
+                .productsId(productsId)
                 .build();
     }
 

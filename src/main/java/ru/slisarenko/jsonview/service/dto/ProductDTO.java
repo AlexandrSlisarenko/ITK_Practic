@@ -5,5 +5,7 @@ import java.math.BigDecimal;
 import lombok.Builder;
 
 @Builder
-public record ProductDTO(String name, BigDecimal price) {
+public record ProductDTO(Long id,
+                         String name,
+                         BigDecimal price) {
 }
