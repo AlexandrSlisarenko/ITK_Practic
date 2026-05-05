@@ -12,6 +12,12 @@ import ru.slisarenko.spring_security_jwt.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
+    boolean existsByUsername(String username);
+
+    void deleteByUsername(String username);
+
+    int countAllByEnabled(boolean enabled);
+
     @Modifying
     @Transactional
     @Query("UPDATE User u SET u.failedAttempts = 0, u.isAccountNonLocked = true, u.lockTime = null WHERE u.username = :username")
