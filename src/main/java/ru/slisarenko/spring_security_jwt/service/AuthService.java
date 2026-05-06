@@ -1,21 +1,20 @@
 package ru.slisarenko.spring_security_jwt.service;
 
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.slisarenko.spring_security_jwt.dto.AuthRequestDTO;
 import ru.slisarenko.spring_security_jwt.dto.AuthResponseDTO;
-import ru.slisarenko.spring_security_jwt.model.RefreshToken;
 import ru.slisarenko.spring_security_jwt.model.Role;
-import ru.slisarenko.spring_security_jwt.model.User;
+import ru.slisarenko.spring_security_jwt.model.UserEntity;
 
 @Slf4j
 @Service
@@ -45,7 +44,7 @@ public class AuthService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             loginService.loginSucceeded(request.username());
 
-            var user = (User) authentication.getPrincipal();
+            var user = (UserEntity) authentication.getPrincipal();
             var accessToken = jwtService.generateAccessToken(user);
             var refreshToken = refreshTokenService.createRefreshToken(user.getUsername());
 
@@ -105,9 +104,10 @@ public class AuthService {
         }
     }
 
+    @PostConstruct
     public void createInitialUsers() {
         if (!userDAOService.existsByUsername("user")) {
-            var user = User.builder()
+            var user = UserEntity.builder()
                     .username("user")
                     .password(passwordEncoder.encode("password"))
                     .role(Role.USER)
@@ -117,7 +117,7 @@ public class AuthService {
         }
 
         if (!userDAOService.existsByUsername("moderator")) {
-            var moderator = User.builder()
+            var moderator = UserEntity.builder()
                     .username("moderator")
                     .password(passwordEncoder.encode("moder123"))
                     .role(Role.MODERATOR)
@@ -127,7 +127,7 @@ public class AuthService {
         }
 
         if (!userDAOService.existsByUsername("admin")) {
-            var admin = User.builder()
+            var admin = UserEntity.builder()
                     .username("admin")
                     .password(passwordEncoder.encode("admin123"))
                     .role(Role.SUPER_ADMIN)

@@ -1,5 +1,6 @@
 package ru.slisarenko.spring_security_jwt.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,9 +43,12 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(
+                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**", "/login", "/api/auth/refresh").permitAll()
+                        .requestMatchers("/api/auth/test").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/error", "/actuator/health").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -60,4 +64,6 @@ public class SecurityConfiguration {
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
+
+
 }

@@ -1,6 +1,5 @@
 package ru.slisarenko.spring_security_jwt.controller;
 
-import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.slisarenko.spring_security_jwt.model.User;
+import ru.slisarenko.spring_security_jwt.model.UserEntity;
 import ru.slisarenko.spring_security_jwt.service.LoginService;
 import ru.slisarenko.spring_security_jwt.service.UserDAOService;
 
@@ -30,7 +29,7 @@ public class AdminController {
 
     @GetMapping("/users")
     @PreAuthorize("hasRole('SUPER_ADMIN')")
-    public ResponseEntity<Page<User>> getAllUsers(@RequestParam("page") int page, @RequestParam("size") int size) {
+    public ResponseEntity<Page<UserEntity>> getAllUsers(@RequestParam("page") int page, @RequestParam("size") int size) {
         return new ResponseEntity<>(userRepository.findAll(page, size), HttpStatus.OK);
     }
 

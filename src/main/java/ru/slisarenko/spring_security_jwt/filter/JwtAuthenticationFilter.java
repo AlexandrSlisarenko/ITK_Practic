@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import ru.slisarenko.spring_security_jwt.logger.AuthenticationLogger;
 import ru.slisarenko.spring_security_jwt.service.JwtService;
 import ru.slisarenko.spring_security_jwt.service.UserDAOService;
 
@@ -21,6 +22,7 @@ import ru.slisarenko.spring_security_jwt.service.UserDAOService;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDAOService userDAOService;
+    private final AuthenticationLogger authLogger;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -47,7 +49,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                 new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                         authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                         SecurityContextHolder.getContext().setAuthentication(authToken);
-                        log.debug("Authenticated user: {}", username);
+                        log.info("Authenticated user: {}", username);
+                        String role = userDetails.getAuthorities().iterator().next().getAuthority();
+                        String requestPath = request.getRequestURI();
+                        authLogger.logResourceAccess(
+                                username,
+                                role,
+                                requestPath,
+                                request.getMethod(),
+                                getClientIp(request),
+                                true
+                        );
                     }
                 }
             }
@@ -64,6 +76,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private boolean checkHeaderAuthorization(String authHeader) {
-        return authHeader != null && authHeader.startsWith("Bearer ");
+        return !(authHeader != null && authHeader.startsWith("Bearer "));
+    }
+
+    private String getClientIp(HttpServletRequest request) {
+        String ipAddress = request.getHeader("X-Forwarded-For");
+        if (ipAddress == null || ipAddress.isEmpty()) {
+            ipAddress = request.getRemoteAddr();
+        }
+        return ipAddress;
     }
 }

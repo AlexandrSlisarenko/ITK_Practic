@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.slisarenko.spring_security_jwt.model.User;
+import ru.slisarenko.spring_security_jwt.model.UserEntity;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByUsername(String username);
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
+    Optional<UserEntity> findByUsername(String username);
 
     boolean existsByUsername(String username);
 
@@ -20,6 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE User u SET u.failedAttempts = 0, u.isAccountNonLocked = true, u.lockTime = null WHERE u.username = :username")
+    @Query("UPDATE UserEntity u SET u.failedAttempts = 0, u.isAccountNonLocked = true, u.lockTime = null WHERE u.username = :username")
     void unlockAccount(String username);
 }

@@ -8,7 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.slisarenko.spring_security_jwt.model.User;
+import ru.slisarenko.spring_security_jwt.model.UserEntity;
 import ru.slisarenko.spring_security_jwt.service.UserDAOService;
 
 @Slf4j
@@ -21,7 +21,7 @@ public class UserController {
 
     @GetMapping("/profile")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('SUPER_ADMIN')")
-    public Map<String, Object> getProfile(@AuthenticationPrincipal User user) {
+    public Map<String, Object> getProfile(@AuthenticationPrincipal UserEntity user) {
         return Map.of(
                 "username", user.getUsername(),
                 "role", user.getRole(),

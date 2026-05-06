@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.slisarenko.spring_security_jwt.model.User;
+import ru.slisarenko.spring_security_jwt.model.UserEntity;
 import ru.slisarenko.spring_security_jwt.repository.UserRepository;
 
 @Service
@@ -18,12 +18,12 @@ public class UserDAOService {
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public Optional<User> findByUsername(String username) {
+    public Optional<UserEntity> findByUsername(String username) {
         return this.userRepository.findByUsername(username);
     }
 
     @Transactional(readOnly = true)
-    public User loadUserByUsername(String username) {
+    public UserEntity loadUserByUsername(String username) {
         var userFromDB = this.findByUsername(username);
         if (userFromDB.isPresent()) {
             return userFromDB.get();
@@ -36,14 +36,14 @@ public class UserDAOService {
         this.userRepository.unlockAccount(username);
     }
 
-    public void saveUser(User user) {
+    public void saveUser(UserEntity user) {
         this.userRepository.save(user);
     }
 
     @Transactional(readOnly = true)
     public boolean isUserAccountNonLocked(String username) {
         return userRepository.findByUsername(username)
-                .map(User::isAccountNonLocked)
+                .map(UserEntity::isAccountNonLocked)
                 .orElse(false);
     }
     @Transactional(readOnly = true)
@@ -52,7 +52,7 @@ public class UserDAOService {
     }
 
     @Transactional(readOnly = true)
-    public Page<User> findAll(int page, int size) {
+    public Page<UserEntity> findAll(int page, int size) {
         var pageable = PageRequest.of(page, size);
         var context = userRepository.findAll(pageable);
         return new PageImpl<>(context.getContent(), pageable, context.getTotalElements());

@@ -21,6 +21,12 @@ import ru.slisarenko.spring_security_jwt.service.AuthService;
 public class AuthController {
     private final AuthService authService;
 
+    @PostMapping("/test")
+    public ResponseEntity<String> test(@RequestBody AuthRequestDTO request) {
+        var response = request.username() + ":" + request.password();
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody AuthRequestDTO request) {
         var response = authService.authenticate(request);

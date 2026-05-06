@@ -15,11 +15,30 @@ spring:
       ddl-auto: update
     show-sql: true
   logging:
+    # Общие настройки
     level:
-      ru.slisarenko.spring_security_jwt: DEBUG
+      ru.slisarenko.spring_security_jwt: INFO
+      org.springframework.web: INFO
+      org.springframework.security: WARN
+      org.hibernate: WARN
+
+    # Настройки файлов
     file:
-      name: logs/auth.log
+      name: ./logs/application.log
       path: ./logs
+
+    # Настройки паттернов
+    pattern:
+      console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %clr(%-5level) [%thread] %clr(%logger{36}){cyan} - %msg%n"
+      file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{50} - %msg%n"
+
+    # Настройки ротации логов
+    logback:
+      rollingpolicy:
+        max-file-size: 10MB
+        max-history: 30
+        total-size-cap: 1GB
+        clean-history-on-start: false
 
 jwt:
   secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
