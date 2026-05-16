@@ -73,7 +73,7 @@ GROUP BY employee.employeename
 HAVING COUNT(project.projectid) > 2;
 
 
-EXPLAIN ANALYZE WITH getAVGTotalAmount AS (SELECT AVG(morder.totalamount) avgTotalAmount
+WITH getAVGTotalAmount AS (SELECT AVG(morder.totalamount) avgTotalAmount
                       FROM Morder AS morder)
 SELECT customer.customername, SUM(morder.totalamount)
 FROM Morder AS morder
@@ -81,12 +81,10 @@ LEFT JOIN Customer AS customer ON morder.customerid = customer.customerid
 GROUP BY customer.customername
 HAVING SUM(morder.totalamount) > (SELECT avgTotalAmount FROM getAVGTotalAmount);
 
-/*WITH averagePrice AS (
-
-)
-SELECT product.productname
-FROM Orderdetail AS detail
-LEFT JOIN Product AS product ON detail.productid = product.productid*/
-
-
+SELECT pr.productname, AVG(pr.price * od.quantity) AS AveragePrice, SUM(od.quantity) AS TotalQuantity
+FROM Product AS pr
+INNER JOIN Orderdetail AS od ON pr.productid = od.productid
+GROUP BY pr.productid, pr.productname
+HAVING AVG(pr.price * od.quantity) > 100.00 AND SUM(od.quantity) > 2
+/*В задаче ошибка не больше 20 а больше 2 по количеству, или я что-то не понял*/
 
