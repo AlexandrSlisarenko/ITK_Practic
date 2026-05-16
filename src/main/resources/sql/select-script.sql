@@ -1,3 +1,28 @@
+--Практическое задание!!!
+EXPLAIN ANALYSE SELECT SUM(products.price * cart_items.quantity) AS total_cost
+                FROM products
+                         JOIN cart_items ON products.id = cart_items.product_id
+                         JOIN orders ON orders.user_id = cart_items.user_id
+                WHERE orders.status = 'active'
+                  AND orders.user_id = 100;
+-- Было:
+-- Planning Time: 0.235 ms
+-- Execution Time: 26.324 ms
+
+CREATE INDEX idx_cart_items_products ON cart_items(product_id);
+CREATE INDEX idx_cart_items_users ON cart_items(user_id);
+CREATE INDEX idx_orders_user_id ON orders (user_id);
+CREATE INDEX idx_orders_status_active ON orders(status) WHERE status = 'active';
+
+
+-- Стало:
+-- Planning Time: 0.197 ms
+-- Execution Time: 0.187 ms
+
+--Практическое задание!!!
+
+
+-- SQL livecoding
 SELECT e.employeename, e.salary, companyname, c.address
 FROM employee e
          LEFT JOIN public.company c on c.companyid = e.companyid;
@@ -48,7 +73,7 @@ GROUP BY employee.employeename
 HAVING COUNT(project.projectid) > 2;
 
 
-WITH getAVGTotalAmount AS (SELECT AVG(morder.totalamount) avgTotalAmount
+EXPLAIN ANALYZE WITH getAVGTotalAmount AS (SELECT AVG(morder.totalamount) avgTotalAmount
                       FROM Morder AS morder)
 SELECT customer.customername, SUM(morder.totalamount)
 FROM Morder AS morder
@@ -56,10 +81,12 @@ LEFT JOIN Customer AS customer ON morder.customerid = customer.customerid
 GROUP BY customer.customername
 HAVING SUM(morder.totalamount) > (SELECT avgTotalAmount FROM getAVGTotalAmount);
 
-WITH averagePrice AS (
+/*WITH averagePrice AS (
 
 )
 SELECT product.productname
 FROM Orderdetail AS detail
-LEFT JOIN Product AS product ON detail.productid = product.productid
+LEFT JOIN Product AS product ON detail.productid = product.productid*/
+
+
 
