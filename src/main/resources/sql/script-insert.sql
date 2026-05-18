@@ -239,3 +239,65 @@ VALUES (1,	1,	1,	2),
        (8,	4,	5,	2),
        (9,	5,	3,	4),
        (10,	5,	4,	1);
+
+CREATE TABLE IF NOT EXISTS Task
+(
+    taskId int primary key,
+    taskName varchar(255),
+    hours  int
+);
+
+INSERT INTO Task(taskId, taskName, hours)
+VALUES (101, 'Design UI', 20),
+       (201, 'Implement Feature', 30),
+       (202, 'Testing', 25),
+       (301, 'Database Design', 35),
+       (401, 'Code Refactoring', 40),
+       (501, 'Write Documentation', 15);
+
+
+
+CREATE TABLE IF NOT EXISTS TaskAssignments
+(
+    assignmentID int primary key,
+    employeeId int not null,
+    projectId  int not null,
+    taskId int not null,
+    hoursWorked int not null,
+    constraint employeeId foreign key(employeeId) references Employee(employeeId),
+    constraint projectId foreign key(projectId) references Project(projectId),
+    constraint taskId foreign key(taskId) references Task(taskId)
+);
+
+INSERT INTO TaskAssignments(assignmentID, employeeId, projectId, taskId, hoursWorked)
+VALUES (1, 1, 1, 101, 20),
+       (2, 1, 2, 201, 15),
+       (3, 2, 2, 202, 25),
+       (4, 3, 1, 101, 15),
+       (5, 3, 3, 301, 30),
+       (6, 4, 4, 401, 40),
+       (7, 5, 2, 201, 35),
+       (8, 5, 3, 301, 20),
+       (9, 1, 4, 401, 15),
+       (10, 2, 5, 501, 30);
+
+CREATE TABLE IF NOT EXISTS Grades
+(
+    gradeId   int primary key,
+    studentId int,
+    courseId  int,
+    grade     int,
+    CONSTRAINT studentId FOREIGN KEY (studentId) REFERENCES Student (studentId),
+    CONSTRAINT courseId FOREIGN KEY (courseId) REFERENCES Course (courseId)
+);
+INSERT INTO Grades(gradeId, studentId, courseId, grade)
+VALUES (1, 1, 1, 85),
+       (2, 1, 2, 78),
+       (3, 2, 2, 92),
+       (4, 2, 3, 88),
+       (5, 3, 1, 70),
+       (6, 3, 3, 75),
+       (7, 4, 4, 95),
+       (8, 4, 3, 80),
+       (9, 5, 2, 88),
+       (10, 5, 3, 92);

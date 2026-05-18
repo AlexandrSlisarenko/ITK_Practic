@@ -85,6 +85,130 @@ SELECT pr.productname, AVG(pr.price * od.quantity) AS AveragePrice, SUM(od.quant
 FROM Product AS pr
 INNER JOIN Orderdetail AS od ON pr.productid = od.productid
 GROUP BY pr.productid, pr.productname
-HAVING AVG(pr.price * od.quantity) > 100.00 AND SUM(od.quantity) > 2
+HAVING AVG(pr.price * od.quantity) > 100.00 AND SUM(od.quantity) > 2;
 /*В задаче ошибка не больше 20 а больше 2 по количеству, или я что-то не понял*/
 
+SELECT student.studentName, course.courseName, AVG(grade.grade)
+FROM Grades AS grades
+         LEFT JOIN Student AS student ON grades.studentId = student.studentId
+         LEFT JOIN Course AS course ON grades.courseId = course.courseId
+         LEFT JOIN Grade AS grade ON grades.gradeId = grade.gradeId
+GROUP BY grades.studentId, student.studentName, course.courseName
+HAVING AVG(grade.grade) > 70;
+
+WITH getTotalHours AS (
+    SELECT taskA.employeeid, taskA.projectid, taskA.taskid, SUM(taskA.hoursworked) AS totalHours
+    FROM TaskAssignments taskA
+    group by taskA.employeeid, taskA.projectid, taskA.taskid
+),
+getTotalHoursInProject AS (
+    SELECT taskA.projectid, SUM(taskA.hoursworked) AS totalHoursInProject
+    FROM TaskAssignments taskA
+    GROUP BY taskA.projectid
+),
+getAVGTotalHoursInProject AS (
+    SELECT taskA.projectid,taskA.taskid, AVG(taskA.hoursworked) AS avgHoursInProject
+    FROM TaskAssignments taskA
+    GROUP BY taskA.projectid, taskid
+)
+SELECT employee.employeename,
+       project.projectname,
+       task.taskname,
+       totalHoursSpendOnTask.totalHours,
+       totalHoursInProject.totalHoursInProject
+FROM getTotalHours totalHoursSpendOnTask
+LEFT JOIN Employee employee ON totalHoursSpendOnTask.employeeid = employee.employeeid
+LEFT JOIN Project project ON totalHoursSpendOnTask.projectid = project.projectid
+LEFT JOIN Task task ON totalHoursSpendOnTask.taskid = task.taskid
+LEFT JOIN getTotalHoursInProject totalHoursInProject ON totalHoursSpendOnTask.projectid = totalHoursInProject.projectid
+LEFT JOIN getAVGTotalHoursInProject avgTotalHouse ON avgTotalHouse.taskid = totalHoursSpendOnTask.taskid AND
+                                                        avgTotalHouse.projectid = totalHoursSpendOnTask.projectid
+WHERE totalHoursSpendOnTask.totalHours > avgTotalHouse.avgHoursInProject
+GROUP BY employee.employeename, project.projectname, task.taskname, totalHoursSpendOnTask.totalHours,
+         totalHoursInProject.totalHoursInProject;
+
+/* Не понимаю почему отработало
+WITH TaskStats AS (
+    -- Сначала агрегируем часы по задачам
+    SELECT
+        ta.EmployeeID,
+        ta.ProjectID,
+        ta.TaskID,
+        SUM(ta.HoursWorked) AS TotalHours
+    FROM TaskAssignments ta
+    GROUP BY ta.EmployeeID, ta.ProjectID, ta.TaskID
+),
+     ProjectStats AS (
+         -- Считаем общее количество часов по каждому проекту
+         SELECT
+             ProjectID,
+             SUM(HoursWorked) AS TotalHoursInProject
+         FROM TaskAssignments
+         GROUP BY ProjectID
+     ),
+     TaskAvg AS (
+         -- Считаем среднее количество часов по задаче в рамках проекта
+         SELECT
+             ta.ProjectID,
+             ta.TaskID,
+             AVG(ta.HoursWorked) AS AvgHoursForTask
+         FROM TaskAssignments ta
+         GROUP BY ta.ProjectID, ta.TaskID
+     )
+SELECT
+    e.EmployeeName,
+    p.ProjectName,
+    t.TaskName,
+    ts.TotalHours,
+    ps.TotalHoursInProject
+FROM TaskStats ts
+         JOIN Employee e ON ts.EmployeeID = e.EmployeeID
+         JOIN Project p ON ts.ProjectID = p.ProjectID
+         JOIN Task t ON ts.TaskID = t.TaskID
+         JOIN ProjectStats ps ON ts.ProjectID = ps.ProjectID
+         JOIN TaskAvg ta ON ts.ProjectID = ta.ProjectID AND ts.TaskID = ta.TaskID
+WHERE ts.TotalHours > ta.AvgHoursForTask
+ORDER BY e.EmployeeName, p.ProjectName, t.TaskName;*/
+
+WITH AgregateData AS (
+    SELECT assignment.employeeid,
+           assignment.projectid,
+           assignment.taskid,
+           SUM(assignment.hoursworked) AS hoursWorked,
+           SUM(SUM(assignment.hoursworked)) OVER (PARTITION BY assignment.projectid) AS totalHoursWorkedOnProject,
+           AVG(SUM(assignment.hoursworked)) OVER (PARTITION BY assignment.projectid, assignment.taskid) AS avgHoursWorkedOnProject
+    FROM TaskAssignments assignment
+    GROUP BY assignment.employeeid, assignment.projectid, assignment.taskid)
+SELECT employee.employeename, project.projectname, task.taskname, data.hoursWorked, data.totalHoursWorkedOnProject
+FROM AgregateData data
+LEFT JOIN Employee employee ON data.employeeid = employee.employeeid
+LEFT JOIN Project project ON data.projectid = project.projectid
+LEFT JOIN Task task ON data.taskid = task.taskid
+WHERE data.hoursWorked > data.avgHoursWorkedOnProject
+GROUP BY employee.employeename, project.projectname, task.taskname, data.hoursWorked, data.totalHoursWorkedOnProject;
+
+
+
+
+SELECT o.orderId,
+       o.totalOrderAmount,
+       o.uniqueProductCount,
+       (
+        SELECT product1.productname
+        FROM OrderDetail detail1
+        LEFT JOIN Product product1 ON detail1.productid = product1.productid
+        WHERE o.orderid = detail1.orderid
+        ORDER BY product1.price DESC
+        LIMIT 1
+        ) AS mostExpensiveProduct
+FROM (
+    SELECT detail.orderid AS orderId,
+        SUM(product.price * detail.quantity) AS totalOrderAmount,
+        COUNT(DISTINCT detail.productid) AS uniqueProductCount
+    FROM OrderDetail detail
+    LEFT JOIN Product product ON detail.productid = product.productid
+    GROUP BY detail.orderid
+    HAVING SUM(product.price * detail.quantity) > 500
+        AND COUNT(DISTINCT detail.productid) > 1
+     ) AS o
+ORDER BY o.orderId;
