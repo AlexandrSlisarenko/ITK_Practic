@@ -301,3 +301,43 @@ VALUES (1, 1, 1, 85),
        (8, 4, 3, 80),
        (9, 5, 2, 88),
        (10, 5, 3, 92);
+
+ALTER TABLE Course ADD COLUMN hours int DEFAULT 0;
+
+UPDATE Course
+SET hours = 40
+WHERE courseid = 1;
+UPDATE Course
+SET hours = 50
+WHERE courseid = 2;
+UPDATE Course
+SET hours = 30
+WHERE courseid = 3;
+UPDATE Course
+SET hours = 45
+WHERE courseid = 4;
+UPDATE Course
+SET hours = 35
+WHERE courseid = 5;
+
+CREATE TABLE IF NOT EXISTS Enrollment
+(
+    enrollmentId int primary key,
+    studentId int NOT NULL,
+    courseId  int NOT NULL,
+    CONSTRAINT studentId FOREIGN KEY (studentId) REFERENCES Student (studentId),
+    CONSTRAINT courseId FOREIGN KEY (courseId) REFERENCES Course (courseId)
+);
+
+INSERT INTO Enrollment(enrollmentId, studentId, courseId)
+VALUES (1,	1,	1),
+       (10,	5,	3),
+       (2,	1,	2),
+       (3, 2,	2),
+       (4,	2,	3),
+       (5,	3,	1),
+       (6,	3,	3),
+       (7,	4,	4),
+       (8,	4,	3),
+       (9,	5,	2);
+

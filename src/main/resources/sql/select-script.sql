@@ -212,3 +212,47 @@ FROM (
         AND COUNT(DISTINCT detail.productid) > 1
      ) AS o
 ORDER BY o.orderId;
+
+
+
+SELECT data.studentname,
+       data.coursename,
+       data.TotalCourseHours,
+       data.TotalStudyHours,
+       data.AverageGrade
+FROM (
+    SELECT student.studentname,
+           course.coursename,
+           course.hours AS TotalCourseHours,
+           SUM(course.hours) OVER (PARTITION BY enrollment.studentid) AS TotalStudyHours,
+           AVG(grade.grade) OVER (PARTITION BY enrollment.studentid, enrollment.courseid) AS AverageGrade
+    FROM Enrollment enrollment
+    LEFT JOIN Student student ON enrollment.studentid = student.studentid
+    LEFT JOIN Course course ON enrollment.courseid = course.courseid
+    LEFT JOIN Grades grade ON enrollment.studentid = grade.studentid AND enrollment.courseid = grade.courseid
+    GROUP BY enrollment.studentid, student.studentname,
+             course.coursename,
+             course.hours,
+             grade.grade,
+             enrollment.courseid
+    HAVING AVG(grade.grade) > 80
+) AS data
+GROUP BY data.studentname, data.coursename, data.TotalCourseHours,
+         data.TotalStudyHours,
+         data.AverageGrade;
+
+
+
+SELECT
+    s.StudentName,
+    c.CourseName,
+    c.Hours AS TotalCourseHours,
+    c.Hours AS TotalStudyHours,
+    AVG(g.Grade) AS AverageGrade
+FROM Student s
+         JOIN Enrollment e ON s.StudentID = e.StudentID
+         JOIN Course c ON e.CourseID = c.CourseID
+         JOIN Grades g ON s.StudentID = g.StudentID AND c.CourseID = g.CourseID
+GROUP BY s.StudentID, s.StudentName, c.CourseID, c.CourseName, c.Hours
+HAVING AVG(g.Grade) > 80
+ORDER BY s.StudentName, c.CourseName;
