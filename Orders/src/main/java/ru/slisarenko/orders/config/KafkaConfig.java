@@ -83,19 +83,29 @@ public class KafkaConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, ShopOrderInformationStatusDTO> consumerFactory() {
+    public ConsumerFactory<String, ShopOrderInformationStatusDTO> consumerFactoryShopOrderInformation() {
         return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
     }
 
+    @Bean
+    public ConsumerFactory<String, Object> consumerFactory() {
+        return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
+    }
+
+    /*@Bean
+    public ConsumerFactory<String, AccountingAllocationResponseDTO> consumerAccountingFactory() {
+        return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
+    }*/
+
     @Qualifier("kafkaTemplate")
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory(
-            ConsumerFactory<String, Object> consumerFactory, KafkaTemplate kafkaTemplate) {
+    public ConcurrentKafkaListenerContainerFactory<String, ShopOrderInformationStatusDTO> kafkaListenerContainerFactory(
+            ConsumerFactory<String, ShopOrderInformationStatusDTO> consumerFactory, KafkaTemplate kafkaTemplate) {
         DefaultErrorHandler errorHandler = new DefaultErrorHandler(new DeadLetterPublishingRecoverer(kafkaTemplate),
                 new FixedBackOff(3000,3)); // ретрай ошибочного сообщения
         errorHandler.addNotRetryableExceptions(NonRetryableException.class);
         errorHandler.addRetryableExceptions(RetryableException.class);
-        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        ConcurrentKafkaListenerContainerFactory<String, ShopOrderInformationStatusDTO> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
         factory.setCommonErrorHandler(errorHandler);
         return factory;
