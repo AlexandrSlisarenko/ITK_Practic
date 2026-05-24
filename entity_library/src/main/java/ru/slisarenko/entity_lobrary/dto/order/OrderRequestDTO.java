@@ -4,6 +4,7 @@ import java.util.List;
 import lombok.Builder;
 
 @Builder
-public record OrderRequestDTO(Long customerId,
+public record OrderRequestDTO(Long requestId,
+                              Long customerId,
                               List<Long> productIds) {
 }

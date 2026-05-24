@@ -1,0 +1,28 @@
+package ru.slisarenko.orders.controller;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import ru.slisarenko.entity_lobrary.dto.ShopOrderInformationStatusDTO;
+import ru.slisarenko.entity_lobrary.dto.order.OrderRequestDTO;
+import ru.slisarenko.orders.service.KafkaService;
+
+@Log4j2
+@RestController
+@RequestMapping("/order")
+@RequiredArgsConstructor
+public class OrderController {
+    private final KafkaService kafkaService;
+
+    @PostMapping
+    public ResponseEntity<ShopOrderInformationStatusDTO> addOrder(@RequestBody OrderRequestDTO order) {
+        log.info(order);
+        this.kafkaService.createOrder(order);
+        return null;
+    }
+
+}

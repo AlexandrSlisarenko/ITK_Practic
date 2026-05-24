@@ -29,7 +29,7 @@ public class ShopCustomer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
 
-    @Column(name="cash", nullable = false, columnDefinition = "DECIMAL(10,2) CHECK (cash > 0)")
+    @Column(name="cash", nullable = false)
     BigDecimal cash;
 
     @Builder.Default
