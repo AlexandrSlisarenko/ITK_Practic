@@ -8,7 +8,6 @@ import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -26,6 +25,8 @@ import org.springframework.kafka.support.serializer.JacksonJsonDeserializer;
 import org.springframework.util.backoff.FixedBackOff;
 import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
 import ru.slisarenko.entity_library.dto.order.OrderRequestDTO;
+import ru.slisarenko.entity_library.dto.payment.PaymentRequestDTO;
+import ru.slisarenko.entity_library.dto.persist.PersistDTO;
 import ru.slisarenko.orders.exception.NonRetryableException;
 import ru.slisarenko.orders.exception.RetryableException;
 
@@ -44,8 +45,36 @@ public class KafkaConfig {
     }
 
     @Bean
+    public ProducerFactory<String, ShopOrderInformationStatusDTO> producerFactoryInformation() {
+        return new DefaultKafkaProducerFactory<>(buildProducerConfigs());
+    }
+
+    @Bean
+    public ProducerFactory<String, PersistDTO> producerFactoryPersist() {
+        return new DefaultKafkaProducerFactory<>(buildProducerConfigs());
+    }
+    @Bean
+    public ProducerFactory<String, PaymentRequestDTO> producerFactoryPayment() {
+        return new DefaultKafkaProducerFactory<>(buildProducerConfigs());
+    }
+
+    @Bean
     KafkaTemplate<String, OrderRequestDTO> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
+    }
+
+    @Bean
+    KafkaTemplate<String, PersistDTO> kafkaTemplatePersist() {
+        return new KafkaTemplate<>(producerFactoryPersist());
+    }
+
+    @Bean
+    KafkaTemplate<String, ShopOrderInformationStatusDTO> kafkaTemplateInformation() {
+        return new KafkaTemplate<>(producerFactoryInformation());
+    }
+    @Bean
+    KafkaTemplate<String, PaymentRequestDTO> kafkaTemplatePayment() {
+        return new KafkaTemplate<>(producerFactoryPayment());
     }
 
     private Map<String,Object> buildProducerConfigs() {
@@ -97,7 +126,6 @@ public class KafkaConfig {
         return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
     }*/
 
-    @Qualifier("kafkaTemplate")
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, ShopOrderInformationStatusDTO> kafkaListenerContainerFactory(
             ConsumerFactory<String, ShopOrderInformationStatusDTO> consumerFactory, KafkaTemplate kafkaTemplate) {

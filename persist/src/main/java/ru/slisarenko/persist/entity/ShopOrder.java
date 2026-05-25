@@ -36,7 +36,7 @@ public class ShopOrder {
     private Long orderId;
 
     @Column(nullable = false)
-    private UUID orderUUID;
+    private String orderUUID;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)

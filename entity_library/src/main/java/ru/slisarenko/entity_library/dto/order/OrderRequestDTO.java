@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.NonNull;
 
 @Builder
-public record OrderRequestDTO(@NonNull Long requestId ,
-                              @NonNull Long customerId,
+public record OrderRequestDTO(@NonNull Long customerId,
                               @NonNull List<Long> productIds) {
 }

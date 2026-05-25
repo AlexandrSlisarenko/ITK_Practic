@@ -1,4 +1,4 @@
-package ru.slisarenko.payment.config;
+package ru.slisarenko.notifications.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,49 +26,15 @@ import org.springframework.kafka.support.serializer.JacksonJsonDeserializer;
 import org.springframework.util.backoff.FixedBackOff;
 import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
 import ru.slisarenko.entity_library.dto.order.OrderRequestDTO;
-import ru.slisarenko.entity_library.dto.payment.PaymentRequestDTO;
-import ru.slisarenko.entity_library.dto.persist.PersistDTO;
-import ru.slisarenko.payment.exception.NonRetryableException;
-import ru.slisarenko.payment.exception.RetryableException;
+import ru.slisarenko.notifications.exception.NonRetryableException;
+import ru.slisarenko.notifications.exception.RetryableException;
 
-import static ru.slisarenko.entity_library.constants.ServiceTopicNames.PAYED_ORDER_REQUEST_TOPIC;
-import static ru.slisarenko.entity_library.constants.ServiceTopicNames.PAYED_ORDER_RESPONSE_TOPIC;
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_NOTIFICATION_TOPIC;
 
 @Configuration
 @RequiredArgsConstructor
 public class KafkaConfig {
-
     private final Environment environment;
-
-    @Bean
-    public ProducerFactory<String, PaymentRequestDTO> producerFactory() {
-        return new DefaultKafkaProducerFactory<>(buildProducerConfigs());
-    }
-
-    @Bean
-    public ProducerFactory<String, ShopOrderInformationStatusDTO> producerFactoryInformation() {
-        return new DefaultKafkaProducerFactory<>(buildProducerConfigs());
-    }
-
-    @Bean
-    public ProducerFactory<String, PersistDTO> producerFactoryPersist() {
-        return new DefaultKafkaProducerFactory<>(buildProducerConfigs());
-    }
-
-    @Bean
-    KafkaTemplate<String, PaymentRequestDTO> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
-    }
-
-    @Bean
-    KafkaTemplate<String, PersistDTO> kafkaTemplatePersist() {
-        return new KafkaTemplate<>(producerFactoryPersist());
-    }
-
-    @Bean
-    KafkaTemplate<String, ShopOrderInformationStatusDTO> kafkaTemplateInformation() {
-        return new KafkaTemplate<>(producerFactoryInformation());
-    }
 
     @Bean
     public ProducerFactory<String, Object> deadLetterProducerFactory() {
@@ -84,35 +50,14 @@ public class KafkaConfig {
         return new KafkaTemplate<>(deadLetterProducerFactory());
     }
 
-    private Map<String,Object> buildProducerConfigs() {
-        Map<String, Object> configs = new HashMap<>();
-        configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, environment.getProperty("spring.kafka.producer.bootstrap-servers"));
-        configs.put(ProducerConfig.ACKS_CONFIG, environment.getProperty("spring.kafka.producer.acks"));
-        configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, environment.getProperty("spring.kafka.producer.key-serializer"));
-        configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, environment.getProperty("spring.kafka.producer.value-serializer"));
-        configs.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, environment.getProperty("spring.kafka.producer.properties.delivery.timeout.ms"));
-        configs.put(ProducerConfig.LINGER_MS_CONFIG, environment.getProperty("spring.kafka.producer.properties.linger.ms"));
-        configs.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, environment.getProperty("spring.kafka.producer.properties.request.timeout.ms"));
-        configs.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, environment.getProperty("spring.kafka.producer.properties.enable.idempotence"));
-        configs.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 5);
-        return configs;
-    }
-
-
-
     @Bean
-    public ConsumerFactory<String, OrderRequestDTO> consumerFactoryOrderRequest() {
+    public ConsumerFactory<String, ShopOrderInformationStatusDTO> consumerFactoryInformation() {
         return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
     }
 
     @Bean
-    public ConsumerFactory<String, Object> consumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
-    }
-
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, OrderRequestDTO> kafkaListenerContainerFactory(
-            ConsumerFactory<String, OrderRequestDTO> consumerFactory,
+    public ConcurrentKafkaListenerContainerFactory<String, ShopOrderInformationStatusDTO> kafkaListenerContainerFactory(
+            ConsumerFactory<String, ShopOrderInformationStatusDTO> consumerFactory,
             @Qualifier("deadLetterKafkaTemplate") KafkaTemplate<String, Object> deadLetterKafkaTemplate) {
 
         DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(deadLetterKafkaTemplate);
@@ -121,7 +66,7 @@ public class KafkaConfig {
         errorHandler.addNotRetryableExceptions(NonRetryableException.class);
         errorHandler.addRetryableExceptions(RetryableException.class);
 
-        ConcurrentKafkaListenerContainerFactory<String, OrderRequestDTO> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        ConcurrentKafkaListenerContainerFactory<String, ShopOrderInformationStatusDTO> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
         factory.setCommonErrorHandler(errorHandler);
         return factory;
@@ -145,17 +90,7 @@ public class KafkaConfig {
 
     @Bean
     NewTopic createRequestTopic() {
-        return TopicBuilder.name(PAYED_ORDER_REQUEST_TOPIC)
-                .partitions(3)
-                .replicas(3)
-                .configs(Map.of("min.insync.replicas",
-                        Objects.requireNonNull(environment.getProperty("spring.kafka.producer.properties.min.insync.replicas"))))
-                .build();
-    }
-
-    @Bean
-    NewTopic createResponseTopic() {
-        return TopicBuilder.name(PAYED_ORDER_RESPONSE_TOPIC)
+        return TopicBuilder.name(SENT_NOTIFICATION_TOPIC)
                 .partitions(3)
                 .replicas(3)
                 .configs(Map.of("min.insync.replicas",

@@ -23,9 +23,11 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<ShopOrderInformationStatusDTO> addOrder(@Validated @RequestBody OrderRequestDTO order) {
         log.info(order);
-        this.kafkaService.createOrder(order);
-        var t = this.kafkaService.getTest();
-        return new ResponseEntity<>(t, HttpStatus.CREATED) ;
+        var key = this.kafkaService.createOrder(order);
+        var result = ShopOrderInformationStatusDTO.builder()
+                .requestUUId(key)
+                .build();
+        return new ResponseEntity<>(result, HttpStatus.CREATED) ;
     }
 
 }

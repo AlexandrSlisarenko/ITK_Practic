@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
 import ru.slisarenko.entity_library.dto.order.OrderRequestDTO;
 import ru.slisarenko.entity_library.dto.payment.PaymentRequestDTO;
+import ru.slisarenko.entity_library.dto.persist.PersistDTO;
 import ru.slisarenko.entity_library.dto.shipping.ShippingRequestDTO;
 import ru.slisarenko.entity_library.enums.OrderStatus;
 import ru.slisarenko.persist.entity.ShopOrder;
@@ -26,7 +27,7 @@ public class ShopService {
     private final ShopOrderRepository shopOrderRepository;
     private final OrderMapping orderMapping;
 
-    public ShopOrderInformationStatusDTO payOrder(PaymentRequestDTO requestDTO) {
+    public PersistDTO payOrder(PaymentRequestDTO requestDTO) {
         if (!checkCustomerExists(requestDTO.customerId())) {
             return getErrorResponse();
         }
@@ -43,13 +44,13 @@ public class ShopService {
         }
         var order = updateStatus(requestDTO.orderId(), OrderStatus.PAYMENT);
 
-        return ShopOrderInformationStatusDTO.builder()
+        return PersistDTO.builder()
                 .orderId(order.getOrderId())
                 .status(order.getStatus())
                 .build();
     }
 
-    public ShopOrderInformationStatusDTO deliveryOrder(ShippingRequestDTO requestDTO) {
+    public PersistDTO deliveryOrder(ShippingRequestDTO requestDTO) {
         if (!checkCustomerExists(requestDTO.customerId())) {
             return getErrorResponse();
         }
@@ -60,13 +61,13 @@ public class ShopService {
 
         var order = updateStatus(requestDTO.orderId(), OrderStatus.SHIPPING);
 
-        return ShopOrderInformationStatusDTO.builder()
+        return PersistDTO.builder()
                 .orderId(order.getOrderId())
                 .status(order.getStatus())
                 .build();
     }
 
-    public ShopOrderInformationStatusDTO createOrder(OrderRequestDTO requestDTO) {
+    public PersistDTO createOrder(PersistDTO requestDTO) {
         if (!checkCustomerExists(requestDTO.customerId())) {
             return getErrorResponse();
         }
@@ -82,9 +83,10 @@ public class ShopService {
                 .status(OrderStatus.CREATED)
                 .customer(this.shopCustomerRepository.getReferenceById(requestDTO.customerId()))
                 .products(products)
+                .orderUUID(requestDTO.requestUUId())
                 .build();
         order = saveOrder(order);
-        return this.orderMapping.toShopOrderInformationStatusDTO(order);
+        return this.orderMapping.toPersistDTO(order);
     }
 
     private BigDecimal getPriceOfOrder(Long orderId) {
@@ -110,8 +112,8 @@ public class ShopService {
         return this.shopOrderRepository.existsById(orderId);
     }
 
-    private ShopOrderInformationStatusDTO getErrorResponse() {
-        return ShopOrderInformationStatusDTO.builder()
+    private PersistDTO getErrorResponse() {
+        return PersistDTO.builder()
                 .orderId(-1L)
                 .status(OrderStatus.ERROR)
                 .build();

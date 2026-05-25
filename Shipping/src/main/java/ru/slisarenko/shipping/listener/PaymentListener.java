@@ -1,0 +1,98 @@
+package ru.slisarenko.shipping.listener;
+
+import java.util.concurrent.ExecutionException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.KafkaException;
+import org.springframework.kafka.annotation.KafkaHandler;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.stereotype.Component;
+import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
+import ru.slisarenko.entity_library.dto.payment.PaymentRequestDTO;
+import ru.slisarenko.entity_library.dto.persist.PersistDTO;
+
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.PAYED_ORDER_REQUEST_TOPIC;
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_PERSIST_REQUEST_TOPIC;
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_PERSIST_RESPONSE_TOPIC;
+
+@Slf4j
+@Component
+@RequiredArgsConstructor
+@KafkaListener(topics = {PAYED_ORDER_REQUEST_TOPIC, SENT_PERSIST_RESPONSE_TOPIC})
+public class PaymentListener {
+    private final KafkaTemplate<String, PersistDTO> kafkaTemplatePersist;
+    private final KafkaTemplate<String, ShopOrderInformationStatusDTO> kafkaTemplateInformation;
+
+    @KafkaHandler
+    public void handleSaga(PaymentRequestDTO requestDTO) {
+        log.info("Saga received: {}", requestDTO);
+
+        var persistData = PersistDTO.builder()
+                .requestUUId(requestDTO.requestUUId())
+                .customerId(requestDTO.customerId())
+                .orderId(requestDTO.orderId())
+                .build();
+        SendResult<String, PersistDTO> result = null;
+        try {
+            result = kafkaTemplatePersist.send(SENT_PERSIST_REQUEST_TOPIC, requestDTO.requestUUId(), persistData).get();
+            log.info("result partition {}", result.getRecordMetadata().partition());
+            log.info("result offset {}", result.getRecordMetadata().offset());
+            log.info("result timestamp {}", result.getRecordMetadata().timestamp());
+            log.info("result topic {}", result.getRecordMetadata().topic());
+            log.info("result key message {}", result.getProducerRecord().key());
+        } catch (InterruptedException | ExecutionException e) {
+            log.error(e.getMessage());
+            throw new KafkaException(e.getMessage());
+        }
+    }
+
+    @KafkaHandler
+    public void listen(PersistDTO order) {
+        log.info("Order UUID => {}", order.requestUUId());
+        sendToPayment(order);
+        sentToInformation(order);
+    }
+
+    private void sendToPayment(PersistDTO order){
+        /*var message = PaymentRequestDTO.builder()
+                .requestUUId(order.requestUUId())
+                .customerId(order.customerId())
+                .orderId(order.orderId())
+                .build();
+        SendResult<String, PaymentRequestDTO> result = null;
+        try {
+           *//* result = kafkaTemplatePayment.send(PAYED_ORDER_REQUEST_TOPIC, order.requestUUId(), message).get();
+            log.info("result partition {}", result.getRecordMetadata().partition());
+            log.info("result offset {}", result.getRecordMetadata().offset());
+            log.info("result timestamp {}", result.getRecordMetadata().timestamp());
+            log.info("result topic {}", result.getRecordMetadata().topic());
+            log.info("result key message {}", result.getProducerRecord().key());*//*
+        } catch (InterruptedException | ExecutionException e) {
+            log.error(e.getMessage());
+            throw new KafkaException(e.getMessage());
+        }*/
+    }
+
+    private void sentToInformation(PersistDTO order) {
+        var message = ShopOrderInformationStatusDTO.builder()
+                .orderId(order.orderId())
+                .requestUUId(order.requestUUId())
+                .status(order.status())
+                .build();
+        SendResult<String, ShopOrderInformationStatusDTO> result = null;
+        try {
+            result = kafkaTemplateInformation.send(PAYED_ORDER_REQUEST_TOPIC, order.requestUUId(), message).get();
+            log.info("result partition {}", result.getRecordMetadata().partition());
+            log.info("result offset {}", result.getRecordMetadata().offset());
+            log.info("result timestamp {}", result.getRecordMetadata().timestamp());
+            log.info("result topic {}", result.getRecordMetadata().topic());
+            log.info("result key message {}", result.getProducerRecord().key());
+        } catch (InterruptedException | ExecutionException e) {
+            log.error(e.getMessage());
+            throw new KafkaException(e.getMessage());
+        }
+    }
+}
+
