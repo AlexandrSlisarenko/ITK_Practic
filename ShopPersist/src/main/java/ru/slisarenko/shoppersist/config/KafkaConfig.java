@@ -22,10 +22,10 @@ import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JacksonJsonDeserializer;
 import org.springframework.util.backoff.FixedBackOff;
-import ru.slisarenko.entity_lobrary.dto.ShopOrderInformationStatusDTO;
-import ru.slisarenko.entity_lobrary.dto.order.OrderRequestDTO;
-import ru.slisarenko.entity_lobrary.dto.payment.PaymentRequestDTO;
-import ru.slisarenko.entity_lobrary.dto.shipping.ShippingRequestDTO;
+import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
+import ru.slisarenko.entity_library.dto.order.OrderRequestDTO;
+import ru.slisarenko.entity_library.dto.payment.PaymentRequestDTO;
+import ru.slisarenko.entity_library.dto.shipping.ShippingRequestDTO;
 import ru.slisarenko.shoppersist.exception.NonRetryableException;
 import ru.slisarenko.shoppersist.exception.RetryableException;
 
@@ -46,50 +46,31 @@ public class KafkaConfig {
     }
 
     @Bean
+    public ProducerFactory<String, Object> deadLetterProducerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, environment.getProperty("spring.kafka.consumer.bootstrap-servers"));
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, environment.getProperty("spring.kafka.producer.key-serializer"));
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, environment.getProperty("spring.kafka.producer.value-serializer"));
+        return new DefaultKafkaProducerFactory<>(props);
+    }
+
+    @Bean
     public KafkaTemplate<String, ShopOrderInformationStatusDTO> kafkaTemplateShopOrderInformation() {
         return new KafkaTemplate<>(producerFactoryShopOrderInformation());
     }
 
-    @Bean()
-    @Primary
+    @Bean
     public KafkaTemplate<String, Object> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
-    @Bean
-    public ConsumerFactory<String, OrderRequestDTO> consumerOrderRequestFactory() {
-        return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
-    }
-    @Bean
-    public ConsumerFactory<String, PaymentRequestDTO> consumerPaymentRequestFactory() {
-        return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
-    }
-    @Bean
-    public ConsumerFactory<String, ShippingRequestDTO> consumerShippingRequestFactory() {
-        return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
-    }
 
     @Bean
-    public ConsumerFactory<String, Object> consumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
+    public KafkaTemplate<String, Object> deadLetterKafkaTemplate() {
+        return new KafkaTemplate<>(deadLetterProducerFactory());
     }
 
-    @Qualifier("kafkaTemplate")
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory(
-            ConsumerFactory<String, Object> consumerFactory, KafkaTemplate kafkaTemplate) {
-        DefaultErrorHandler errorHandler = new DefaultErrorHandler(new DeadLetterPublishingRecoverer(kafkaTemplate),
-                new FixedBackOff(3000,3)); // ретрай ошибочного сообщения
-        errorHandler.addNotRetryableExceptions(NonRetryableException.class);
-        errorHandler.addRetryableExceptions(RetryableException.class);
-        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory);
-        factory.setCommonErrorHandler(errorHandler);
-        return factory;
-    }
-
-
-    private Map<String,Object> buildProducerConfigs() {
+    private Map<String, Object> buildProducerConfigs() {
         Map<String, Object> configs = new HashMap<>();
         configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, environment.getProperty("spring.kafka.bootstrap-servers"));
         configs.put(ProducerConfig.ACKS_CONFIG, environment.getProperty("spring.kafka.producer.acks"));
@@ -104,7 +85,42 @@ public class KafkaConfig {
         return configs;
     }
 
-    private Map<String,Object> buildConsumerConfigs() {
+    /*@Bean
+    public ConsumerFactory<String, OrderRequestDTO> consumerOrderRequestFactory() {
+        return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
+    }
+    @Bean
+    public ConsumerFactory<String, PaymentRequestDTO> consumerPaymentRequestFactory() {
+        return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
+    }
+    @Bean
+    public ConsumerFactory<String, ShippingRequestDTO> consumerShippingRequestFactory() {
+        return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
+    }*/
+
+    @Bean
+    public ConsumerFactory<String, Object> consumerFactory() {
+        return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory(
+            ConsumerFactory<String, Object> consumerFactory,
+            @Qualifier("deadLetterKafkaTemplate") KafkaTemplate<String, Object> deadLetterKafkaTemplate) {
+
+        DefaultErrorHandler errorHandler = new DefaultErrorHandler(new DeadLetterPublishingRecoverer(deadLetterKafkaTemplate),
+                new FixedBackOff(3000, 3));
+        errorHandler.addNotRetryableExceptions(NonRetryableException.class);
+        errorHandler.addRetryableExceptions(RetryableException.class);
+
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory);
+        factory.setCommonErrorHandler(errorHandler);
+        return factory;
+    }
+
+
+    private Map<String, Object> buildConsumerConfigs() {
         Map<String, Object> configs = new HashMap<>();
         configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, environment.getProperty("spring.kafka.bootstrap-servers"));
         configs.put(ConsumerConfig.GROUP_ID_CONFIG, environment.getProperty("spring.kafka.consumer.group-id"));

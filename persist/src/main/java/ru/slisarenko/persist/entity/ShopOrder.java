@@ -1,4 +1,4 @@
-package ru.slisarenko.shoppersist.entity;
+package ru.slisarenko.persist.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,12 +15,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import ru.slisarenko.entity_library.enums.OrderStatus;
+
 
 @Entity
 @Table(name = "shop_order", schema = "shop")
@@ -33,6 +34,9 @@ public class ShopOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
+
+    @Column(nullable = false)
+    private UUID orderUUID;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)

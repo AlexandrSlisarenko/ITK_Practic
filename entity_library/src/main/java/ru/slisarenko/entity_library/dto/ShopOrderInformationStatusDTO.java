@@ -1,7 +1,7 @@
-package ru.slisarenko.entity_lobrary.dto;
+package ru.slisarenko.entity_library.dto;
 
 import lombok.Builder;
-import ru.slisarenko.entity_lobrary.enums.OrderStatus;
+import ru.slisarenko.entity_library.enums.OrderStatus;
 
 @Builder
 public record ShopOrderInformationStatusDTO(Long requestId,

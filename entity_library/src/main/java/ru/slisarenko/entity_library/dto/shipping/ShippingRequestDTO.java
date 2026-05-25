@@ -1,4 +1,4 @@
-package ru.slisarenko.entity_lobrary.dto.shipping;
+package ru.slisarenko.entity_library.dto.shipping;
 
 public record ShippingRequestDTO(Long requestId,
                                  Long orderId,

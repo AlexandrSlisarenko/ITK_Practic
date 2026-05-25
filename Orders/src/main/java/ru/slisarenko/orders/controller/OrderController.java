@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.slisarenko.entity_lobrary.dto.ShopOrderInformationStatusDTO;
-import ru.slisarenko.entity_lobrary.dto.order.OrderRequestDTO;
+import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
+import ru.slisarenko.entity_library.dto.order.OrderRequestDTO;
 import ru.slisarenko.orders.service.KafkaService;
 
 @Log4j2

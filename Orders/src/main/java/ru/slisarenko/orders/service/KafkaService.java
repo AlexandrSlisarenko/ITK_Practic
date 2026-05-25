@@ -11,11 +11,11 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
-import ru.slisarenko.entity_lobrary.dto.ShopOrderInformationStatusDTO;
-import ru.slisarenko.entity_lobrary.dto.order.OrderRequestDTO;
-import ru.slisarenko.entity_lobrary.enums.OrderStatus;
+import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
+import ru.slisarenko.entity_library.dto.order.OrderRequestDTO;
+import ru.slisarenko.entity_library.enums.OrderStatus;
 
-import static ru.slisarenko.entity_lobrary.constants.ServiceTopicNames.NEW_ORDERS_REQUEST_TOPIC;
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.NEW_ORDERS_REQUEST_TOPIC;
 
 @Log4j2
 @Service

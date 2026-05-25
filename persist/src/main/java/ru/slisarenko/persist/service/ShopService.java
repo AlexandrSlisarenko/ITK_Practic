@@ -1,4 +1,4 @@
-package ru.slisarenko.shoppersist.service;
+package ru.slisarenko.persist.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,12 +10,12 @@ import ru.slisarenko.entity_library.dto.order.OrderRequestDTO;
 import ru.slisarenko.entity_library.dto.payment.PaymentRequestDTO;
 import ru.slisarenko.entity_library.dto.shipping.ShippingRequestDTO;
 import ru.slisarenko.entity_library.enums.OrderStatus;
-import ru.slisarenko.shoppersist.entity.ShopOrder;
-import ru.slisarenko.shoppersist.entity.ShopProduct;
-import ru.slisarenko.shoppersist.mapping.OrderMapping;
-import ru.slisarenko.shoppersist.repository.ShopCustomerRepository;
-import ru.slisarenko.shoppersist.repository.ShopOrderRepository;
-import ru.slisarenko.shoppersist.repository.ShopProductRepository;
+import ru.slisarenko.persist.entity.ShopOrder;
+import ru.slisarenko.persist.entity.ShopProduct;
+import ru.slisarenko.persist.mapping.OrderMapping;
+import ru.slisarenko.persist.repository.ShopCustomerRepository;
+import ru.slisarenko.persist.repository.ShopOrderRepository;
+import ru.slisarenko.persist.repository.ShopProductRepository;
 
 @Service
 @Transactional

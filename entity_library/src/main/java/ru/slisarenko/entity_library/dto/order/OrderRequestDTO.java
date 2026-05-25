@@ -1,4 +1,4 @@
-package ru.slisarenko.entity_lobrary.dto.order;
+package ru.slisarenko.entity_library.dto.order;
 
 import java.util.List;
 import lombok.Builder;

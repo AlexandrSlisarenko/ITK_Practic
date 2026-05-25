@@ -1,4 +1,4 @@
-package ru.slisarenko.entity_lobrary.enums;
+package ru.slisarenko.entity_library.enums;
 
 public enum OrderStatus {
     CREATED,

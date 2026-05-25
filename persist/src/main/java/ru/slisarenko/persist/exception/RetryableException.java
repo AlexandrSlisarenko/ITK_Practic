@@ -1,4 +1,4 @@
-package ru.slisarenko.shoppersist.exception;
+package ru.slisarenko.persist.exception;
 
 public class RetryableException extends RuntimeException {
     public RetryableException(String message) {

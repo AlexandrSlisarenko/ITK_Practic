@@ -1,6 +1,5 @@
-package ru.slisarenko.entity_lobrary.dto.payment;
+package ru.slisarenko.entity_library.dto.payment;
 
-import java.math.BigDecimal;
 import lombok.Builder;
 
 @Builder

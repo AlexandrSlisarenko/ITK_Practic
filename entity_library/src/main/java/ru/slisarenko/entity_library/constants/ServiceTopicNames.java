@@ -1,4 +1,4 @@
-package ru.slisarenko.entity_lobrary.constants;
+package ru.slisarenko.entity_library.constants;
 
 public class ServiceTopicNames {
     public static final String NEW_ORDERS_REQUEST_TOPIC = "new_orders";

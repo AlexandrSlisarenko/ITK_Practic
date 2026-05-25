@@ -24,6 +24,6 @@ spring:
       #key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       #value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
-        spring.json.trusted.packages: ru.slisarenko.entity_lobrary.dto
+        spring.json.trusted.packages: ru.slisarenko.entity_library.dto
         allow.auto.create.topics: true
       group-id: group-id-orders

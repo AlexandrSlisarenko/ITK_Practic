@@ -7,7 +7,7 @@
         <artifactId>itk_practic</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>ShopPersist</artifactId>
+    <artifactId>shoppersist</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ShopPersist</name>
     <description>ShopPersist</description>
@@ -41,6 +41,10 @@
             <artifactId>spring-boot-starter-kafka</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-json</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka-test</artifactId>
             <scope>test</scope>
@@ -54,6 +58,10 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${org.mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
     </dependencies>
 

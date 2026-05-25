@@ -1,4 +1,4 @@
-package ru.slisarenko.shoppersist.entity;
+package ru.slisarenko.persist.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
