@@ -28,6 +28,7 @@ import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
 import ru.slisarenko.entity_library.dto.order.OrderRequestDTO;
 import ru.slisarenko.entity_library.dto.payment.PaymentRequestDTO;
 import ru.slisarenko.entity_library.dto.persist.PersistDTO;
+import ru.slisarenko.entity_library.dto.shipping.ShippingRequestDTO;
 import ru.slisarenko.payment.exception.NonRetryableException;
 import ru.slisarenko.payment.exception.RetryableException;
 
@@ -44,6 +45,12 @@ public class KafkaConfig {
     public ProducerFactory<String, PaymentRequestDTO> producerFactory() {
         return new DefaultKafkaProducerFactory<>(buildProducerConfigs());
     }
+
+    @Bean
+    public ProducerFactory<String, ShippingRequestDTO> producerFactoryShipping() {
+        return new DefaultKafkaProducerFactory<>(buildProducerConfigs());
+    }
+
 
     @Bean
     public ProducerFactory<String, ShopOrderInformationStatusDTO> producerFactoryInformation() {
@@ -68,6 +75,10 @@ public class KafkaConfig {
     @Bean
     KafkaTemplate<String, ShopOrderInformationStatusDTO> kafkaTemplateInformation() {
         return new KafkaTemplate<>(producerFactoryInformation());
+    }
+    @Bean
+    KafkaTemplate<String, ShippingRequestDTO> kafkaTemplateShipping() {
+        return new KafkaTemplate<>(producerFactoryShipping());
     }
 
     @Bean

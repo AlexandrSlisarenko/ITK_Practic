@@ -27,12 +27,12 @@ import org.springframework.util.backoff.FixedBackOff;
 import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
 import ru.slisarenko.entity_library.dto.order.OrderRequestDTO;
 import ru.slisarenko.entity_library.dto.payment.PaymentRequestDTO;
-import ru.slisarenko.entity_library.dto.persist.PersistDTO;
+import ru.slisarenko.entity_library.dto.shipping.ShippingRequestDTO;
 import ru.slisarenko.shipping.exception.NonRetryableException;
 import ru.slisarenko.shipping.exception.RetryableException;
 
-import static ru.slisarenko.entity_library.constants.ServiceTopicNames.PAYED_ORDER_REQUEST_TOPIC;
-import static ru.slisarenko.entity_library.constants.ServiceTopicNames.PAYED_ORDER_RESPONSE_TOPIC;
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_SHIPPING_ORDER_REQUEST_TOPIC;
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_SHIPPING_ORDER_RESPONSE_TOPIC;
 
 @Configuration
 @RequiredArgsConstructor
@@ -41,7 +41,7 @@ public class KafkaConfig {
     private final Environment environment;
 
     @Bean
-    public ProducerFactory<String, PaymentRequestDTO> producerFactory() {
+    public ProducerFactory<String, PaymentRequestDTO> producerFactoryPayment() {
         return new DefaultKafkaProducerFactory<>(buildProducerConfigs());
     }
 
@@ -51,17 +51,17 @@ public class KafkaConfig {
     }
 
     @Bean
-    public ProducerFactory<String, PersistDTO> producerFactoryPersist() {
+    public ProducerFactory<String, ShippingRequestDTO> producerFactoryPersist() {
         return new DefaultKafkaProducerFactory<>(buildProducerConfigs());
     }
 
     @Bean
-    KafkaTemplate<String, PaymentRequestDTO> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
+    KafkaTemplate<String, PaymentRequestDTO> kafkaTemplatePayment() {
+        return new KafkaTemplate<>(producerFactoryPayment());
     }
 
     @Bean
-    KafkaTemplate<String, PersistDTO> kafkaTemplatePersist() {
+    KafkaTemplate<String, ShippingRequestDTO> kafkaTemplatePersist() {
         return new KafkaTemplate<>(producerFactoryPersist());
     }
 
@@ -145,7 +145,7 @@ public class KafkaConfig {
 
     @Bean
     NewTopic createRequestTopic() {
-        return TopicBuilder.name(PAYED_ORDER_REQUEST_TOPIC)
+        return TopicBuilder.name(SENT_SHIPPING_ORDER_REQUEST_TOPIC)
                 .partitions(3)
                 .replicas(3)
                 .configs(Map.of("min.insync.replicas",
@@ -155,7 +155,7 @@ public class KafkaConfig {
 
     @Bean
     NewTopic createResponseTopic() {
-        return TopicBuilder.name(PAYED_ORDER_RESPONSE_TOPIC)
+        return TopicBuilder.name(SENT_SHIPPING_ORDER_RESPONSE_TOPIC)
                 .partitions(3)
                 .replicas(3)
                 .configs(Map.of("min.insync.replicas",

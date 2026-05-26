@@ -17,27 +17,23 @@ import ru.slisarenko.entity_library.dto.shipping.ShippingRequestDTO;
 import static ru.slisarenko.entity_library.constants.ServiceTopicNames.PAYED_ORDER_REQUEST_TOPIC;
 import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_PERSIST_REQUEST_TOPIC;
 import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_PERSIST_RESPONSE_TOPIC;
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_SHIPPING_ORDER_REQUEST_TOPIC;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 @KafkaListener(topics = {PAYED_ORDER_REQUEST_TOPIC, SENT_PERSIST_RESPONSE_TOPIC})
 public class PaymentListener {
-    private final KafkaTemplate<String, PersistDTO> kafkaTemplatePersist;
+    private final KafkaTemplate<String, PaymentRequestDTO> kafkaTemplate;
     private final KafkaTemplate<String, ShopOrderInformationStatusDTO> kafkaTemplateInformation;
+    private final KafkaTemplate<String, ShippingRequestDTO> kafkaTemplateShipping;
 
     @KafkaHandler
     public void handleSaga(PaymentRequestDTO requestDTO) {
-        log.info("Saga received: {}", requestDTO);
-
-        var persistData = PersistDTO.builder()
-                .requestUUId(requestDTO.requestUUId())
-                .customerId(requestDTO.customerId())
-                .orderId(requestDTO.orderId())
-                .build();
-        SendResult<String, PersistDTO> result = null;
+        log.info("Payment invoice: {}", requestDTO);
+       SendResult<String, PaymentRequestDTO> result = null;
         try {
-            result = kafkaTemplatePersist.send(SENT_PERSIST_REQUEST_TOPIC, requestDTO.requestUUId(), persistData).get();
+            result = kafkaTemplate.send(SENT_PERSIST_REQUEST_TOPIC, requestDTO.requestUUId(), requestDTO).get();
             log.info("result partition {}", result.getRecordMetadata().partition());
             log.info("result offset {}", result.getRecordMetadata().offset());
             log.info("result timestamp {}", result.getRecordMetadata().timestamp());
@@ -51,7 +47,7 @@ public class PaymentListener {
 
     @KafkaHandler
     public void listen(PersistDTO order) {
-        log.info("Order UUID => {}", order.requestUUId());
+        log.info("Order UUID => {}, The bill is => {}", order.requestUUId(), order.status());
         sendToShipping(order);
         sentToInformation(order);
     }
@@ -62,9 +58,9 @@ public class PaymentListener {
                 .customerId(order.customerId())
                 .orderId(order.orderId())
                 .build();
-        SendResult<String, PaymentRequestDTO> result = null;
+        SendResult<String, ShippingRequestDTO> result = null;
         try {
-            result = kafkaTemplatePayment.send(PAYED_ORDER_REQUEST_TOPIC, order.requestUUId(), message).get();
+            result = kafkaTemplateShipping.send(SENT_SHIPPING_ORDER_REQUEST_TOPIC, order.requestUUId(), message).get();
             log.info("result partition {}", result.getRecordMetadata().partition());
             log.info("result offset {}", result.getRecordMetadata().offset());
             log.info("result timestamp {}", result.getRecordMetadata().timestamp());

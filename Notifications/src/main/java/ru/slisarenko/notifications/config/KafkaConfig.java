@@ -39,7 +39,7 @@ public class KafkaConfig {
     @Bean
     public ProducerFactory<String, Object> deadLetterProducerFactory() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, environment.getProperty("spring.kafka.consumer.bootstrap-servers"));
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, environment.getProperty("spring.kafka.producer.bootstrap-servers"));
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, environment.getProperty("spring.kafka.producer.key-serializer"));
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, environment.getProperty("spring.kafka.producer.value-serializer"));
         return new DefaultKafkaProducerFactory<>(props);
@@ -72,6 +72,16 @@ public class KafkaConfig {
         return factory;
     }
 
+    @Bean
+    public NewTopic createRequestTopic() {
+        return TopicBuilder.name(SENT_NOTIFICATION_TOPIC)
+                .partitions(3)
+                .replicas(3)
+                .configs(Map.of("min.insync.replicas",
+                        Objects.requireNonNull(environment.getProperty("spring.kafka.producer.properties.min.insync.replicas"))))
+                .build();
+    }
+
 
 
     private Map<String,Object> buildConsumerConfigs() {
@@ -88,13 +98,5 @@ public class KafkaConfig {
         return configs;
     }
 
-    @Bean
-    NewTopic createRequestTopic() {
-        return TopicBuilder.name(SENT_NOTIFICATION_TOPIC)
-                .partitions(3)
-                .replicas(3)
-                .configs(Map.of("min.insync.replicas",
-                        Objects.requireNonNull(environment.getProperty("spring.kafka.producer.properties.min.insync.replicas"))))
-                .build();
-    }
+
 }

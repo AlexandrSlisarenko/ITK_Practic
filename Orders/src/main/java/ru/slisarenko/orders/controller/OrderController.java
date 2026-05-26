@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
 import ru.slisarenko.entity_library.dto.order.OrderRequestDTO;
+import ru.slisarenko.entity_library.enums.OrderStatus;
 import ru.slisarenko.orders.service.KafkaService;
 
 @Log4j2
@@ -25,7 +26,9 @@ public class OrderController {
         log.info(order);
         var key = this.kafkaService.createOrder(order);
         var result = ShopOrderInformationStatusDTO.builder()
+                .orderId(0L)
                 .requestUUId(key)
+                .status(OrderStatus.CREATED)
                 .build();
         return new ResponseEntity<>(result, HttpStatus.CREATED) ;
     }

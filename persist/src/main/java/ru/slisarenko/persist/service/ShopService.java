@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
-import ru.slisarenko.entity_library.dto.order.OrderRequestDTO;
 import ru.slisarenko.entity_library.dto.payment.PaymentRequestDTO;
 import ru.slisarenko.entity_library.dto.persist.PersistDTO;
 import ru.slisarenko.entity_library.dto.shipping.ShippingRequestDTO;
 import ru.slisarenko.entity_library.enums.OrderStatus;
+import ru.slisarenko.persist.entity.ShopCustomer;
 import ru.slisarenko.persist.entity.ShopOrder;
 import ru.slisarenko.persist.entity.ShopProduct;
 import ru.slisarenko.persist.mapping.OrderMapping;
@@ -45,6 +44,7 @@ public class ShopService {
         var order = updateStatus(requestDTO.orderId(), OrderStatus.PAYMENT);
 
         return PersistDTO.builder()
+                .requestUUId(requestDTO.requestUUId())
                 .orderId(order.getOrderId())
                 .status(order.getStatus())
                 .build();
@@ -52,6 +52,7 @@ public class ShopService {
 
     public PersistDTO deliveryOrder(ShippingRequestDTO requestDTO) {
         if (!checkCustomerExists(requestDTO.customerId())) {
+
             return getErrorResponse();
         }
 
@@ -68,20 +69,15 @@ public class ShopService {
     }
 
     public PersistDTO createOrder(PersistDTO requestDTO) {
-        if (!checkCustomerExists(requestDTO.customerId())) {
-            return getErrorResponse();
-        }
+        var customer = createCustomer(requestDTO.customerId());
         var products = new ArrayList<ShopProduct>();
         for (Long id : requestDTO.productIds()) {
-            if (!checkProductExists(id)) {
-                return getErrorResponse();
-            }
-            products.add(this.shopProductRepository.getReferenceById(id));
+            products.add(getProduct(id));
         }
 
         var order = ShopOrder.builder()
                 .status(OrderStatus.CREATED)
-                .customer(this.shopCustomerRepository.getReferenceById(requestDTO.customerId()))
+                .customer(customer)
                 .products(products)
                 .orderUUID(requestDTO.requestUUId())
                 .build();
@@ -104,8 +100,13 @@ public class ShopService {
         return this.shopCustomerRepository.existsById(customerId);
     }
 
-    private boolean checkProductExists(Long productId) {
-        return this.shopProductRepository.existsById(productId);
+    private ShopProduct getProduct(Long productId) {
+        var product = this.shopProductRepository.findById(productId)
+                .orElseGet(() -> ShopProduct.builder()
+                        .price(BigDecimal.valueOf(10L))
+                        .productId(productId)
+                        .build());
+        return this.shopProductRepository.save(product);
     }
 
     private boolean checkOrderExists(Long orderId) {
@@ -127,6 +128,16 @@ public class ShopService {
         var order = shopOrderRepository.findById(orderId).orElseGet(ShopOrder::new);
         order.setStatus(OrderStatus.PAYMENT);
         return saveOrder(order);
+    }
+
+    private ShopCustomer createCustomer(Long customerId) {
+        var customer = this.shopCustomerRepository.findById(customerId)
+                .orElseGet(() -> ShopCustomer.builder()
+                        .cash(BigDecimal.valueOf(1000000L))
+                        .customerId(customerId)
+                        .build());
+        return this.shopCustomerRepository.save(customer);
+
     }
 
 }

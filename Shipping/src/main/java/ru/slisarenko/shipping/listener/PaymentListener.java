@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
 import ru.slisarenko.entity_library.dto.payment.PaymentRequestDTO;
 import ru.slisarenko.entity_library.dto.persist.PersistDTO;
+import ru.slisarenko.entity_library.dto.shipping.ShippingRequestDTO;
+import ru.slisarenko.entity_library.enums.OrderStatus;
 
 import static ru.slisarenko.entity_library.constants.ServiceTopicNames.PAYED_ORDER_REQUEST_TOPIC;
 import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_PERSIST_REQUEST_TOPIC;
@@ -22,19 +24,19 @@ import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_PERS
 @RequiredArgsConstructor
 @KafkaListener(topics = {PAYED_ORDER_REQUEST_TOPIC, SENT_PERSIST_RESPONSE_TOPIC})
 public class PaymentListener {
-    private final KafkaTemplate<String, PersistDTO> kafkaTemplatePersist;
+    private final KafkaTemplate<String, ShippingRequestDTO> kafkaTemplatePersist;
     private final KafkaTemplate<String, ShopOrderInformationStatusDTO> kafkaTemplateInformation;
 
     @KafkaHandler
     public void handleSaga(PaymentRequestDTO requestDTO) {
         log.info("Saga received: {}", requestDTO);
 
-        var persistData = PersistDTO.builder()
+        var persistData = ShippingRequestDTO.builder()
                 .requestUUId(requestDTO.requestUUId())
-                .customerId(requestDTO.customerId())
+                .address("ASDRESS")
                 .orderId(requestDTO.orderId())
                 .build();
-        SendResult<String, PersistDTO> result = null;
+        SendResult<String, ShippingRequestDTO> result = null;
         try {
             result = kafkaTemplatePersist.send(SENT_PERSIST_REQUEST_TOPIC, requestDTO.requestUUId(), persistData).get();
             log.info("result partition {}", result.getRecordMetadata().partition());

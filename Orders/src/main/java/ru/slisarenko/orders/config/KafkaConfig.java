@@ -91,25 +91,7 @@ public class KafkaConfig {
         return configs;
     }
 
-    @Bean
-    NewTopic createRequestTopic() {
-        return TopicBuilder.name(NEW_ORDERS_REQUEST_TOPIC)
-                .partitions(3)
-                .replicas(3)
-                .configs(Map.of("min.insync.replicas",
-                        Objects.requireNonNull(environment.getProperty("spring.kafka.producer.properties.min.insync.replicas"))))
-                .build();
-    }
 
-    @Bean
-    NewTopic createResponseTopic() {
-        return TopicBuilder.name(NEW_ORDERS_RESPONSE_TOPIC)
-                .partitions(3)
-                .replicas(3)
-                .configs(Map.of("min.insync.replicas",
-                        Objects.requireNonNull(environment.getProperty("spring.kafka.producer.properties.min.insync.replicas"))))
-                .build();
-    }
 
     @Bean
     public ConsumerFactory<String, ShopOrderInformationStatusDTO> consumerFactoryShopOrderInformation() {
@@ -120,11 +102,6 @@ public class KafkaConfig {
     public ConsumerFactory<String, Object> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
     }
-
-    /*@Bean
-    public ConsumerFactory<String, AccountingAllocationResponseDTO> consumerAccountingFactory() {
-        return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
-    }*/
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, ShopOrderInformationStatusDTO> kafkaListenerContainerFactory(
@@ -151,5 +128,25 @@ public class KafkaConfig {
         configs.put(JacksonJsonDeserializer.TRUSTED_PACKAGES,
                 environment.getProperty("spring.kafka.consumer.properties.spring.json.trusted.packages"));
         return configs;
+    }
+
+    @Bean
+    NewTopic createRequestTopic() {
+        return TopicBuilder.name(NEW_ORDERS_REQUEST_TOPIC)
+                .partitions(3)
+                .replicas(3)
+                .configs(Map.of("min.insync.replicas",
+                        Objects.requireNonNull(environment.getProperty("spring.kafka.producer.properties.min.insync.replicas"))))
+                .build();
+    }
+
+    @Bean
+    NewTopic createResponseTopic() {
+        return TopicBuilder.name(NEW_ORDERS_RESPONSE_TOPIC)
+                .partitions(3)
+                .replicas(3)
+                .configs(Map.of("min.insync.replicas",
+                        Objects.requireNonNull(environment.getProperty("spring.kafka.producer.properties.min.insync.replicas"))))
+                .build();
     }
 }
