@@ -67,14 +67,7 @@ public class KafkaConfig {
         return new DefaultKafkaProducerFactory<>(buildProducerConfigs());
     }
 
-    @Bean
-    public ProducerFactory<String, Object> deadLetterProducerFactory() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, environment.getProperty("spring.kafka.consumer.bootstrap-servers"));
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, environment.getProperty("spring.kafka.producer.key-serializer"));
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, environment.getProperty("spring.kafka.producer.value-serializer"));
-        return new DefaultKafkaProducerFactory<>(props);
-    }
+
 
     @Bean
     public KafkaTemplate<String, PersistDTO> kafkaTemplateOrder() {
@@ -102,10 +95,7 @@ public class KafkaConfig {
     }
 
 
-    @Bean
-    public KafkaTemplate<String, Object> deadLetterKafkaTemplate() {
-        return new KafkaTemplate<>(deadLetterProducerFactory());
-    }
+
 
     private Map<String, Object> buildProducerConfigs() {
         Map<String, Object> configs = new HashMap<>();
@@ -125,6 +115,20 @@ public class KafkaConfig {
     @Bean
     public ConsumerFactory<String, Object> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(buildConsumerConfigs());
+    }
+
+    @Bean
+    public ProducerFactory<String, Object> deadLetterProducerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, environment.getProperty("spring.kafka.consumer.bootstrap-servers"));
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, environment.getProperty("spring.kafka.producer.key-serializer"));
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, environment.getProperty("spring.kafka.producer.value-serializer"));
+        return new DefaultKafkaProducerFactory<>(props);
+    }
+
+    @Bean
+    public KafkaTemplate<String, Object> deadLetterKafkaTemplate() {
+        return new KafkaTemplate<>(deadLetterProducerFactory());
     }
 
     @Bean
@@ -148,11 +152,17 @@ public class KafkaConfig {
         Map<String, Object> configs = new HashMap<>();
         configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, environment.getProperty("spring.kafka.consumer.bootstrap-servers"));
         configs.put(ConsumerConfig.GROUP_ID_CONFIG, environment.getProperty("spring.kafka.consumer.group-id"));
+        configs.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, environment.getProperty("spring.kafka.consumer.auto-offset-reset"));
+
+        //configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        //configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JacksonJsonDeserializer.class);
+
         configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
         configs.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
         // пропускает сообщение, которое не смог десерилизовать
         configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
         configs.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JacksonJsonDeserializer.class);
+        configs.put(JacksonJsonDeserializer.VALUE_DEFAULT_TYPE, Object.class);
         configs.put(JacksonJsonDeserializer.TRUSTED_PACKAGES, environment.getProperty("spring.kafka.consumer.properties.spring.json.trusted.packages"));
         configs.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, environment.getProperty("spring.kafka.consumer.isolation-level", "read_committed"));
         return configs;

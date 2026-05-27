@@ -31,7 +31,7 @@ public class PaymentListener {
     @KafkaHandler
     public void handleSaga(PaymentRequestDTO requestDTO) {
         log.info("Payment invoice: {}", requestDTO);
-       SendResult<String, PaymentRequestDTO> result = null;
+        SendResult<String, PaymentRequestDTO> result = null;
         try {
             result = kafkaTemplate.send(SENT_PERSIST_REQUEST_TOPIC, requestDTO.requestUUId(), requestDTO).get();
             log.info("result partition {}", result.getRecordMetadata().partition());
@@ -52,7 +52,7 @@ public class PaymentListener {
         sentToInformation(order);
     }
 
-    private void sendToShipping(PersistDTO order){
+    private void sendToShipping(PersistDTO order) {
         var message = ShippingRequestDTO.builder()
                 .requestUUId(order.requestUUId())
                 .customerId(order.customerId())

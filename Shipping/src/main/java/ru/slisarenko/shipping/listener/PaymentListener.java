@@ -28,8 +28,8 @@ public class PaymentListener {
     private final KafkaTemplate<String, ShopOrderInformationStatusDTO> kafkaTemplateInformation;
 
     @KafkaHandler
-    public void handleSaga(PaymentRequestDTO requestDTO) {
-        log.info("Saga received: {}", requestDTO);
+    public void handleMessage(PaymentRequestDTO requestDTO) {
+        log.info("PaymentRequestDTO in Shipping module: {}", requestDTO);
 
         var persistData = ShippingRequestDTO.builder()
                 .requestUUId(requestDTO.requestUUId())
@@ -57,25 +57,7 @@ public class PaymentListener {
         sentToInformation(order);
     }
 
-    private void sendToPayment(PersistDTO order){
-        /*var message = PaymentRequestDTO.builder()
-                .requestUUId(order.requestUUId())
-                .customerId(order.customerId())
-                .orderId(order.orderId())
-                .build();
-        SendResult<String, PaymentRequestDTO> result = null;
-        try {
-           *//* result = kafkaTemplatePayment.send(PAYED_ORDER_REQUEST_TOPIC, order.requestUUId(), message).get();
-            log.info("result partition {}", result.getRecordMetadata().partition());
-            log.info("result offset {}", result.getRecordMetadata().offset());
-            log.info("result timestamp {}", result.getRecordMetadata().timestamp());
-            log.info("result topic {}", result.getRecordMetadata().topic());
-            log.info("result key message {}", result.getProducerRecord().key());*//*
-        } catch (InterruptedException | ExecutionException e) {
-            log.error(e.getMessage());
-            throw new KafkaException(e.getMessage());
-        }*/
-    }
+
 
     private void sentToInformation(PersistDTO order) {
         var message = ShopOrderInformationStatusDTO.builder()

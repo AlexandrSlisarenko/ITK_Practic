@@ -18,7 +18,7 @@ import ru.slisarenko.persist.repository.ShopOrderRepository;
 import ru.slisarenko.persist.repository.ShopProductRepository;
 
 @Service
-@Transactional
+@Transactional("transactionManager")
 @RequiredArgsConstructor
 public class ShopService {
     private final ShopProductRepository shopProductRepository;
@@ -104,7 +104,6 @@ public class ShopService {
         var product = this.shopProductRepository.findById(productId)
                 .orElseGet(() -> ShopProduct.builder()
                         .price(BigDecimal.valueOf(10L))
-                        .productId(productId)
                         .build());
         return this.shopProductRepository.save(product);
     }
@@ -131,10 +130,9 @@ public class ShopService {
     }
 
     private ShopCustomer createCustomer(Long customerId) {
-        var customer = this.shopCustomerRepository.findById(customerId)
+       var customer = this.shopCustomerRepository.findById(customerId)
                 .orElseGet(() -> ShopCustomer.builder()
                         .cash(BigDecimal.valueOf(1000000L))
-                        .customerId(customerId)
                         .build());
         return this.shopCustomerRepository.save(customer);
 

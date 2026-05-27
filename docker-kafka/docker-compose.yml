@@ -18,7 +18,7 @@ services:
       # Controller quorum
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka-1:9097,2@kafka-2:9097,3@kafka-3:9097
     ports:
-      - "9092:9092"  # EXTERNAL порт для доступа с хоста
+      - 9092:9092  # EXTERNAL порт для доступа с хоста
     volumes:
       - D:/Projects/ITK_Practic/itk_practic/docker-kafka/volumes-test/kafka-1/:/bitnami/kafka
 
@@ -41,7 +41,7 @@ services:
       # Controller quorum
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka-1:9097,2@kafka-2:9097,3@kafka-3:9097
     ports:
-      - "9094:9094"  # EXTERNAL порт для доступа с хоста
+      - 9094:9094  # EXTERNAL порт для доступа с хоста
     volumes:
       - D:/Projects/ITK_Practic/itk_practic/docker-kafka/volumes-test/kafka-2/:/bitnami/kafka
 
@@ -64,6 +64,6 @@ services:
       # Controller quorum
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka-1:9097,2@kafka-2:9097,3@kafka-3:9097
     ports:
-      - "9096:9096"  # EXTERNAL порт для доступа с хоста
+      - 9096:9096  # EXTERNAL порт для доступа с хоста
     volumes:
       - D:/Projects/ITK_Practic/itk_practic/docker-kafka/volumes-test/kafka-3/:/bitnami/kafka

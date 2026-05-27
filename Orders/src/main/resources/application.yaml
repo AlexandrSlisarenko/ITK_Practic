@@ -7,7 +7,7 @@ spring:
     producer:
       bootstrap-servers: localhost:9092,localhost:9094,localhost:9096
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
       acks: all
       retries: 50 # ?????????? ????????? ????????
       properties:
@@ -24,6 +24,6 @@ spring:
       #key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       #value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
-        spring.json.trusted.packages: ru.slisarenko.entity_library.dto
+        spring.json.trusted.packages: ru.slisarenko.entity_library.dto.*
         allow.auto.create.topics: true
       group-id: group-id-orders
