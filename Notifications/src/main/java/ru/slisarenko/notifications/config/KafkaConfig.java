@@ -72,18 +72,6 @@ public class KafkaConfig {
         return factory;
     }
 
-    @Bean
-    public NewTopic createRequestTopic() {
-        return TopicBuilder.name(SENT_NOTIFICATION_TOPIC)
-                .partitions(3)
-                .replicas(3)
-                .configs(Map.of("min.insync.replicas",
-                        Objects.requireNonNull(environment.getProperty("spring.kafka.producer.properties.min.insync.replicas"))))
-                .build();
-    }
-
-
-
     private Map<String,Object> buildConsumerConfigs() {
         Map<String, Object> configs = new HashMap<>();
         configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, environment.getProperty("spring.kafka.consumer.bootstrap-servers"));
@@ -92,10 +80,20 @@ public class KafkaConfig {
         configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
         configs.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
         configs.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JacksonJsonDeserializer.class);
-        configs.put(JacksonJsonDeserializer.VALUE_DEFAULT_TYPE, OrderRequestDTO.class);
+        configs.put(JacksonJsonDeserializer.VALUE_DEFAULT_TYPE, ShopOrderInformationStatusDTO.class);
         configs.put(JacksonJsonDeserializer.TRUSTED_PACKAGES,
                 environment.getProperty("spring.kafka.consumer.properties.spring.json.trusted.packages"));
         return configs;
+    }
+
+    @Bean
+    public NewTopic createRequestTopic() {
+        return TopicBuilder.name(SENT_NOTIFICATION_TOPIC)
+                .partitions(3)
+                .replicas(3)
+                .configs(Map.of("min.insync.replicas",
+                        Objects.requireNonNull(environment.getProperty("spring.kafka.producer.properties.min.insync.replicas"))))
+                .build();
     }
 
 

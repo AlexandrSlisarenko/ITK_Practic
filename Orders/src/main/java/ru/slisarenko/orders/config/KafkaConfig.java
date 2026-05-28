@@ -134,16 +134,6 @@ public class KafkaConfig {
     }
 
     @Bean
-    NewTopic createRequestTopic() {
-        return TopicBuilder.name(NEW_ORDERS_REQUEST_TOPIC)
-                .partitions(3)
-                .replicas(3)
-                .configs(Map.of("min.insync.replicas",
-                        Objects.requireNonNull(environment.getProperty("spring.kafka.producer.properties.min.insync.replicas"))))
-                .build();
-    }
-
-    @Bean
     NewTopic createResponseTopic() {
         return TopicBuilder.name(NEW_ORDERS_RESPONSE_TOPIC)
                 .partitions(3)

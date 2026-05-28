@@ -16,9 +16,10 @@ import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_NOTI
 public class NotificationListener {
     @KafkaHandler
     public void handleSaga(ShopOrderInformationStatusDTO information) {
-        log.info("RequestUUID => {}, Order id => {}, Status => {}",
+        log.info("RequestUUID => {}, Order id => {}, Module => {}, Status => {}",
                 information.requestUUId(),
                 information.orderId(),
+                information.moduleName(),
                 information.status());
     }
 }

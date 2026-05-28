@@ -10,5 +10,6 @@ public record PersistDTO(@NonNull String requestUUId,
                          Long customerId,
                          List<Long> productIds,
                          Long orderId,
-                         OrderStatus status) {
+                         OrderStatus status,
+                         String address) {
 }

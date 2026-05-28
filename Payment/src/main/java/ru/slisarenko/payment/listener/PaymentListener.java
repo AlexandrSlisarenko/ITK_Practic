@@ -13,23 +13,26 @@ import ru.slisarenko.entity_library.dto.ShopOrderInformationStatusDTO;
 import ru.slisarenko.entity_library.dto.payment.PaymentRequestDTO;
 import ru.slisarenko.entity_library.dto.persist.PersistDTO;
 import ru.slisarenko.entity_library.dto.shipping.ShippingRequestDTO;
+import ru.slisarenko.entity_library.enums.OrderStatus;
 
+import static ru.slisarenko.entity_library.constants.ServiceNames.PAYMENT_MODULE;
 import static ru.slisarenko.entity_library.constants.ServiceTopicNames.PAYED_ORDER_REQUEST_TOPIC;
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.PAYED_ORDER_RESPONSE_TOPIC;
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_NOTIFICATION_TOPIC;
 import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_PERSIST_REQUEST_TOPIC;
-import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_PERSIST_RESPONSE_TOPIC;
 import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_SHIPPING_ORDER_REQUEST_TOPIC;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-@KafkaListener(topics = {PAYED_ORDER_REQUEST_TOPIC, SENT_PERSIST_RESPONSE_TOPIC})
+@KafkaListener(topics = {PAYED_ORDER_REQUEST_TOPIC, PAYED_ORDER_RESPONSE_TOPIC})
 public class PaymentListener {
     private final KafkaTemplate<String, PaymentRequestDTO> kafkaTemplate;
     private final KafkaTemplate<String, ShopOrderInformationStatusDTO> kafkaTemplateInformation;
     private final KafkaTemplate<String, ShippingRequestDTO> kafkaTemplateShipping;
 
     @KafkaHandler
-    public void handleSaga(PaymentRequestDTO requestDTO) {
+    public void listen(PaymentRequestDTO requestDTO) {
         log.info("Payment invoice: {}", requestDTO);
         SendResult<String, PaymentRequestDTO> result = null;
         try {
@@ -48,16 +51,14 @@ public class PaymentListener {
     @KafkaHandler
     public void listen(PersistDTO order) {
         log.info("Order UUID => {}, The bill is => {}", order.requestUUId(), order.status());
-        sendToShipping(order);
         sentToInformation(order);
+        if(order.status().equals(OrderStatus.PAYMENT)) {
+            sendToShipping(order);
+        }
     }
 
     private void sendToShipping(PersistDTO order) {
-        var message = ShippingRequestDTO.builder()
-                .requestUUId(order.requestUUId())
-                .customerId(order.customerId())
-                .orderId(order.orderId())
-                .build();
+        var message = toShippingRequestDTO(order);
         SendResult<String, ShippingRequestDTO> result = null;
         try {
             result = kafkaTemplateShipping.send(SENT_SHIPPING_ORDER_REQUEST_TOPIC, order.requestUUId(), message).get();
@@ -73,14 +74,10 @@ public class PaymentListener {
     }
 
     private void sentToInformation(PersistDTO order) {
-        var message = ShopOrderInformationStatusDTO.builder()
-                .orderId(order.orderId())
-                .requestUUId(order.requestUUId())
-                .status(order.status())
-                .build();
+        var message = ShopOrderInformationDTO(order);
         SendResult<String, ShopOrderInformationStatusDTO> result = null;
         try {
-            result = kafkaTemplateInformation.send(PAYED_ORDER_REQUEST_TOPIC, order.requestUUId(), message).get();
+            result = kafkaTemplateInformation.send(SENT_NOTIFICATION_TOPIC, order.requestUUId(), message).get();
             log.info("result partition {}", result.getRecordMetadata().partition());
             log.info("result offset {}", result.getRecordMetadata().offset());
             log.info("result timestamp {}", result.getRecordMetadata().timestamp());
@@ -90,6 +87,24 @@ public class PaymentListener {
             log.error(e.getMessage());
             throw new KafkaException(e.getMessage());
         }
+    }
+
+    private ShippingRequestDTO toShippingRequestDTO(PersistDTO order) {
+        return ShippingRequestDTO.builder()
+                .requestUUId(order.requestUUId())
+                .customerId(order.customerId())
+                .orderId(order.orderId())
+                .address(order.address())
+                .build();
+    }
+
+    private ShopOrderInformationStatusDTO ShopOrderInformationDTO(PersistDTO order) {
+        return ShopOrderInformationStatusDTO.builder()
+                .orderId(order.orderId())
+                .requestUUId(order.requestUUId())
+                .status(order.status())
+                .moduleName(PAYMENT_MODULE)
+                .build();
     }
 }
 

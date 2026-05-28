@@ -15,11 +15,16 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "shop_customer", schema = "shop")
-@Data
+@Getter
+@Setter
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -30,7 +35,10 @@ public class ShopCustomer {
     private Long customerId;
 
     @Column(name = "cash", nullable = false)
-    BigDecimal cash;
+    private BigDecimal cash;
+
+    @Column(name = "address", nullable = false)
+    private String address;
 
     @Builder.Default
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

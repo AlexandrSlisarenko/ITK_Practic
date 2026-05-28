@@ -15,8 +15,10 @@ import ru.slisarenko.entity_library.dto.persist.PersistDTO;
 import ru.slisarenko.entity_library.dto.shipping.ShippingRequestDTO;
 import ru.slisarenko.persist.service.ShopService;
 
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.NEW_ORDERS_RESPONSE_TOPIC;
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.PAYED_ORDER_RESPONSE_TOPIC;
 import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_PERSIST_REQUEST_TOPIC;
-import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_PERSIST_RESPONSE_TOPIC;
+import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_SHIPPING_ORDER_RESPONSE_TOPIC;
 
 @Slf4j
 @Component
@@ -24,8 +26,6 @@ import static ru.slisarenko.entity_library.constants.ServiceTopicNames.SENT_PERS
 public class PersistListener {
 
     private final ShopService shopService;
-    private final KafkaTemplate<String, PaymentRequestDTO> kafkaTemplatePaymentRequest;
-    private final KafkaTemplate<String, ShippingRequestDTO> kafkaTemplateShippingRequest;
     private final KafkaTemplate<String, PersistDTO> kafkaTemplateOrder;
 
     @KafkaListener(topics = SENT_PERSIST_REQUEST_TOPIC, containerFactory = "kafkaListenerContainerFactory")
@@ -63,7 +63,7 @@ public class PersistListener {
         kafkaTemplateOrder.executeInTransaction(operations -> {
             try {
                 SendResult<String, PersistDTO> result = operations
-                        .send(SENT_PERSIST_RESPONSE_TOPIC, order.requestUUId(), order).get();
+                        .send(NEW_ORDERS_RESPONSE_TOPIC, order.requestUUId(), order).get();
                 log.info("result partition {}", result.getRecordMetadata().partition());
                 log.info("result offset {}", result.getRecordMetadata().offset());
                 log.info("result timestamp {}", result.getRecordMetadata().timestamp());
@@ -79,16 +79,11 @@ public class PersistListener {
     }
 
     private void sentToPayment(PersistDTO order) {
-        var message = PaymentRequestDTO.builder()
-                .orderId(order.orderId())
-                .requestUUId(order.requestUUId())
-                .customerId(order.customerId())
-                .build();
-
-        kafkaTemplatePaymentRequest.executeInTransaction(operations -> {
+        // надо отправлять PersistDTO
+        kafkaTemplateOrder.executeInTransaction(operations -> {
             try {
-                SendResult<String, PaymentRequestDTO> result = operations
-                        .send(SENT_PERSIST_RESPONSE_TOPIC, order.requestUUId(), message).get();
+                SendResult<String, PersistDTO> result = operations
+                        .send(PAYED_ORDER_RESPONSE_TOPIC, order.requestUUId(), order).get();
                 log.info("result partition {}", result.getRecordMetadata().partition());
                 log.info("result offset {}", result.getRecordMetadata().offset());
                 log.info("result timestamp {}", result.getRecordMetadata().timestamp());
@@ -104,17 +99,10 @@ public class PersistListener {
     }
 
     private void sentToShipping(PersistDTO order) {
-        var message = ShippingRequestDTO.builder()
-                .orderId(order.orderId())
-                .requestUUId(order.requestUUId())
-                .customerId(order.customerId())
-                .address("ADDRESS")
-                .build();
-
-        kafkaTemplateShippingRequest.executeInTransaction(operations -> {
+        kafkaTemplateOrder.executeInTransaction(operations -> {
             try {
-                SendResult<String, ShippingRequestDTO> result = kafkaTemplateShippingRequest
-                        .send(SENT_PERSIST_RESPONSE_TOPIC, order.requestUUId(), message).get();
+                SendResult<String, PersistDTO> result = operations
+                        .send(SENT_SHIPPING_ORDER_RESPONSE_TOPIC, order.requestUUId(), order).get();
                 log.info("result partition {}", result.getRecordMetadata().partition());
                 log.info("result offset {}", result.getRecordMetadata().offset());
                 log.info("result timestamp {}", result.getRecordMetadata().timestamp());

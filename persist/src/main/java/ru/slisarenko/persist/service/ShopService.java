@@ -36,17 +36,20 @@ public class ShopService {
         }
 
         var price = getPriceOfOrder(requestDTO.orderId());
-        var cash = getCash(requestDTO.orderId());
+        var cash = getCash(requestDTO.customerId());
 
         if (cash.compareTo(price) < 0) {
             return getErrorResponse();
         }
         var order = updateStatus(requestDTO.orderId(), OrderStatus.PAYMENT);
+        var customer = order.getCustomer();
 
         return PersistDTO.builder()
                 .requestUUId(requestDTO.requestUUId())
                 .orderId(order.getOrderId())
                 .status(order.getStatus())
+                .customerId(customer.getCustomerId())
+                .address(customer.getAddress())
                 .build();
     }
 
@@ -61,10 +64,14 @@ public class ShopService {
         }
 
         var order = updateStatus(requestDTO.orderId(), OrderStatus.SHIPPING);
+        var customer = order.getCustomer();
 
         return PersistDTO.builder()
+                .requestUUId(order.getOrderUUID())
                 .orderId(order.getOrderId())
                 .status(order.getStatus())
+                .address(customer.getAddress())
+                .customerId(customer.getCustomerId())
                 .build();
     }
 
@@ -125,7 +132,7 @@ public class ShopService {
 
     private ShopOrder updateStatus(Long orderId, OrderStatus orderStatus) {
         var order = shopOrderRepository.findById(orderId).orElseGet(ShopOrder::new);
-        order.setStatus(OrderStatus.PAYMENT);
+        order.setStatus(orderStatus);
         return saveOrder(order);
     }
 
@@ -133,6 +140,7 @@ public class ShopService {
        var customer = this.shopCustomerRepository.findById(customerId)
                 .orElseGet(() -> ShopCustomer.builder()
                         .cash(BigDecimal.valueOf(1000000L))
+                        .address("Russian Federation Voronezh")
                         .build());
         return this.shopCustomerRepository.save(customer);
 

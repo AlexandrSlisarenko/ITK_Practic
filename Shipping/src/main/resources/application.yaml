@@ -9,7 +9,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
       acks: all
-      retries: 50
+      retries: 2
       properties:
         min.insync.replicas: 2
         retry.backoff.ms: 2000

@@ -14,6 +14,8 @@ import ru.slisarenko.entity_library.dto.order.OrderRequestDTO;
 import ru.slisarenko.entity_library.enums.OrderStatus;
 import ru.slisarenko.orders.service.KafkaService;
 
+import static ru.slisarenko.entity_library.constants.ServiceNames.ORDERS_MODULE;
+
 @Log4j2
 @RestController
 @RequestMapping("/order")
@@ -29,6 +31,7 @@ public class OrderController {
                 .orderId(0L)
                 .requestUUId(key)
                 .status(OrderStatus.CREATED)
+                .moduleName(ORDERS_MODULE)
                 .build();
         return new ResponseEntity<>(result, HttpStatus.CREATED) ;
     }
