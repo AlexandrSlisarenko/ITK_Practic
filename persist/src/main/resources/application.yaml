@@ -1,0 +1,47 @@
+server:
+  port: 8092
+spring:
+  application:
+    name: persist
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    name: postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 2
+      minimum-idle: 1
+      connection-init-sql: CREATE SCHEMA IF NOT EXISTS shop
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        default_schema: shop
+        show_sql: true
+        format_sql: true
+        hbm2ddl.auto: update
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092,localhost:9094,localhost:9096
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+      acks: all
+      retries: 2 # ?????????? ????????? ????????
+      properties:
+        min.insync.replicas: 2
+        retry.backoff.ms: 2000 # ????? ????? ????????? ???????? ?? ????????
+        delivery.timeout.ms: 60000 # ????? ?? ??????? ???????? ??????
+        linger.ms: 0 # ????? ?????????? ????????? ????? ????????? ??????
+        request.timeout.ms: 1000 # ????? ???????? ?????? ?? ???????
+        #delivery.timeout.ms >= linger.ms + request.timeout.ms
+        enable.idempotence: true
+        allow.auto.create.topics: false
+      transaction-id-prefix: transaction_persist_module
+    consumer:
+      bootstrap-servers: localhost:9092,localhost:9094,localhost:9096
+      auto-offset-reset: earliest
+      properties:
+        spring.json.trusted.packages: ru.slisarenko.entity_library.dto.*
+        allow.auto.create.topics: false
+      group-id: group-id-persist

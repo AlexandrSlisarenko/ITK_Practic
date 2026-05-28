@@ -1,0 +1,69 @@
+services:
+  kafka-1:
+    image: 'bitnami/kafka:3.3.2'
+    container_name: kafka-1
+    environment:
+      # KRaft settings
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_KRAFT_CLUSTER_ID=r4zt_wrqTRuT7W2NJsB_GA
+      # Listeners (внутри контейнера)
+      - KAFKA_CFG_LISTENERS=INTERNAL://0.0.0.0:9091,CONTROLLER://0.0.0.0:9097,EXTERNAL://0.0.0.0:9092
+      # Advertised listeners (что видят клиенты)
+      - KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka-1:9091,EXTERNAL://host.docker.internal:9092
+      # Security protocol map
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,INTERNAL:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
+      # Controller quorum
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka-1:9097,2@kafka-2:9097,3@kafka-3:9097
+    ports:
+      - 9092:9092  # EXTERNAL порт для доступа с хоста
+    volumes:
+      - D:/Projects/ITK_Practic/itk_practic/docker-kafka/volumes-test/kafka-1/:/bitnami/kafka
+
+  kafka-2:
+    image: 'bitnami/kafka:3.3.2'
+    container_name: kafka-2
+    environment:
+      # KRaft settings
+      - KAFKA_CFG_NODE_ID=2
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_KRAFT_CLUSTER_ID=r4zt_wrqTRuT7W2NJsB_GA
+      # Listeners (внутри контейнера)
+      - KAFKA_CFG_LISTENERS=INTERNAL://0.0.0.0:9093,CONTROLLER://0.0.0.0:9097,EXTERNAL://0.0.0.0:9094
+      # Advertised listeners (что видят клиенты)
+      - KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka-2:9093,EXTERNAL://host.docker.internal:9094
+      # Security protocol map
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,INTERNAL:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
+      # Controller quorum
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka-1:9097,2@kafka-2:9097,3@kafka-3:9097
+    ports:
+      - 9094:9094  # EXTERNAL порт для доступа с хоста
+    volumes:
+      - D:/Projects/ITK_Practic/itk_practic/docker-kafka/volumes-test/kafka-2/:/bitnami/kafka
+
+  kafka-3:
+    image: 'bitnami/kafka:3.3.2'
+    container_name: kafka-3
+    environment:
+      # KRaft settings
+      - KAFKA_CFG_NODE_ID=3
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_KRAFT_CLUSTER_ID=r4zt_wrqTRuT7W2NJsB_GA
+      # Listeners (внутри контейнера)
+      - KAFKA_CFG_LISTENERS=INTERNAL://0.0.0.0:9095,CONTROLLER://0.0.0.0:9097,EXTERNAL://0.0.0.0:9096
+      # Advertised listeners (что видят клиенты)
+      - KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka-3:9095,EXTERNAL://host.docker.internal:9096
+      # Security protocol map
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,INTERNAL:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
+      # Controller quorum
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka-1:9097,2@kafka-2:9097,3@kafka-3:9097
+    ports:
+      - 9096:9096  # EXTERNAL порт для доступа с хоста
+    volumes:
+      - D:/Projects/ITK_Practic/itk_practic/docker-kafka/volumes-test/kafka-3/:/bitnami/kafka
