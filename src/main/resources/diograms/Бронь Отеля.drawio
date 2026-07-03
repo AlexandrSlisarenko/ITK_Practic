@@ -23,14 +23,6 @@
         <mxCell id="mDlep5LFg91DvluXMNSA-12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Mobile UI" vertex="1">
           <mxGeometry height="60" width="120" x="460" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="mDlep5LFg91DvluXMNSA-18" edge="1" parent="1" source="mDlep5LFg91DvluXMNSA-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="mDlep5LFg91DvluXMNSA-10">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="mDlep5LFg91DvluXMNSA-40" connectable="0" parent="mDlep5LFg91DvluXMNSA-18" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="REST API" vertex="1">
-          <mxGeometry relative="1" x="-0.0115" y="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="mDlep5LFg91DvluXMNSA-23" edge="1" parent="1" source="mDlep5LFg91DvluXMNSA-13" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="mDlep5LFg91DvluXMNSA-22">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
@@ -40,7 +32,7 @@
         <mxCell id="mDlep5LFg91DvluXMNSA-31" edge="1" parent="1" source="mDlep5LFg91DvluXMNSA-13" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;elbow=vertical;" target="mDlep5LFg91DvluXMNSA-30">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mDlep5LFg91DvluXMNSA-49" connectable="0" parent="mDlep5LFg91DvluXMNSA-31" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="REST&lt;div&gt;- запрос на бронирование&lt;/div&gt;&lt;div&gt;- запрос на снятие бронирования&lt;/div&gt;" vertex="1">
+        <mxCell id="mDlep5LFg91DvluXMNSA-49" connectable="0" parent="mDlep5LFg91DvluXMNSA-31" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="REST&lt;div&gt;- запрос на бронирование&lt;/div&gt;&lt;div&gt;- запрос на снятие бронирования&lt;/div&gt;&lt;div&gt;- запрос на статус сос&lt;span style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;тояния&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry relative="1" x="-0.1838" y="1" as="geometry">
             <mxPoint y="2" as="offset" />
           </mxGeometry>
@@ -54,7 +46,12 @@
         <mxCell id="mDlep5LFg91DvluXMNSA-29" edge="1" parent="1" source="mDlep5LFg91DvluXMNSA-16" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="mDlep5LFg91DvluXMNSA-26">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mDlep5LFg91DvluXMNSA-32" edge="1" parent="1" source="mDlep5LFg91DvluXMNSA-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="mDlep5LFg91DvluXMNSA-30" value="&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 11px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;REST&lt;/span&gt;&lt;div style=&quot;forced-color-adjust: none; color: rgb(0, 0, 0); font-family: Helvetica; font-size: 11px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;- запрос на бронирование&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; color: rgb(0, 0, 0); font-family: Helvetica; font-size: 11px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;- запрос на снятие бронирования&lt;/div&gt;&#xa;&#xa;">
+        <mxCell id="mDlep5LFg91DvluXMNSA-58" connectable="0" parent="mDlep5LFg91DvluXMNSA-29" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="REST&amp;nbsp;&lt;div&gt;просмотр информации по&lt;/div&gt;&lt;div&gt;&amp;nbsp;отелю по прямой ссылке&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.2333" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mDlep5LFg91DvluXMNSA-32" edge="1" parent="1" source="mDlep5LFg91DvluXMNSA-16" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="mDlep5LFg91DvluXMNSA-30" value="&lt;br&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 11px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;REST&lt;/span&gt;&lt;div style=&quot;forced-color-adjust: none; color: rgb(0, 0, 0); font-family: Helvetica; font-size: 11px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;- запрос на бронирование&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; color: rgb(0, 0, 0); font-family: Helvetica; font-size: 11px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;- запрос на снятие бронирования&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; color: rgb(0, 0, 0); font-family: Helvetica; font-size: 11px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;- запрос на статус состояния&lt;/div&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="mDlep5LFg91DvluXMNSA-16" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;br&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(236, 236, 236); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;Mobile&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(236, 236, 236); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;API Gateway&lt;/span&gt;&lt;/div&gt;&lt;div&gt;(Routing, Reate Limit, JWT)&lt;br&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
@@ -91,7 +88,7 @@
         <mxCell id="mDlep5LFg91DvluXMNSA-34" edge="1" parent="1" source="mDlep5LFg91DvluXMNSA-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="mDlep5LFg91DvluXMNSA-26">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mDlep5LFg91DvluXMNSA-50" connectable="0" parent="mDlep5LFg91DvluXMNSA-34" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="gRPC&amp;nbsp;&lt;div&gt;получение информации&amp;nbsp;&lt;/div&gt;&lt;div&gt;о свободе выбранного места&amp;nbsp;&lt;/div&gt;" vertex="1">
+        <mxCell id="mDlep5LFg91DvluXMNSA-50" connectable="0" parent="mDlep5LFg91DvluXMNSA-34" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Kafka&lt;br&gt;&lt;div&gt;получение информации&amp;nbsp;&lt;/div&gt;&lt;div&gt;о свободе выбранного места&amp;nbsp;&lt;/div&gt;" vertex="1">
           <mxGeometry relative="1" x="0.0367" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -99,7 +96,7 @@
         <mxCell id="mDlep5LFg91DvluXMNSA-51" edge="1" parent="1" source="mDlep5LFg91DvluXMNSA-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="mDlep5LFg91DvluXMNSA-48">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mDlep5LFg91DvluXMNSA-52" connectable="0" parent="mDlep5LFg91DvluXMNSA-51" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="gRPC&lt;div&gt;получение информации&lt;/div&gt;&lt;div&gt;&amp;nbsp;о оплате&lt;/div&gt;" vertex="1">
+        <mxCell id="mDlep5LFg91DvluXMNSA-52" connectable="0" parent="mDlep5LFg91DvluXMNSA-51" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Kafka&lt;br&gt;&lt;div&gt;получение информации&lt;/div&gt;&lt;div&gt;&amp;nbsp;о оплате&lt;/div&gt;" vertex="1">
           <mxGeometry relative="1" x="-0.1333" y="-1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -110,14 +107,8 @@
         <mxCell id="mDlep5LFg91DvluXMNSA-35" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Notification Service&lt;div&gt;(SMS, PUSH, EMAIL)&lt;/div&gt;" vertex="1">
           <mxGeometry height="60" width="120" x="1260" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="mDlep5LFg91DvluXMNSA-43" edge="1" parent="1" source="mDlep5LFg91DvluXMNSA-16" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" target="mDlep5LFg91DvluXMNSA-26" value="">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="580" y="270" as="sourcePoint" />
-            <mxPoint x="170" y="700" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="mDlep5LFg91DvluXMNSA-26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Information&amp;nbsp;&lt;div&gt;Store&lt;/div&gt;&lt;div&gt;(CRUD)&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="120" x="480" y="710" as="geometry" />
+        <mxCell id="mDlep5LFg91DvluXMNSA-26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Information&amp;nbsp;&lt;div&gt;Store&lt;/div&gt;&lt;div&gt;(CRUD - управление информацией об отелях)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="120" x="450" y="620" as="geometry" />
         </mxCell>
         <mxCell id="mDlep5LFg91DvluXMNSA-46" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="REST&amp;nbsp;&lt;div&gt;просмотр информации по&lt;/div&gt;&lt;div&gt;&amp;nbsp;отелю по прямой ссылке&lt;/div&gt;" vertex="1">
           <mxGeometry x="333" y="481" as="geometry" />
@@ -145,6 +136,9 @@
           <mxGeometry relative="1" x="0.0978" y="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="mDlep5LFg91DvluXMNSA-59" edge="1" parent="1" source="mDlep5LFg91DvluXMNSA-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.467;entryY=1.024;entryDx=0;entryDy=0;entryPerimeter=0;" target="mDlep5LFg91DvluXMNSA-13" value="&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 11px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;REST API&lt;/span&gt;&#xa;&#xa;">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
