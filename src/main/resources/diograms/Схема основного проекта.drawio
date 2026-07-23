@@ -412,7 +412,7 @@
           <mxGeometry height="60" width="120" x="615" y="2460" as="geometry" />
         </mxCell>
         <mxCell id="HDIyClHeuKONO5LQNIM0-44" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" value="REST&lt;div&gt;Endpoint&lt;/div&gt;" vertex="1">
-          <mxGeometry height="80" width="120" x="330" y="3030" as="geometry" />
+          <mxGeometry height="80" width="120" x="475" y="3040" as="geometry" />
         </mxCell>
         <mxCell id="HDIyClHeuKONO5LQNIM0-51" edge="1" parent="1" source="HDIyClHeuKONO5LQNIM0-45" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;" target="HDIyClHeuKONO5LQNIM0-44">
           <mxGeometry relative="1" as="geometry" />
