@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Страница-1" id="zhFgXbXHMfRGNtL-eq70">
-    <mxGraphModel dx="1979" dy="601" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2114" dy="672" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -82,22 +82,13 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-53" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;direction=south;" value="" vertex="1">
-          <mxGeometry height="810" width="300" x="320" y="530" as="geometry" />
+          <mxGeometry height="810" width="290" x="330" y="530" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-54" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot; face=&quot;Comic Sans MS&quot;&gt;Ingress Service&lt;/font&gt;&lt;/b&gt;" vertex="1">
           <mxGeometry height="30" width="110" x="475" y="555" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-55" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&amp;nbsp;-&amp;nbsp; получение XML&lt;div&gt;&amp;nbsp;-&amp;nbsp; проверка подписи&lt;/div&gt;&lt;div&gt;&amp;nbsp;-&amp;nbsp; сохранение документа&lt;/div&gt;" vertex="1">
           <mxGeometry height="55" width="150" x="450" y="585" as="geometry" />
-        </mxCell>
-        <mxCell id="1ZBM-VfQY7cxwquH4SlS-56" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-57" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=17;startArrow=classic;startFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="1ZBM-VfQY7cxwquH4SlS-9" value="&lt;font&gt;InputStream(JSch)&lt;/font&gt;">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="389.4799999999999" y="1367.09" as="sourcePoint" />
-            <mxPoint x="299.9999999999999" y="1540" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="1ZBM-VfQY7cxwquH4SlS-57" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;" value="Scheduler&lt;div&gt;раз в 5 секунд по списку контрагентов проверяет папку input и вычитывает XML&lt;/div&gt;" vertex="1">
-          <mxGeometry height="90" width="190" x="400" y="1230" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-63" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-58" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="1ZBM-VfQY7cxwquH4SlS-64" value="">
           <mxGeometry relative="1" as="geometry">
@@ -119,8 +110,51 @@
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-71" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-69" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="1ZBM-VfQY7cxwquH4SlS-20">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-86" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="1ZBM-VfQY7cxwquH4SlS-85">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-75" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="139" width="270" x="340" y="1150" as="geometry" />
+        </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-69" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="HTTPS" vertex="1">
           <mxGeometry height="60" width="120" x="-120" y="1460" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-80" parent="1" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fixedHeader=1;" value="" vertex="1">
+          <mxGeometry height="120" width="240" x="350" y="1159.5" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-81" parent="1ZBM-VfQY7cxwquH4SlS-80" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fixedHeader=1;" value="" vertex="1">
+          <mxGeometry height="120" width="240" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-82" parent="1ZBM-VfQY7cxwquH4SlS-81" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="Прием XML&lt;div&gt;&amp;nbsp;по одному&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="120" as="geometry">
+            <mxRectangle height="120" width="120" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-83" parent="1ZBM-VfQY7cxwquH4SlS-81" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="Scheduler&lt;div&gt;раз в 5 секунд по списку контрагентов проверяет папку input и вычитывает XML&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="120" x="120" as="geometry">
+            <mxRectangle height="120" width="120" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-84" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-20" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.219;entryY=0.998;entryDx=0;entryDy=0;entryPerimeter=0;" target="1ZBM-VfQY7cxwquH4SlS-81">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-56" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-81" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=17;startArrow=classic;startFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.758;exitY=0.978;exitDx=0;exitDy=0;exitPerimeter=0;" target="1ZBM-VfQY7cxwquH4SlS-9" value="&lt;font&gt;InputStream(JSch)&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="495" y="1320" as="sourcePoint" />
+            <mxPoint x="299.9999999999999" y="1540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-85" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="320" width="260" x="345" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-90" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-88" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="1ZBM-VfQY7cxwquH4SlS-89" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-88" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Потоковый парсинг документа и получение подписи(StaX Parser)" vertex="1">
+          <mxGeometry height="40" width="230" x="360" y="1060" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-89" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="" vertex="1">
+          <mxGeometry height="60" width="230" x="360" y="980" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
