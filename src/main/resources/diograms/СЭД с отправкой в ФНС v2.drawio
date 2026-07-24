@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Страница-1" id="zhFgXbXHMfRGNtL-eq70">
-    <mxGraphModel dx="3371" dy="1306" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2523" dy="871" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -209,11 +209,23 @@
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-112" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;" value="&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;SAVE IN DOC&amp;nbsp;&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;&lt;span style=&quot;white-space: normal&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Id_contragent&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;white-space: normal&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;id_document_contragent&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;&lt;div&gt;SAVE IN Outbox&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;Id_contragent &lt;/span&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;id_document_contragent&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="60" width="210" x="370" y="760" as="geometry" />
         </mxCell>
-        <mxCell id="1ZBM-VfQY7cxwquH4SlS-113" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=11.91081157483552;fillColor=#ffcc99;strokeColor=#36393d;" value="PostgreSQL&lt;div&gt;table_DOC&lt;/div&gt;&lt;div&gt;table_Outbox&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-113" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=6.939829508463504;fillColor=#ffcc99;strokeColor=#36393d;" value="PostgreSQL&lt;div&gt;table_DOC&lt;/div&gt;&lt;div&gt;table_Outbox&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="80" width="130" x="670" y="740" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-115" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-109" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="1ZBM-VfQY7cxwquH4SlS-113">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-118" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Scheduler раз в 5 секунд делает отправку XML в MinIO&lt;div&gt;при успехе в записи DOC и Outbox добавляется id файла в MinIO&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="210" x="370" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-119" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-109" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.012;exitY=0.526;exitDx=0;exitDy=0;startArrow=classic;startFill=1;exitPerimeter=0;" target="1ZBM-VfQY7cxwquH4SlS-104" value="Если MinIO не доступна&lt;div&gt;то 503 ошибка&amp;nbsp;&lt;/div&gt;&lt;div&gt;сервис падает&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;?????&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-120" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" value="" vertex="1">
+          <mxGeometry height="230" width="905" x="485" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-121" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="KAFKA" vertex="1">
+          <mxGeometry height="30" width="60" x="1290" y="250" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
