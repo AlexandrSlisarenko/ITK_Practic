@@ -222,10 +222,13 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-120" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" value="" vertex="1">
-          <mxGeometry height="230" width="905" x="485" y="250" as="geometry" />
+          <mxGeometry height="230" width="905" x="500" y="250" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-121" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="KAFKA" vertex="1">
           <mxGeometry height="30" width="60" x="1290" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-122" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-110" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0.134;entryY=1.012;entryDx=0;entryDy=0;entryPerimeter=0;" target="1ZBM-VfQY7cxwquH4SlS-120">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
