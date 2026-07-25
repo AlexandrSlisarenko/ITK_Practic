@@ -1,14 +1,14 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Страница-1" id="zhFgXbXHMfRGNtL-eq70">
-    <mxGraphModel dx="2099" dy="759" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3654" dy="1687" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="" vertex="1">
-          <mxGeometry height="2080" width="1440" x="160" y="130" as="geometry" />
+          <mxGeometry height="2080" width="2660" x="160" y="130" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;direction=south;fillColor=#d5e8d4;strokeColor=#82b366;" value="" vertex="1">
-          <mxGeometry height="1270" width="1320" x="220" y="170" as="geometry" />
+          <mxGeometry height="1270" width="2580" x="220" y="170" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="&lt;b&gt;&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 19px;&quot; face=&quot;Comic Sans MS&quot;&gt;Kubernetes&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;" vertex="1">
           <mxGeometry height="30" width="130" x="1200" y="460" as="geometry" />
@@ -47,7 +47,7 @@
           <mxGeometry height="60" width="120" x="-160" y="1740" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-40" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
-          <mxGeometry height="1200" width="1240" x="260" y="200" as="geometry" />
+          <mxGeometry height="1200" width="2500" x="260" y="200" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-41" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start; white-space: nowrap;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20parent%3D%221%22%20style%3D%22rounded%3D1%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3BfillColor%3D%23e1d5e7%3BstrokeColor%3D%239673a6%3B%22%20value%3D%22Elasticsearch%26lt%3Bdiv%26gt%3B%D1%85%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%BB%D0%BE%D0%B3%D0%BE%D0%B2%20%D0%B8%20%D1%81%D0%BE%D0%B1%D1%8B%D1%82%D0%B8%D0%B9%26lt%3B%2Fdiv%26gt%3B%22%20vertex%3D%221%22%3E%3CmxGeometry%20height%3D%2260%22%20width%3D%22129.23076923076923%22%20x%3D%221925.3846153846155%22%20y%3D%22524.99%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" vertex="1">
           <mxGeometry height="390" width="160" x="1230" y="1500" as="geometry" />
@@ -232,7 +232,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-120" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" value="" vertex="1">
-          <mxGeometry height="230" width="655" x="992.5" y="250" as="geometry" />
+          <mxGeometry height="130" width="655" x="992.5" y="250" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-121" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="KAFKA" vertex="1">
           <mxGeometry height="30" width="60" x="1290" y="250" as="geometry" />
@@ -241,13 +241,13 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-12" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=none;strokeColor=#666666;" value="Инфраструктура банка" vertex="1">
-          <mxGeometry height="540" width="400" x="-360" y="320" as="geometry">
+          <mxGeometry height="1090" width="400" x="2840" y="130" as="geometry">
             <mxRectangle height="30" width="387" y="420" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uxFAcMpeMJxBEOyxzVsG-28" collapsed="1" parent="uxFAcMpeMJxBEOyxzVsG-12" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=none;strokeColor=#666666;" value="Внешние системы" vertex="1">
-          <mxGeometry height="30" width="400" y="30" as="geometry">
-            <mxRectangle height="280" width="400" y="30" as="alternateBounds" />
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-28" parent="uxFAcMpeMJxBEOyxzVsG-12" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=none;strokeColor=#666666;" value="Внешние системы" vertex="1">
+          <mxGeometry height="280" width="400" y="30" as="geometry">
+            <mxRectangle height="30" width="400" y="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-29" parent="uxFAcMpeMJxBEOyxzVsG-28" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" value="Контрагенты (СЭД / 1С / SAP)" vertex="1">
@@ -265,9 +265,9 @@
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-34" parent="uxFAcMpeMJxBEOyxzVsG-28" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=12;" value="Администратор / DevOps&#xa;(Cockpit / Kibana / Grafana)" vertex="1">
           <mxGeometry height="50" width="400" y="230" as="geometry" />
         </mxCell>
-        <mxCell id="uxFAcMpeMJxBEOyxzVsG-18" collapsed="1" parent="uxFAcMpeMJxBEOyxzVsG-12" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=none;strokeColor=#666666;" value="Безопасность и инфраструктура" vertex="1">
-          <mxGeometry height="30" width="400" y="60" as="geometry">
-            <mxRectangle height="270" width="400" y="60" as="alternateBounds" />
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-18" parent="uxFAcMpeMJxBEOyxzVsG-12" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=none;strokeColor=#666666;" value="Безопасность и инфраструктура" vertex="1">
+          <mxGeometry height="270" width="400" y="310" as="geometry">
+            <mxRectangle height="30" width="400" y="310" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-19" parent="uxFAcMpeMJxBEOyxzVsG-18" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="🔐 mTLS (ФНС)" vertex="1">
@@ -295,41 +295,41 @@
           <mxGeometry height="30" width="400" y="240" as="geometry" />
         </mxCell>
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-1" parent="uxFAcMpeMJxBEOyxzVsG-12" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=none;strokeColor=#666666;" value="Хранилища данных (Data Layer)" vertex="1">
-          <mxGeometry height="420" width="400" y="90" as="geometry">
-            <mxRectangle height="30" width="400" y="90" as="alternateBounds" />
+          <mxGeometry height="280" width="400" y="580" as="geometry">
+            <mxRectangle height="30" width="400" y="580" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uxFAcMpeMJxBEOyxzVsG-2" parent="uxFAcMpeMJxBEOyxzVsG-1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=center;fontStyle=0;" value="🐘 PostgreSQL (3 БД: ingestion_db, processing_db, status_db)&#xa;Партиционирование: по дате (месяц)&#xa;Индексы: составные, покрывающие&#xa;Размер: 2-3 ТБ (5 лет)" vertex="1">
-          <mxGeometry height="110" width="400" y="30" as="geometry" />
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-2" parent="uxFAcMpeMJxBEOyxzVsG-1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=center;fontStyle=0;" value="🐘 PostgreSQL (3 БД: ingestion_db, processing_db, status_db)&#xa;Партиционирование: по дате (месяц)&#xa;Индексы: составные, покрывающие&#xa;Размер: 2-3 ТБ (5 лет)" vertex="1">
+          <mxGeometry height="80" width="400" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="uxFAcMpeMJxBEOyxzVsG-3" parent="uxFAcMpeMJxBEOyxzVsG-1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;align=center;" value="📦 MinIO (S3-совместимое хранилище)&#xa;Бакет: legal-documents&#xa;Ключи: {тип}/{год}/{месяц}/{день}/{uuid}.xml&#xa;ILM: 1 год → холодное, 5 лет → удаление&#xa;Объем: ~165 ТБ (с Erasure Coding 4+2)" vertex="1">
-          <mxGeometry height="120" width="400" y="140" as="geometry" />
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-3" parent="uxFAcMpeMJxBEOyxzVsG-1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;align=center;" value="📦 MinIO (S3-совместимое хранилище)&#xa;Бакет: legal-documents&#xa;Ключи: {тип}/{год}/{месяц}/{день}/{uuid}.xml&#xa;ILM: 1 год → холодное, 5 лет → удаление&#xa;Объем: ~165 ТБ (с Erasure Coding 4+2)" vertex="1">
+          <mxGeometry height="80" width="400" y="110" as="geometry" />
         </mxCell>
-        <mxCell id="uxFAcMpeMJxBEOyxzVsG-4" parent="uxFAcMpeMJxBEOyxzVsG-1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=center;" value="⚡ Redis (глобальный кэш справочников)&#xa;+ Caffeine (локальный кэш в каждом поде)" vertex="1">
-          <mxGeometry height="80" width="400" y="260" as="geometry" />
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-4" parent="uxFAcMpeMJxBEOyxzVsG-1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=center;" value="⚡ Redis (глобальный кэш справочников)&#xa;+ Caffeine (локальный кэш в каждом поде)" vertex="1">
+          <mxGeometry height="40" width="400" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="uxFAcMpeMJxBEOyxzVsG-5" parent="uxFAcMpeMJxBEOyxzVsG-1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=center;" value="🔍 Elasticsearch (индексы для отчетов)&#xa;+ Kibana (визуализация)" vertex="1">
-          <mxGeometry height="80" width="400" y="340" as="geometry" />
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-5" parent="uxFAcMpeMJxBEOyxzVsG-1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=center;" value="🔍 Elasticsearch (индексы для отчетов)&#xa;+ Kibana (визуализация)" vertex="1">
+          <mxGeometry height="50" width="400" y="230" as="geometry" />
         </mxCell>
-        <mxCell id="uxFAcMpeMJxBEOyxzVsG-6" collapsed="1" parent="uxFAcMpeMJxBEOyxzVsG-12" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=none;strokeColor=#666666;" value="Мониторинг и Observability" vertex="1">
-          <mxGeometry height="30" width="400" y="510" as="geometry">
-            <mxRectangle height="230" width="387" y="60" as="alternateBounds" />
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-6" parent="uxFAcMpeMJxBEOyxzVsG-12" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=none;strokeColor=#666666;" value="Мониторинг и Observability" vertex="1">
+          <mxGeometry height="230" width="400" y="860" as="geometry">
+            <mxRectangle height="30" width="400" y="1000" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-7" parent="uxFAcMpeMJxBEOyxzVsG-6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=center;" value="📊 Prometheus (метрики) + Grafana (дашборды)" vertex="1">
-          <mxGeometry height="40" width="387" y="30" as="geometry" />
+          <mxGeometry height="40" width="400" y="30" as="geometry" />
         </mxCell>
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-8" parent="uxFAcMpeMJxBEOyxzVsG-6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=center;" value="📜 ELK Stack (Elasticsearch + Logstash + Kibana)" vertex="1">
-          <mxGeometry height="40" width="387" y="70" as="geometry" />
+          <mxGeometry height="40" width="400" y="70" as="geometry" />
         </mxCell>
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-9" parent="uxFAcMpeMJxBEOyxzVsG-6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=center;" value="🔎 Zipkin (distributed tracing)" vertex="1">
-          <mxGeometry height="40" width="387" y="110" as="geometry" />
+          <mxGeometry height="40" width="400" y="110" as="geometry" />
         </mxCell>
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-10" parent="uxFAcMpeMJxBEOyxzVsG-6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=center;" value="🔔 Alertmanager + Telegram (алерты)" vertex="1">
-          <mxGeometry height="40" width="387" y="150" as="geometry" />
+          <mxGeometry height="40" width="400" y="150" as="geometry" />
         </mxCell>
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-11" parent="uxFAcMpeMJxBEOyxzVsG-6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=center;" value="📋 Camunda Cockpit (аудит процессов)" vertex="1">
-          <mxGeometry height="40" width="387" y="190" as="geometry" />
+          <mxGeometry height="40" width="400" y="190" as="geometry" />
         </mxCell>
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-35" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;📤 Kafka Producer (Outbox Poller)&lt;/span&gt;&lt;br style=&quot;font-size: 11px;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Топик: document-ingest (20 партиций)&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Message(id_contragent,id_doc_contragent, id_doc_minio)&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="85" width="250" x="350" y="460" as="geometry" />
@@ -388,6 +388,12 @@
         </mxCell>
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-58" edge="1" parent="1" source="uxFAcMpeMJxBEOyxzVsG-49" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.186;exitDx=0;exitDy=0;exitPerimeter=0;" target="1ZBM-VfQY7cxwquH4SlS-104">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-60" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;direction=south;" value="" vertex="1">
+          <mxGeometry height="905" width="600" x="1190" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-69" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;direction=south;" value="" vertex="1">
+          <mxGeometry height="905" width="600" x="2030" y="395.5" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
