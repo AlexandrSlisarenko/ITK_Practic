@@ -25,6 +25,9 @@
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-9" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12.28571428571422;container=0;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" value="SFTP-сервер&lt;div&gt;(документы контрагентов)&lt;br&gt;&lt;div&gt;Для каждого контрагента input и error&lt;/div&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="140" width="170" x="380.5" y="1680" as="geometry" />
         </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-39" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="uxFAcMpeMJxBEOyxzVsG-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" value="NGINX" vertex="1">
           <mxGeometry height="250" width="120" x="200" y="1470" as="geometry" />
         </mxCell>
@@ -40,7 +43,7 @@
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-32" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-30" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="1ZBM-VfQY7cxwquH4SlS-20">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="1ZBM-VfQY7cxwquH4SlS-30" parent="1" style="whiteSpace=wrap;html=1;rounded=1;" value="&lt;span style=&quot;font-family: Arial, sans-serif; font-size: 14.6667px; white-space: pre-wrap; background-color: rgb(255, 255, 255);&quot;&gt;HTTP Callback (новый &lt;/span&gt;&lt;span id=&quot;docs-internal-guid-e7dcac8e-7fff-8742-5527-2f67167e3fa5&quot; style=&quot;font-family: Arial, sans-serif; font-size: 14.6667px; white-space: pre-wrap; background-color: rgb(255, 255, 255);&quot;&gt;&lt;span style=&quot;font-size: 11pt; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; font-variant-emoji: normal; vertical-align: baseline;&quot;&gt;УПД&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-family: Arial, sans-serif; font-size: 14.6667px; white-space: pre-wrap; background-color: rgb(255, 255, 255);&quot;&gt;)&lt;/span&gt;&lt;div&gt;&lt;font face=&quot;Arial, sans-serif&quot;&gt;&lt;span style=&quot;font-size: 14.6667px; white-space-collapse: preserve; background-color: rgb(255, 255, 255);&quot;&gt;mTLS&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-30" parent="1" style="whiteSpace=wrap;html=1;rounded=1;" value="&lt;span style=&quot;font-family: Arial, sans-serif; font-size: 14.6667px; white-space: pre-wrap; background-color: rgb(255, 255, 255);&quot;&gt;HTTP Callback (ID &lt;/span&gt;&lt;span id=&quot;docs-internal-guid-e7dcac8e-7fff-8742-5527-2f67167e3fa5&quot; style=&quot;font-family: Arial, sans-serif; font-size: 14.6667px; white-space: pre-wrap; background-color: rgb(255, 255, 255);&quot;&gt;&lt;span style=&quot;font-size: 11pt; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; font-variant-emoji: normal; vertical-align: baseline;&quot;&gt;УПД&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-family: Arial, sans-serif; font-size: 14.6667px; white-space: pre-wrap; background-color: rgb(255, 255, 255);&quot;&gt;)&lt;/span&gt;&lt;div&gt;&lt;font face=&quot;Arial, sans-serif&quot;&gt;&lt;span style=&quot;font-size: 14.6667px; white-space-collapse: preserve; background-color: rgb(255, 255, 255);&quot;&gt;mTLS&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="60" width="120" x="-160" y="1740" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-40" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
@@ -108,13 +111,13 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-75" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
-          <mxGeometry height="160" width="270" x="340" y="1150" as="geometry" />
+          <mxGeometry height="160" width="270" x="350" y="1150" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-69" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="HTTPS" vertex="1">
           <mxGeometry height="60" width="120" x="-120" y="1460" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-80" parent="1" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fixedHeader=1;" value="" vertex="1">
-          <mxGeometry height="120.5" width="240" x="355" y="1180" as="geometry" />
+          <mxGeometry height="120.5" width="240" x="360" y="1180" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-81" parent="1ZBM-VfQY7cxwquH4SlS-80" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fixedHeader=1;" value="" vertex="1">
           <mxGeometry height="121" width="240" as="geometry" />
@@ -139,7 +142,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-85" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
-          <mxGeometry height="250" width="260" x="345" y="870" as="geometry" />
+          <mxGeometry height="250" width="270" x="340" y="870" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-90" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-88" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="1ZBM-VfQY7cxwquH4SlS-89" value="">
           <mxGeometry relative="1" as="geometry" />
@@ -183,13 +186,14 @@
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-103" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-97" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0;entryDx=0;entryDy=41.14285714285711;entryPerimeter=0;fontSize=13;" target="1ZBM-VfQY7cxwquH4SlS-9" value="XML и Log ошибки">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="670" y="920.09" />
-              <mxPoint x="670" y="1771.18" />
+              <mxPoint x="640" y="920.1" />
+              <mxPoint x="640" y="1771.2" />
+              <mxPoint x="550.5" y="1771.2" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-104" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffcc99;strokeColor=#36393d;" value="MinIO&lt;div&gt;Долговременное&amp;nbsp;&lt;/div&gt;&lt;div&gt;хранилище документов&lt;/div&gt;" vertex="1">
-          <mxGeometry height="120" width="150" x="325" y="270" as="geometry" />
+          <mxGeometry height="120" width="150" x="992.5" y="600" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-105" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;text-align: left;&quot;&gt;Получение XML&lt;/span&gt;" vertex="1">
           <mxGeometry height="30" width="105" x="413" y="1150" as="geometry" />
@@ -212,8 +216,8 @@
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-112" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;" value="&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;SAVE IN DOC&amp;nbsp;&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;&lt;span style=&quot;white-space: normal&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Id_contragent&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;white-space: normal&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;id_document_contragent&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;&lt;div&gt;SAVE IN Outbox&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;Id_contragent &lt;/span&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;id_document_contragent&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="60" width="210" x="370" y="760" as="geometry" />
         </mxCell>
-        <mxCell id="1ZBM-VfQY7cxwquH4SlS-113" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=6.939829508463504;fillColor=#ffcc99;strokeColor=#36393d;" value="PostgreSQL&lt;div&gt;table_DOC&lt;/div&gt;&lt;div&gt;table_Outbox&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="80" width="130" x="697" y="520" as="geometry" />
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-113" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=6.939829508463504;fillColor=#ffcc99;strokeColor=#36393d;" value="PostgreSQL&lt;div&gt;table_DOC&lt;/div&gt;&lt;div&gt;table_Outbox&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;table_FNS_DOC&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="130" x="750" y="720" as="geometry" />
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-115" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-109" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="1ZBM-VfQY7cxwquH4SlS-113">
           <mxGeometry relative="1" as="geometry" />
@@ -221,11 +225,10 @@
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-118" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Scheduler раз в 5 секунд делает отправку XML в MinIO&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;в записи DOC и Outbox добавляется id файла в MinIO, отправляет сообщение в топик Ingress_to_Process&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(Message(&lt;/span&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Id_contragent,&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;id_doc_contragent, id_doc_MinIO&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;))&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="140" width="210" x="370" y="610" as="geometry" />
         </mxCell>
-        <mxCell id="1ZBM-VfQY7cxwquH4SlS-119" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-109" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.014;exitY=0.103;exitDx=0;exitDy=0;startArrow=classic;startFill=1;exitPerimeter=0;" target="1ZBM-VfQY7cxwquH4SlS-104" value="Если MinIO не доступна&lt;div&gt;то 503 ошибка&amp;nbsp;&lt;/div&gt;&lt;div&gt;сервис падает&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;?????&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="290" y="470" />
-            </Array>
+        <mxCell id="1ZBM-VfQY7cxwquH4SlS-119" edge="1" parent="1" source="1ZBM-VfQY7cxwquH4SlS-109" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;startArrow=none;startFill=0;" target="1ZBM-VfQY7cxwquH4SlS-104" value="">
+          <mxGeometry relative="1" x="0.0549" y="69" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points" />
           </mxGeometry>
         </mxCell>
         <mxCell id="1ZBM-VfQY7cxwquH4SlS-120" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" value="" vertex="1">
@@ -330,6 +333,61 @@
         </mxCell>
         <mxCell id="uxFAcMpeMJxBEOyxzVsG-35" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;📤 Kafka Producer (Outbox Poller)&lt;/span&gt;&lt;br style=&quot;font-size: 11px;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Топик: document-ingest (20 партиций)&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Message(id_contragent,id_doc_contragent, id_doc_minio)&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="85" width="250" x="350" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-42" edge="1" parent="1" source="uxFAcMpeMJxBEOyxzVsG-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="uxFAcMpeMJxBEOyxzVsG-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-37" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;align=center;" value="📞 FNS Callback Controller" vertex="1">
+          <mxGeometry height="50" width="120" x="680" y="1250.5" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-40" edge="1" parent="1" source="uxFAcMpeMJxBEOyxzVsG-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="uxFAcMpeMJxBEOyxzVsG-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-38" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;HTTP Callback (ID &lt;/span&gt;&lt;span id=&quot;docs-internal-guid-e7dcac8e-7fff-8742-5527-2f67167e3fa5&quot; style=&quot;white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;&lt;span style=&quot;font-size: 11pt; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; font-variant-emoji: normal; vertical-align: baseline;&quot;&gt;УПД&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;)&lt;/span&gt;&lt;div&gt;&lt;font face=&quot;Arial, sans-serif&quot;&gt;&lt;span style=&quot;font-size: 14.6667px; white-space-collapse: preserve; background-color: rgb(255, 255, 255);&quot;&gt;mTLS&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="680" y="1550" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-45" edge="1" parent="1" source="uxFAcMpeMJxBEOyxzVsG-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="uxFAcMpeMJxBEOyxzVsG-43">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-41" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;align=center;" value="✅ Проверка дублей&amp;nbsp;" vertex="1">
+          <mxGeometry height="30" width="160" x="660" y="1190" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-43" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=6.939829508463504;fillColor=#ffcc99;strokeColor=#36393d;" value="PostgreSQL&lt;div&gt;table_FNS&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="59.75" width="80" x="827" y="1230" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-44" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffcc99;strokeColor=#36393d;" value="Redis&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="150" x="1016" y="1145" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-46" edge="1" parent="1" source="uxFAcMpeMJxBEOyxzVsG-41" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="uxFAcMpeMJxBEOyxzVsG-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-49" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="260" width="250" x="660" y="885" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-59" edge="1" parent="1" source="uxFAcMpeMJxBEOyxzVsG-50" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0;exitDx=0;exitDy=0;" target="uxFAcMpeMJxBEOyxzVsG-35">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="690" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-50" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;text-align: left;&quot;&gt;Сохранение ФНС документа&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="180" x="690" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-51" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Scheduler раз в 5 секунд делает отправку XML в MinIO&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;в записи FNS_DOC и Outbox добавляется id файла в MinIO, отправляет сообщение в топик Ingress_to_Process&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(Message(&lt;/span&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Id_contragent,&amp;nbsp;&lt;br&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Id_udp&lt;/span&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;, id_udp_MinIO&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;))&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="210" x="675" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-53" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;" value="&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;SAVE IN FNS_DOC&amp;nbsp;&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;&lt;span style=&quot;white-space: normal&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;id_contragent,&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); white-space: normal;&quot;&gt;Id_udp&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;&lt;div&gt;SAVE IN Outbox&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;Id_contragent &lt;/span&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;id_udp&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="210" x="675" y="1070" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-54" edge="1" parent="1" source="uxFAcMpeMJxBEOyxzVsG-41" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.4;entryY=0.992;entryDx=0;entryDy=0;entryPerimeter=0;" target="uxFAcMpeMJxBEOyxzVsG-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-57" edge="1" parent="1" source="uxFAcMpeMJxBEOyxzVsG-49" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" target="1ZBM-VfQY7cxwquH4SlS-113">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxFAcMpeMJxBEOyxzVsG-58" edge="1" parent="1" source="uxFAcMpeMJxBEOyxzVsG-49" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.186;exitDx=0;exitDy=0;exitPerimeter=0;" target="1ZBM-VfQY7cxwquH4SlS-104">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
