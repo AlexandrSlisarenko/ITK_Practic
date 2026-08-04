@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Claude">
   <diagram name="Camunda BPM - Горизонтальное масштабирование" id="camunda-scaling">
-    <mxGraphModel dx="2054" dy="2309" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3735" dy="3298" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -488,6 +488,141 @@
         </mxCell>
         <mxCell id="YylXXy4FzsxSt8aHbr34-12" edge="1" parent="1" source="pod3" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.744;entryY=-0.004;entryDx=0;entryDy=0;entryPerimeter=0;" target="ext_box">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-1" parent="1" style="text;html=1;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;" value="Camunda BPM: финальная архитектура кластера&#xa;Read Replica + History Cleanup + MinIO (S3-совместимое хранилище)" vertex="1">
+          <mxGeometry height="50" width="700" x="690" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Frontend&#xa;(клиентский портал)" vertex="1">
+          <mxGeometry height="50" width="160" x="250" y="1145" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Внутр. система&#xa;сотрудников" vertex="1">
+          <mxGeometry height="50" width="160" x="250" y="1215" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;dashed=1;fontSize=10;" value="Camunda Modeler&#xa;(desktop, вне кластера,&#xa;деплой BPMN через REST)" vertex="1">
+          <mxGeometry height="55" width="160" x="250" y="1295" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=1;" value="Custom Gateway&#xa;(External Task API client)" vertex="1">
+          <mxGeometry height="70" width="180" x="460" y="1175" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-6" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" value="Load Balancer&#xa;(k8s Service / Ingress)" vertex="1">
+          <mxGeometry height="80" width="150" x="690" y="1170" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#82b366;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Kubernetes-кластер: реплики Camunda Engine (Process App)" vertex="1">
+          <mxGeometry height="230" width="560" x="890" y="1115" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Под 1&#xa;Process App&#xa;(открытие точки / KYC /&#xa;скоринг)" vertex="1">
+          <mxGeometry height="80" width="160" x="910" y="1155" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Под 2&#xa;Process App&#xa;(открытие точки / KYC /&#xa;скоринг)" vertex="1">
+          <mxGeometry height="80" width="160" x="1090" y="1155" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Под N (HPA)&#xa;Process App&#xa;(открытие точки / KYC /&#xa;скоринг)" vertex="1">
+          <mxGeometry height="80" width="160" x="1270" y="1155" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-11" parent="1" style="text;html=1;fontSize=9;fontStyle=2;align=center;" value="stateless реплики — всё состояние в общей БД" vertex="1">
+          <mxGeometry height="20" width="520" x="910" y="1295" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#9673a6;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Под: Admin/UI-приложение" vertex="1">
+          <mxGeometry height="110" width="560" x="890" y="1375" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Cockpit&#xa;(мониторинг, incidents)" vertex="1">
+          <mxGeometry height="55" width="160" x="910" y="1410" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Tasklist&#xa;(user tasks, QA)" vertex="1">
+          <mxGeometry height="55" width="160" x="1090" y="1410" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Admin&#xa;(управление правами)" vertex="1">
+          <mxGeometry height="55" width="160" x="1270" y="1410" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="SSO / LDAP" vertex="1">
+          <mxGeometry height="55" width="150" x="1500" y="1410" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" value="History Cleanup&#xa;(встроенный batch-job Camunda,&#xa;запускается по расписанию,&#xa;напр. 22:00, TTL=P180D)" vertex="1">
+          <mxGeometry height="70" width="260" x="890" y="1525" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#b85450;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Слой БД Camunda" vertex="1">
+          <mxGeometry height="180" width="560" x="890" y="1635" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" value="Master БД Camunda&#xa;(write: runtime + history)&#xa;managed-сервис или StatefulSet&#xa;+ партиционирование history-таблиц" vertex="1">
+          <mxGeometry height="90" width="240" x="910" y="1675" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" value="Read Replica&#xa;(streaming replication)&#xa;только для чтения:&#xa;Cockpit, отчётность, BI" vertex="1">
+          <mxGeometry height="90" width="240" x="1190" y="1675" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-21" parent="1" style="text;html=1;fontSize=9;fontStyle=2;" value="streaming replication" vertex="1">
+          <mxGeometry height="40" width="40" x="1150" y="1700" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#d79b00;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="MinIO (S3-совместимое, on-premise)" vertex="1">
+          <mxGeometry height="180" width="480" x="290" y="1635" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="MinIO node 1" vertex="1">
+          <mxGeometry height="45" width="100" x="310" y="1675" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="MinIO node 2" vertex="1">
+          <mxGeometry height="45" width="100" x="420" y="1675" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="MinIO node 3" vertex="1">
+          <mxGeometry height="45" width="100" x="530" y="1675" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="MinIO node 4" vertex="1">
+          <mxGeometry height="45" width="100" x="640" y="1675" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-27" parent="1" style="text;html=1;fontSize=9;fontStyle=2;align=center;" value="distributed mode, erasure coding,&#xa;бакеты: kyc-documents, credit-applications&#xa;шифрование at-rest, lifecycle policy (TTL)" vertex="1">
+          <mxGeometry height="60" width="430" x="310" y="1735" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-28" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-29" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-30" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;dashed=1;" target="YwLbGq00pOSrlPOj4cvM-6" value="деплой моделей">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-31" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-32" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-33" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-34" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-35" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="YwLbGq00pOSrlPOj4cvM-19" value="write (runtime + history)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-36" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="YwLbGq00pOSrlPOj4cvM-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-37" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="YwLbGq00pOSrlPOj4cvM-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-38" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="YwLbGq00pOSrlPOj4cvM-22" value="хранение тяжёлых JSON&#xa;(ссылка сохраняется в БД)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-39" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;strokeColor=#b85450;" target="YwLbGq00pOSrlPOj4cvM-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-40" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="YwLbGq00pOSrlPOj4cvM-20" value="read-only">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-41" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="YwLbGq00pOSrlPOj4cvM-20" value="read-only">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-42" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-43" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="YwLbGq00pOSrlPOj4cvM-19" value="DELETE (батчами)&#xa;только завершённые процессы">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-44" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="YwLbGq00pOSrlPOj4cvM-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-45" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;fontStyle=2;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;whiteSpace=wrap;spacing=8;" value="1) Read Replica снимает нагрузку чтения Cockpit/Tasklist/отчётности с мастера — обычная streaming-репликация СУБД, не CQRS.&#xa;2) History Cleanup — встроенный batch-job Camunda, удаляет/архивирует завершённые процессы старше TTL, синхронизировать с lifecycle policy MinIO.&#xa;3) MinIO хранит тяжёлые JSON-документы; в БД Camunda остаётся только ключ объекта (process variable) — БД остаётся компактной.&#xa;4) Все три компонента (Master DB, Replica, MinIO) — общие ресурсы кластера, НЕ привязаны к конкретному поду процессов." vertex="1">
+          <mxGeometry height="100" width="1160" x="290" y="1855" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
