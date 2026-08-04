@@ -1,0 +1,495 @@
+<mxfile host="Electron" agent="Claude">
+  <diagram name="Camunda BPM - Горизонтальное масштабирование" id="camunda-scaling">
+    <mxGraphModel dx="2054" dy="2309" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title_main" parent="1" style="text;html=1;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;" value="Camunda BPM: горизонтальное масштабирование под нагрузку&#xa;(несколько подов с одинаковым набором Process App, общая БД)" vertex="1">
+          <mxGeometry height="50" width="700" x="690" y="-290" as="geometry" />
+        </mxCell>
+        <mxCell id="frontend1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Frontend-приложение&#xa;(клиентский портал)" vertex="1">
+          <mxGeometry height="60" width="180" x="80" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="frontend2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Внутренняя система&#xa;сотрудников банка" vertex="1">
+          <mxGeometry height="60" width="180" x="80" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="frontend3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Мобильное приложение /&#xa;удалённый клиент" vertex="1">
+          <mxGeometry height="60" width="180" x="80" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="gateway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1;" value="Custom Gateway&#xa;(REST-слой поверх&#xa;Camunda External Task API)" vertex="1">
+          <mxGeometry height="90" width="220" x="330" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="lb" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" value="Load Balancer&#xa;(k8s Service / Ingress)&#xa;round-robin между подами" vertex="1">
+          <mxGeometry height="110" width="180" x="620" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#82b366;dashed=1;verticalAlign=top;fontSize=12;fontStyle=1;align=center;" value="Kubernetes-кластер: реплики Camunda Engine" vertex="1">
+          <mxGeometry height="430" width="720" x="860" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="pod1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Под 1: Spring Boot + Camunda Engine" vertex="1">
+          <mxGeometry height="270" width="210" x="880" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="pod1_apps" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="Process App:&#xa;Открытие точки / KYC / Скоринг&#xa;(идентичный набор моделей)" vertex="1">
+          <mxGeometry height="55" width="180" x="895" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="pod1_job" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Job Executor" vertex="1">
+          <mxGeometry height="35" width="180" x="895" y="235" as="geometry" />
+        </mxCell>
+        <mxCell id="pod1_rest" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Engine REST API" vertex="1">
+          <mxGeometry height="35" width="180" x="895" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="pod1_hc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;dashed=1;fontSize=9;" value="Health check /&#xa;readiness probe" vertex="1">
+          <mxGeometry height="30" width="180" x="895" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="pod2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Под 2: Spring Boot + Camunda Engine" vertex="1">
+          <mxGeometry height="270" width="210" x="1105" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="pod2_apps" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="Process App:&#xa;Открытие точки / KYC / Скоринг&#xa;(идентичный набор моделей)" vertex="1">
+          <mxGeometry height="55" width="180" x="1120" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="pod2_job" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Job Executor" vertex="1">
+          <mxGeometry height="35" width="180" x="1120" y="235" as="geometry" />
+        </mxCell>
+        <mxCell id="pod2_rest" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Engine REST API" vertex="1">
+          <mxGeometry height="35" width="180" x="1120" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="pod2_hc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;dashed=1;fontSize=9;" value="Health check /&#xa;readiness probe" vertex="1">
+          <mxGeometry height="30" width="180" x="1120" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-9" edge="1" parent="1" source="pod3" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="YylXXy4FzsxSt8aHbr34-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pod3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Под 3: Spring Boot + Camunda Engine&#xa;(автоскейлинг: HPA по CPU / очереди задач)" vertex="1">
+          <mxGeometry height="270" width="220" x="1330" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="pod3_apps" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="Process App:&#xa;Открытие точки / KYC / Скоринг&#xa;(идентичный набор моделей)" vertex="1">
+          <mxGeometry height="55" width="190" x="1345" y="205" as="geometry" />
+        </mxCell>
+        <mxCell id="pod3_job" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Job Executor" vertex="1">
+          <mxGeometry height="35" width="190" x="1345" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="pod3_rest" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Engine REST API" vertex="1">
+          <mxGeometry height="35" width="190" x="1345" y="315" as="geometry" />
+        </mxCell>
+        <mxCell id="pod3_dashed" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontColor=#82b366;fontStyle=2;fontSize=10;" value="+N реплик по нагрузке" vertex="1">
+          <mxGeometry height="20" width="190" x="1345" y="355" as="geometry" />
+        </mxCell>
+        <mxCell id="db" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" value="Общая БД Camunda&#xa;(история, переменные, runtime-таблицы)&#xa;кластерная блокировка задач (optimistic locking)&#xa;history-level: full" vertex="1">
+          <mxGeometry height="80" width="360" x="1030" y="-110" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#9673a6;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Отдельный под: Admin/UI-приложение" vertex="1">
+          <mxGeometry height="180" width="250" x="1660" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="cockpit" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Cockpit&#xa;(мониторинг всех подов через общую БД)" vertex="1">
+          <mxGeometry height="50" width="170" x="1700" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="tasklist" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Tasklist&#xa;(пользовательские задачи, QA)" vertex="1">
+          <mxGeometry height="50" width="170" x="1700" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#d79b00;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Внешние системы банка (доступны всем подам)" vertex="1">
+          <mxGeometry height="120" width="1300" x="520" y="602.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ext1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="АБС банка" vertex="1">
+          <mxGeometry height="55" width="180" x="890" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="ext2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Бюро кредитных историй /&#xa;госсистемы" vertex="1">
+          <mxGeometry height="55" width="180" x="1100" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="ext3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Message Broker&#xa;(Kafka/RabbitMQ, если есть&#xa;межпроцессная асинхронность)" vertex="1">
+          <mxGeometry height="55" width="230" x="1310" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="frontend1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="frontend2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="frontend3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="gateway" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="lb" value="External Task fetch/complete">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="lb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="pod1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="lb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="pod2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="710" y="60" />
+              <mxPoint x="1210" y="60" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="lb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="pod3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="710" y="60" />
+              <mxPoint x="1440" y="60" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="pod1" style="rounded=0;html=1;endArrow=block;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="db">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1090" y="272.5" as="sourcePoint" />
+            <mxPoint x="1420" y="27.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="pod2" style="rounded=0;html=1;endArrow=block;" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="pod3" style="rounded=0;html=1;endArrow=block;exitX=0.805;exitY=0.015;exitDx=0;exitDy=0;exitPerimeter=0;" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="cockpit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="db">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1650" y="260" />
+              <mxPoint x="1650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="tasklist" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="db">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1775" y="60" />
+              <mxPoint x="1650" y="60" />
+              <mxPoint x="1650" y="-10" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-2" parent="1" style="text;html=1;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;" value="Внутреннее устройство одного пода Camunda Engine" vertex="1">
+          <mxGeometry height="30" width="650" x="2720" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;verticalAlign=top;fontSize=13;fontStyle=1;align=center;" value="Под (Kubernetes Pod)" vertex="1">
+          <mxGeometry height="865" width="1160" x="2450" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;dashed=1;fontSize=10;fontStyle=2;align=center;" value="requests/limits: CPU 1-2 vCPU, RAM 2-4 GB (пример)&#xa;JVM: -Xms / -Xmx настроены под лимиты контейнера" vertex="1">
+          <mxGeometry height="45" width="370" x="3210" y="215" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f4ea;strokeColor=#82b366;verticalAlign=top;fontSize=12;fontStyle=1;align=center;" value="Контейнер: Spring Boot Application (JVM)" vertex="1">
+          <mxGeometry height="680" width="1100" x="2480" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" value="Входящий трафик от Load Balancer" vertex="1">
+          <mxGeometry height="40" width="300" x="3185" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=top;align=center;" value="Встроенный Tomcat / HTTP-слой (Spring MVC)" vertex="1">
+          <mxGeometry height="85" width="725" x="2685" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;" value="engine-rest API&#xa;(REST-эндпоинты движка)" vertex="1">
+          <mxGeometry height="45" width="160" x="3050" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;" value="External Task API&#xa;(fetch &amp; lock, complete, fail)" vertex="1">
+          <mxGeometry height="45" width="140" x="2700" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;" value="Spring Actuator&#xa;/health /readiness /liveness /metrics" vertex="1">
+          <mxGeometry height="45" width="180" x="2860" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-3" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="LOU6W0FggTf-lCZ_p-wn-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;" value="Auth-фильтр&#xa;(SSO/LDAP токен-валидация)" vertex="1">
+          <mxGeometry height="45" width="160" x="3230" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;verticalAlign=top;align=center;" value="Process Engine (ядро Camunda, ProcessEngineConfiguration)" vertex="1">
+          <mxGeometry height="165" width="710" x="2850" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="RepositoryService&#xa;(деплой BPMN-моделей)" vertex="1">
+          <mxGeometry height="50" width="150" x="3102.5" y="592.5" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="RuntimeService&#xa;(запуск / состояние процессов)" vertex="1">
+          <mxGeometry height="50" width="155" x="3100" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="TaskService&#xa;(пользовательские задачи)" vertex="1">
+          <mxGeometry height="50" width="150" x="3270" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="HistoryService&#xa;(history-level: full)" vertex="1">
+          <mxGeometry height="50" width="105" x="3430" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="ManagementService&#xa;(джобы, метрики, инциденты)" vertex="1">
+          <mxGeometry height="45" width="150" x="3270" y="595" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="BPMN-парсер /&#xa;Execution Listener&#39;ы" vertex="1">
+          <mxGeometry height="45" width="105" x="3430" y="595" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-21" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;verticalAlign=top;align=center;" value="Задеплоенные Process Applications (classloader-изоляция)" vertex="1">
+          <mxGeometry height="135" width="505" x="2982.5" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;" value="Process App: Открытие точки&#xa;— BPMN-модель&#xa;— Java Delegates&#xa;— своя ветка версий" vertex="1">
+          <mxGeometry height="90" width="155" x="3157.5" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;" value="Process App: KYC&#xa;— BPMN-модель&#xa;— Java Delegates&#xa;— своя ветка версий" vertex="1">
+          <mxGeometry height="90" width="140" x="3010" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;" value="Process App: Скоринг&#xa;— BPMN-модель&#xa;— Java Delegates&#xa;— своя ветка версий" vertex="1">
+          <mxGeometry height="90" width="140" x="3325" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;verticalAlign=top;align=center;" value="Job Executor (планировщик асинхронных задач)" vertex="1">
+          <mxGeometry height="230" width="190" x="2560" y="492.5" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;" value="Job Acquisition Thread&#xa;(вычитывает задачи из БД,&#xa;лочит через optimistic locking)" vertex="1">
+          <mxGeometry height="80" width="160" x="2570" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;" value="Thread Pool исполнения&#xa;core-pool-size / max-pool-size&#xa;/ queue-size" vertex="1">
+          <mxGeometry height="80" width="160" x="2575" y="622.5" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=1;verticalAlign=top;align=center;" value="External Task Client&lt;br&gt;(подписка Gateway на топики задач, long-polling к engine-rest)" vertex="1">
+          <mxGeometry height="77.5" width="360" x="2525" y="286.25" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-29" parent="1" style="text;html=1;fontSize=9;align=left;verticalAlign=top;fontStyle=2;" value="Примечание: если Gateway — внешний сервис (отдельный под),&lt;br&gt;этот блок — точка входа его подписки в текущий под.&amp;nbsp;&lt;div&gt;Camunda сама балансирует задачи между всеми подами-репликами.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="32.5" width="300" x="2535" y="316.25" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" value="HikariCP&#xa;(пул соединений к общей БД Camunda)" vertex="1">
+          <mxGeometry height="45" width="260" x="2525" y="850" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-31" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" value="Общая БД Camunda&#xa;(вне пода, отдельный сервис)" vertex="1">
+          <mxGeometry height="50" width="300" x="2800" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-32" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;dashed=1;fontSize=10;" value="Sidecar (опционально):&#xa;service mesh proxy (Istio/Envoy),&#xa;log shipper (Fluent Bit)" vertex="1">
+          <mxGeometry height="80" width="200" x="2490" y="960" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-33" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-6" style="rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-34" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-8" style="rounded=0;html=1;endArrow=block;entryX=0.436;entryY=0.018;entryDx=0;entryDy=0;entryPerimeter=0;" target="YylXXy4FzsxSt8aHbr34-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-35" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-9" style="rounded=0;html=1;endArrow=block;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="LOU6W0FggTf-lCZ_p-wn-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-36" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-37" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-21" style="rounded=0;html=1;endArrow=block;exitX=-0.004;exitY=0.444;exitDx=0;exitDy=0;exitPerimeter=0;" target="LOU6W0FggTf-lCZ_p-wn-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-38" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-28" style="rounded=0;html=1;endArrow=block;fontSize=9;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-9" value="long polling">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-39" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-40" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-12" style="rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-41" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-30" style="rounded=0;html=1;endArrow=block;fontSize=9;" target="LOU6W0FggTf-lCZ_p-wn-31" value="JDBC">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-42" parent="1" style="text;html=1;fontSize=11;fontStyle=1;" value="Легенда" vertex="1">
+          <mxGeometry height="20" width="100" x="2480" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-43" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="HTTP-слой" vertex="1">
+          <mxGeometry height="22" width="110" x="2480" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-44" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="Ядро движка" vertex="1">
+          <mxGeometry height="22" width="110" x="2600" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-45" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" value="Process App" vertex="1">
+          <mxGeometry height="22" width="110" x="2720" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-46" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" value="Job Executor / Gateway-клиент" vertex="1">
+          <mxGeometry height="22" width="180" x="2840" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-47" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="БД / соединения" vertex="1">
+          <mxGeometry height="22" width="120" x="3030" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-48" parent="1" style="text;html=1;fontSize=20;fontStyle=1;align=center;verticalAlign=middle;" value="Архитектура: Перенос банка на Camunda BPM" vertex="1">
+          <mxGeometry height="30" width="650" x="480" y="-1060" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-49" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;fontColor=#6c8ebf;" value="Frontend-слой (удалённое размещение)" vertex="1">
+          <mxGeometry height="20" width="320" x="60" y="-1000" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-50" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;fontColor=#d79b00;" value="Gateway-слой" vertex="1">
+          <mxGeometry height="20" width="260" x="440" y="-1000" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-51" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;fontColor=#82b366;" value="Camunda BPM Engine (Spring Boot, embedded)" vertex="1">
+          <mxGeometry height="20" width="620" x="740" y="-1000" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-52" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;fontColor=#b85450;" value="Delegate / Backend-сервисы" vertex="1">
+          <mxGeometry height="20" width="360" x="740" y="-650" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-53" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;fontColor=#9673a6;" value="Инструменты администрирования и моделирования" vertex="1">
+          <mxGeometry height="20" width="230" x="1130" y="-900" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-54" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;fontColor=#b85450;" value="Внешние системы банка" vertex="1">
+          <mxGeometry height="20" width="360" x="860" y="-540" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-55" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Frontend-приложение&#xa;(клиентский портал банка)" vertex="1">
+          <mxGeometry height="60" width="180" x="70" y="-950" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-56" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Frontend-приложение&#xa;(внутренняя система сотрудников)" vertex="1">
+          <mxGeometry height="60" width="180" x="70" y="-860" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-57" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Мобильное приложение /&#xa;удалённый клиент" vertex="1">
+          <mxGeometry height="60" width="180" x="70" y="-770" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-58" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1;" value="Custom Gateway&#xa;(REST-слой поверх&#xa;Camunda External Task API)" vertex="1">
+          <mxGeometry height="90" width="220" x="450" y="-860" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-59" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#82b366;dashed=1;verticalAlign=top;fontSize=11;" value="" vertex="1">
+          <mxGeometry height="290" width="620" x="740" y="-960" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-60" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" value="Process App:&#xa;Открытие торговой точки" vertex="1">
+          <mxGeometry height="60" width="170" x="770" y="-930" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-61" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" value="Process App:&#xa;KYC / проверка клиента" vertex="1">
+          <mxGeometry height="60" width="170" x="965" y="-930" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-62" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" value="Process App:&#xa;Кредитный скоринг" vertex="1">
+          <mxGeometry height="60" width="170" x="1160" y="-930" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-63" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Job Executor&#xa;(асинхронные шаги, таймеры)" vertex="1">
+          <mxGeometry height="50" width="220" x="780" y="-790" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-64" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Authorization API&#xa;(роли, права доступа)" vertex="1">
+          <mxGeometry height="50" width="220" x="1100" y="-800" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-65" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Взаимодействие процессов между собой:&#xa;Call Activity / Message Events&#xa;(независимость и перекомпоновка модулей)" vertex="1">
+          <mxGeometry height="50" width="560" x="770" y="-730" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-66" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Camunda Modeler&#xa;(проектирование BPMN,&#xa;хранится в Git)" vertex="1">
+          <mxGeometry height="60" width="180" x="1500" y="-1020" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-67" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Camunda Cockpit&#xa;(мониторинг, incidents)" vertex="1">
+          <mxGeometry height="60" width="180" x="1570" y="-920" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-68" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Camunda Tasklist&#xa;(пользовательские задачи,&#xa;QA / интеграционное тестирование)" vertex="1">
+          <mxGeometry height="70" width="180" x="1570" y="-775" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-69" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="SSO / LDAP&#xa;(корпоративная аутентификация)" vertex="1">
+          <mxGeometry height="50" width="180" x="1490" y="-650" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-70" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Java Delegate&#xa;(адаптер, без бизнес-логики)" vertex="1">
+          <mxGeometry height="55" width="170" x="550" y="-510" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-71" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Сервисный слой&#xa;(бизнес-логика банка)" vertex="1">
+          <mxGeometry height="55" width="170" x="960" y="-510" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-72" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="БД Camunda&#xa;(история, переменные,&#xa;history-level: full)" vertex="1">
+          <mxGeometry height="55" width="170" x="1310" y="-520" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-73" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" value="АБС банка&#xa;(автоматизированная&#xa;банковская система)" vertex="1">
+          <mxGeometry height="60" width="170" x="770" y="-430" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-74" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" value="Внешние интеграции&#xa;(бюро кредитных историй,&#xa;госсистемы и др.)" vertex="1">
+          <mxGeometry height="60" width="170" x="980" y="-430" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-75" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" value="Прочие команды /&#xa;смежные BPM-процессы" vertex="1">
+          <mxGeometry height="60" width="170" x="1190" y="-430" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-76" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-77" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-78" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-79" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;" target="LOU6W0FggTf-lCZ_p-wn-60" value="External Task&#xa;fetch &amp; complete">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-80" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-63">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-81" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-64">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-82" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-65">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-83" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-65">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-84" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-65">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1245.03" y="-839.97" />
+              <mxPoint x="1050" y="-839.97" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-85" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-70">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-86" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-71">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-87" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-72">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-88" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-73">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-89" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-74">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-90" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-75">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-91" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-62" value="деплой BPMN">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-92" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-59" value="мониторинг">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-93" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-59" value="user tasks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-94" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-64" value="auth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-95" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;verticalAlign=top;fontStyle=1;fontSize=12;align=left;spacingLeft=8;" value="Легенда" vertex="1">
+          <mxGeometry height="200" width="380" x="70" y="-630" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-96" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Frontend-слой (клиентские приложения)" vertex="1">
+          <mxGeometry height="25" width="220" x="80" y="-600" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-97" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Gateway / интеграционный слой" vertex="1">
+          <mxGeometry height="25" width="220" x="80" y="-570" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-98" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Camunda процессы (BPMN)" vertex="1">
+          <mxGeometry height="25" width="220" x="80" y="-540" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-99" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Инфраструктура / администрирование" vertex="1">
+          <mxGeometry height="25" width="220" x="80" y="-510" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-100" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="Backend / внешние системы" vertex="1">
+          <mxGeometry height="25" width="220" x="80" y="-480" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=21;verticalAlign=top;" value="&lt;div style=&quot;line-height: 130%;&quot;&gt;Доступ на уровне процессов&lt;/div&gt;" vertex="1">
+          <mxGeometry height="115" width="230" x="2860" y="525" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;verticalAlign=top;" value="IdentityService&lt;br&gt;(пользователи, группы, роли)&lt;div&gt;&amp;nbsp;LDAP-плагин Camunda&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="150" x="2900" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="AuthorizationService&#xa;(права доступа)" vertex="1">
+          <mxGeometry height="35" width="150" x="2900" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="SSO / LDAP" vertex="1">
+          <mxGeometry height="55" width="230" x="1560" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Camunda Modeler&lt;br&gt;(BPMN-модели в Git)" vertex="1">
+          <mxGeometry height="55" width="180" x="700" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-8" edge="1" parent="1" source="pod2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YylXXy4FzsxSt8aHbr34-7" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1210" y="410" as="sourcePoint" />
+            <mxPoint x="1190" y="635" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="MinIO" vertex="1">
+          <mxGeometry height="55" width="140" x="1140" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-10" edge="1" parent="1" source="pod1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" target="YylXXy4FzsxSt8aHbr34-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-11" edge="1" parent="1" source="pod1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.34;entryY=0.021;entryDx=0;entryDy=0;entryPerimeter=0;" target="ext_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-12" edge="1" parent="1" source="pod3" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.744;entryY=-0.004;entryDx=0;entryDy=0;entryPerimeter=0;" target="ext_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

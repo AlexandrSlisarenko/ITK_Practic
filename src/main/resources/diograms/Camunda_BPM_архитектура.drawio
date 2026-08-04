@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Claude">
   <diagram name="Camunda BPM - Архитектура проекта" id="camunda-arch">
-    <mxGraphModel dx="1174" dy="691" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1170" math="0" shadow="0">
+    <mxGraphModel dx="1712" dy="1008" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1170" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -59,16 +59,16 @@
           <mxGeometry height="50" width="560" x="790" y="350" as="geometry" />
         </mxCell>
         <mxCell id="modeler" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Camunda Modeler&#xa;(проектирование BPMN,&#xa;хранится в Git)" vertex="1">
-          <mxGeometry height="60" width="180" x="1450" y="60" as="geometry" />
+          <mxGeometry height="60" width="180" x="1520" y="60" as="geometry" />
         </mxCell>
         <mxCell id="cockpit" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Camunda Cockpit&#xa;(мониторинг, incidents)" vertex="1">
-          <mxGeometry height="60" width="180" x="1450" y="160" as="geometry" />
+          <mxGeometry height="60" width="180" x="1590" y="160" as="geometry" />
         </mxCell>
         <mxCell id="tasklist" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Camunda Tasklist&#xa;(пользовательские задачи,&#xa;QA / интеграционное тестирование)" vertex="1">
-          <mxGeometry height="70" width="180" x="1480" y="280" as="geometry" />
+          <mxGeometry height="70" width="180" x="1590" y="305" as="geometry" />
         </mxCell>
         <mxCell id="sso" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="SSO / LDAP&#xa;(корпоративная аутентификация)" vertex="1">
-          <mxGeometry height="50" width="180" x="1460" y="390" as="geometry" />
+          <mxGeometry height="50" width="180" x="1510" y="430" as="geometry" />
         </mxCell>
         <mxCell id="delegate1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Java Delegate&#xa;(адаптер, без бизнес-логики)" vertex="1">
           <mxGeometry height="55" width="170" x="570" y="570" as="geometry" />
