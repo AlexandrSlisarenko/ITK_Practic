@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Claude">
   <diagram name="Camunda BPM - Горизонтальное масштабирование" id="camunda-scaling">
-    <mxGraphModel dx="2054" dy="2309" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="10270" dy="7145" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1240,6 +1240,218 @@
         </mxCell>
         <mxCell id="YZrR8DOupRYEo43ufBo8-188" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-134" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;innerLoopWaypoints=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="YZrR8DOupRYEo43ufBo8-134">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-1" parent="1" style="text;html=1;fontSize=17;fontStyle=1;align=center;verticalAlign=middle;" value="Полный процесс подписания договора через ЭЦП с использованием Kafka" vertex="1">
+          <mxGeometry height="35" width="900" x="5640" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eef7ee;strokeColor=#2d5016;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="Camunda BPMN (Open-Point Engine)" vertex="1">
+          <mxGeometry height="150" width="1820" x="5200" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff7e6;strokeColor=#d79b00;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="Custom Gateway" vertex="1">
+          <mxGeometry height="150" width="1820" x="5200" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="Провайдер ЭЦП (внешняя система)" vertex="1">
+          <mxGeometry height="130" width="1820" x="5200" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff7e6;strokeColor=#d79b00;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="Webhook-приёмник (Gateway)" vertex="1">
+          <mxGeometry height="130" width="1820" x="5200" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8e8e8;strokeColor=#231f20;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;Kafka" vertex="1">
+          <mxGeometry height="150" width="1820" x="5200" y="1060" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff7e6;strokeColor=#d79b00;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="Gateway: Kafka Consumer" vertex="1">
+          <mxGeometry height="190" width="1820" x="5200" y="1210" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eef7ee;strokeColor=#2d5016;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="Camunda BPMN — продолжение" vertex="1">
+          <mxGeometry height="170" width="1820" x="5200" y="1390" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Service Task&#xa;«Подписание договора»&#xa;(External Task, topic: esign-sign)" vertex="1">
+          <mxGeometry height="65" width="200" x="5240" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-10" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;strokeWidth=3;fontSize=9;" value="Intermediate Message&#xa;Catch Event&#xa;«Ожидание подписи»" vertex="1">
+          <mxGeometry height="90" width="90" x="5540" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-11" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=8;" value="Boundary Timer&#xa;P3D (3 дня)" vertex="1">
+          <mxGeometry height="40" width="40" x="5660" y="595" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="Напоминание /&#xa;отмена заявки" vertex="1">
+          <mxGeometry height="50" width="140" x="5830" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-13" parent="1" style="text;html=1;fontSize=8;fontStyle=2;align=center;" value="ACT_RU_EVENT_SUBSCR&#xa;процесс «спит»,&#xa;ресурсы Job Executor&#39;а&#xa;не расходуются" vertex="1">
+          <mxGeometry height="40" width="90" x="5670" y="505" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="fetchAndLock&#xa;(topic: esign-sign)" vertex="1">
+          <mxGeometry height="55" width="180" x="5230" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="esignClient.initiateSigning(&#xa;documentKey, clientPhone)" vertex="1">
+          <mxGeometry height="55" width="220" x="5460" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;" value="complete(task,&#xa;{esignSessionId})" vertex="1">
+          <mxGeometry height="55" width="180" x="5720" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-17" parent="1" style="text;html=1;fontSize=8;fontStyle=2;align=left;fillColor=#ffffff;strokeColor=#d79b00;rounded=1;whiteSpace=wrap;" value="ВАЖНО: complete() вызывается сразу после\nотправки на подпись — НЕ после реального\nподписания клиентом (это может занять дни)" vertex="1">
+          <mxGeometry height="55" width="320" x="5940" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" value="Отправка SMS/push&#xa;клиенту с кодом" vertex="1">
+          <mxGeometry height="55" width="180" x="5240" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Клиент вводит код,&#xa;подписывает документ&#xa;(вне системы банка)" vertex="1">
+          <mxGeometry height="55" width="200" x="5480" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" value="POST /esign-webhook&#xa;{sessionId, status: SIGNED}&#xa;+ HMAC-подпись" vertex="1">
+          <mxGeometry height="55" width="220" x="5740" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-21" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Проверка HMAC-подписи&#xa;(доверяем ли отправителю)" vertex="1">
+          <mxGeometry height="55" width="200" x="5240" y="975" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;" value="kafkaProducer.send(&#xa;topic, key=sessionId, callback)" vertex="1">
+          <mxGeometry height="55" width="240" x="5480" y="975" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="HTTP 200 OK&#xa;провайдеру (сразу,&#xa;не дожидаясь обработки)" vertex="1">
+          <mxGeometry height="55" width="200" x="5760" y="975" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="401 Unauthorized&#xa;(подпись не совпала —&#xa;НЕ публикуем в Kafka)" vertex="1">
+          <mxGeometry height="45" width="200" x="5240" y="1035" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-25" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#231f20;fontColor=#ffffff;strokeColor=#000000;fontSize=10;fontStyle=1;" value="topic: external.callbacks.esign&#xa;partition key = sessionId&#xa;(гарантирует порядок событий одной сессии)" vertex="1">
+          <mxGeometry height="65" width="320" x="5460" y="1105" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3d3d3d;fontColor=#ffffff;strokeColor=#000000;fontSize=9;" value="topic: external.callbacks.esign&#xa;.dead-letter-queue" vertex="1">
+          <mxGeometry height="65" width="220" x="5940" y="1102.5" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-27" parent="1" style="text;html=1;fontSize=8;fontStyle=2;align=left;" value="Retention (напр. 7 дней) — если Gateway недоступен,&#xa;событие не теряется, будет обработано при восстановлении" vertex="1">
+          <mxGeometry height="30" width="500" x="5460" y="1175" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Проверка идемпотентности&#xa;(eventId уже обработан?)" vertex="1">
+          <mxGeometry height="55" width="200" x="5240" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-29" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="lookupApplicationBySessionId&#xa;(sessionId → businessKey)" vertex="1">
+          <mxGeometry height="55" width="220" x="5480" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;" value="correlateMessage(&#xa;esignCompletedMessage,&#xa;businessKey=applicationId)" vertex="1">
+          <mxGeometry height="55" width="240" x="5770" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-31" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="markProcessed(eventId)&#xa;+ commit offset" vertex="1">
+          <mxGeometry height="55" width="180" x="6100" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-32" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="Исключение:&amp;nbsp;процесс не найден&lt;br&gt;(уже завершён по таймауту)&lt;br&gt;→ отправка в DLQ" vertex="1">
+          <mxGeometry height="40" width="260" x="5560" y="1330" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-33" parent="1" style="text;html=1;fontSize=8;fontStyle=2;align=left;" value="дубликат → просто игнорируем,&#xa;offset коммитим" vertex="1">
+          <mxGeometry height="30" width="200" x="5240" y="1310" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-34" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=9;" value="Message Catch Event&#xa;срабатывает" vertex="1">
+          <mxGeometry height="70" width="90" x="5240" y="1440" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-35" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="Переменная&#xa;signedDocumentUrl&#xa;записана в контекст" vertex="1">
+          <mxGeometry height="60" width="180" x="5390" y="1445" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-36" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="Service Task&#xa;«Активация точки»&#xa;(следующий шаг процесса)" vertex="1">
+          <mxGeometry height="60" width="180" x="5630" y="1445" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-37" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#666666;fontSize=9;" value="DLQ → Ops-панель:&#xa;ручной разбор&#xa;(«клиент подписал, но заявка&#xa;уже отменена по таймауту»)" vertex="1">
+          <mxGeometry height="70" width="220" x="5930" y="1435" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-38" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-39" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-40" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5580" y="770.03" />
+              <mxPoint x="5210" y="770.03" />
+              <mxPoint x="5210" y="872.49" />
+            </Array>
+            <mxPoint x="5579.998571428571" y="750" as="sourcePoint" />
+            <mxPoint x="5249.97" y="872.4857142857143" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-41" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-42" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5810.03" y="670.03" />
+              <mxPoint x="5590.03" y="670.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-43" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="SdBgG4MfuhIz1VseSWwH-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-44" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=8;" target="SdBgG4MfuhIz1VseSWwH-12" value="истёк таймаут">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-45" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-46" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-47" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;exitX=0.444;exitY=0.971;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="SdBgG4MfuhIz1VseSWwH-21">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5837.6900000000005" y="920.03" />
+              <mxPoint x="5340.03" y="920.03" />
+            </Array>
+            <mxPoint x="5740" y="919.9957142857143" as="sourcePoint" />
+            <mxPoint x="5360.028571428571" y="1022.51" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-48" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=8;" target="SdBgG4MfuhIz1VseSWwH-22" value="valid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-49" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=8;dashed=1;" target="SdBgG4MfuhIz1VseSWwH-24" value="invalid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-50" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-51" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-52" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-53" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-54" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-55" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-56" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=8;dashed=1;" target="SdBgG4MfuhIz1VseSWwH-32" value="ошибка">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-57" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="SdBgG4MfuhIz1VseSWwH-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-58" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-34">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="6110.03" y="1380.03" />
+              <mxPoint x="5210.03" y="1380.03" />
+              <mxPoint x="5210.03" y="1475" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-59" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-60" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-61" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="SdBgG4MfuhIz1VseSWwH-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-62" parent="1" style="text;html=1;fontSize=9;align=left;verticalAlign=middle;fontStyle=2;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;whiteSpace=wrap;spacing=8;" value="Ключевая идея всей схемы: движок Camunda «засыпает» на Intermediate Message Catch Event сразу после отправки документа на подпись — вместо того, чтобы ждать&#xa;синхронно (клиент может подписывать от секунд до дней). Webhook от провайдера ЭЦП проходит через Kafka, а не напрямую в Camunda — это даёт устойчивость к временной&#xa;недоступности Gateway/кластера, идемпотентность через partition key, и защиту от потери события благодаря retention. Boundary Timer гарантирует, что заявка не «зависнет» навечно,&#xa;если клиент так и не подписал документ." vertex="1">
+          <mxGeometry height="70" width="1820" x="5200" y="1560" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
