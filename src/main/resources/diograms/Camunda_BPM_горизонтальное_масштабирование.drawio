@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Claude">
   <diagram name="Camunda BPM - Горизонтальное масштабирование" id="camunda-scaling">
-    <mxGraphModel dx="10270" dy="7145" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="5757" dy="4554" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -754,16 +754,16 @@
         <mxCell id="YZrR8DOupRYEo43ufBo8-42" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Пул: АБС банка&#xa;(core banking system)" vertex="1">
           <mxGeometry height="60" width="160" x="3190" y="105" as="geometry" />
         </mxCell>
-        <mxCell id="YZrR8DOupRYEo43ufBo8-43" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Пул: ФНС —&#xa;ЕГРЮЛ/ЕГРИП API" vertex="1">
+        <mxCell id="YZrR8DOupRYEo43ufBo8-43" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="&lt;div&gt;REST&lt;/div&gt;Пул: ФНС —&lt;br&gt;ЕГРЮЛ/ЕГРИП API" vertex="1">
           <mxGeometry height="60" width="140" x="2675" y="745" as="geometry" />
         </mxCell>
-        <mxCell id="YZrR8DOupRYEo43ufBo8-44" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Пул: Росфинмониторинг /&#xa;санкционные списки" vertex="1">
-          <mxGeometry height="60" width="155" x="2940" y="745" as="geometry" />
+        <mxCell id="YZrR8DOupRYEo43ufBo8-44" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="&lt;span style=&quot;font-size: 9px; font-weight: 400;&quot;&gt;Fin Monitor&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="115" x="2890" y="745" as="geometry" />
         </mxCell>
-        <mxCell id="YZrR8DOupRYEo43ufBo8-45" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Пул: MinIO&#xa;(хранилище сканов документов)" vertex="1">
+        <mxCell id="YZrR8DOupRYEo43ufBo8-45" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="&lt;span style=&quot;font-size: 9px; font-weight: 400;&quot;&gt;OCR Service&lt;/span&gt;" vertex="1">
           <mxGeometry height="60" width="200" x="2645" y="1185" as="geometry" />
         </mxCell>
-        <mxCell id="YZrR8DOupRYEo43ufBo8-46" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Пул: Бюро кредитных&#xa;историй" vertex="1">
+        <mxCell id="YZrR8DOupRYEo43ufBo8-46" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="&lt;span style=&quot;font-size: 9px; font-weight: 400;&quot;&gt;CreditBureauService&lt;/span&gt;" vertex="1">
           <mxGeometry height="60" width="160" x="3650" y="1185" as="geometry" />
         </mxCell>
         <mxCell id="YZrR8DOupRYEo43ufBo8-47" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Пул: Сервис&#xa;электронной подписи (ЭЦП)" vertex="1">
@@ -858,7 +858,7 @@
         <mxCell id="YZrR8DOupRYEo43ufBo8-76" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-30" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-31" value="все ок">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="YZrR8DOupRYEo43ufBo8-77" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-30" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-32" value="расхождения">
+        <mxCell id="YZrR8DOupRYEo43ufBo8-77" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-30" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-32" value="При определенных условиях">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="YZrR8DOupRYEo43ufBo8-78" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-30" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-33" value="санкции">
