@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Страница-1" id="ikd7BjCT6jEBFD-c5HwL">
-    <mxGraphModel dx="8346" dy="3023" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="5827" dy="1511" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -374,8 +374,8 @@
         <mxCell id="FJsbK6QlsCD859aHYSRE-260" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#666666;fontSize=10;" value="Обновление статуса заявки&#xa;(через локальное сопоставление&#xa;processInstanceId → applicationId)" vertex="1">
           <mxGeometry height="55" width="380" x="-1430" y="1315" as="geometry" />
         </mxCell>
-        <mxCell id="FJsbK6QlsCD859aHYSRE-261" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" value="Load Balancer" vertex="1">
-          <mxGeometry height="70" width="120" x="-520" y="930" as="geometry" />
+        <mxCell id="FJsbK6QlsCD859aHYSRE-261" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;Load Balancer&lt;/span&gt;&lt;br style=&quot;font-size: 11px;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;(k8s Service / Ingress)&lt;/span&gt;&lt;br style=&quot;font-size: 11px;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;round-robin между подами&lt;/span&gt;" vertex="1">
+          <mxGeometry height="70" width="200" x="-520" y="930" as="geometry" />
         </mxCell>
         <mxCell id="FJsbK6QlsCD859aHYSRE-264" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;verticalAlign=top;" value="&lt;div&gt;REST&lt;/div&gt;ФНС:ЕГРЮЛ/ЕГРИП API&lt;div&gt;(req string ОГРН или ИНН;&lt;/div&gt;&lt;div&gt;key string Ключ к API)&lt;/div&gt;" vertex="1">
           <mxGeometry height="62.5" width="110" x="-1290" y="605" as="geometry" />
