@@ -1,9 +1,12 @@
 <mxfile host="Electron">
   <diagram name="Страница-1" id="ikd7BjCT6jEBFD-c5HwL">
-    <mxGraphModel dx="5827" dy="1511" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="6972" dy="2198" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="-kG_ebDBZwR_p8FUV4j5-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#82b366;dashed=1;verticalAlign=top;fontSize=12;fontStyle=1;align=center;arcSize=0;" value="Kubernetes-кластер: реплики Camunda Engine" vertex="1">
+          <mxGeometry height="810" width="1880" x="-1800" y="730" as="geometry" />
+        </mxCell>
         <mxCell id="FJsbK6QlsCD859aHYSRE-230" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#82b366;dashed=1;verticalAlign=top;fontSize=12;fontStyle=1;align=center;" value="Kubernetes-кластер: реплики Camunda Engine" vertex="1">
           <mxGeometry height="1430" width="2890" x="80" y="360" as="geometry" />
         </mxCell>
@@ -619,7 +622,7 @@
           <mxGeometry height="45" width="55" x="-810" y="865" as="geometry" />
         </mxCell>
         <mxCell id="SdrS6XpNGPNws8vja6rg-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;verticalAlign=top;" value="&lt;div&gt;OCR Service&lt;/div&gt;(Разбор сканов документов и проверка&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;)&lt;/span&gt;" vertex="1">
-          <mxGeometry height="52.5" width="82.5" x="-922.5" y="700" as="geometry" />
+          <mxGeometry height="52.5" width="82.5" x="-925" y="663.75" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
