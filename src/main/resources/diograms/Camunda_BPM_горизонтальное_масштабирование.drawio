@@ -1,0 +1,1459 @@
+<mxfile host="Electron" agent="Claude">
+  <diagram name="Camunda BPM - Горизонтальное масштабирование" id="camunda-scaling">
+    <mxGraphModel dx="5757" dy="4554" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title_main" parent="1" style="text;html=1;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;" value="Camunda BPM: горизонтальное масштабирование под нагрузку&#xa;(несколько подов с одинаковым набором Process App, общая БД)" vertex="1">
+          <mxGeometry height="50" width="700" x="690" y="-290" as="geometry" />
+        </mxCell>
+        <mxCell id="frontend1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Frontend-приложение&#xa;(клиентский портал)" vertex="1">
+          <mxGeometry height="60" width="180" x="80" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="frontend2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Внутренняя система&#xa;сотрудников банка" vertex="1">
+          <mxGeometry height="60" width="180" x="80" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="frontend3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Мобильное приложение /&#xa;удалённый клиент" vertex="1">
+          <mxGeometry height="60" width="180" x="80" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="gateway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1;" value="Custom Gateway&#xa;(REST-слой поверх&#xa;Camunda External Task API)" vertex="1">
+          <mxGeometry height="90" width="220" x="330" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="lb" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" value="Load Balancer&#xa;(k8s Service / Ingress)&#xa;round-robin между подами" vertex="1">
+          <mxGeometry height="110" width="180" x="620" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#82b366;dashed=1;verticalAlign=top;fontSize=12;fontStyle=1;align=center;" value="Kubernetes-кластер: реплики Camunda Engine" vertex="1">
+          <mxGeometry height="430" width="720" x="860" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="pod1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Под 1: Spring Boot + Camunda Engine" vertex="1">
+          <mxGeometry height="270" width="210" x="880" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="pod1_apps" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="Process App:&#xa;Открытие точки / KYC / Скоринг&#xa;(идентичный набор моделей)" vertex="1">
+          <mxGeometry height="55" width="180" x="895" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="pod1_job" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Job Executor" vertex="1">
+          <mxGeometry height="35" width="180" x="895" y="235" as="geometry" />
+        </mxCell>
+        <mxCell id="pod1_rest" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Engine REST API" vertex="1">
+          <mxGeometry height="35" width="180" x="895" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="pod1_hc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;dashed=1;fontSize=9;" value="Health check /&#xa;readiness probe" vertex="1">
+          <mxGeometry height="30" width="180" x="895" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="pod2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Под 2: Spring Boot + Camunda Engine" vertex="1">
+          <mxGeometry height="270" width="210" x="1105" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="pod2_apps" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="Process App:&#xa;Открытие точки / KYC / Скоринг&#xa;(идентичный набор моделей)" vertex="1">
+          <mxGeometry height="55" width="180" x="1120" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="pod2_job" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Job Executor" vertex="1">
+          <mxGeometry height="35" width="180" x="1120" y="235" as="geometry" />
+        </mxCell>
+        <mxCell id="pod2_rest" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Engine REST API" vertex="1">
+          <mxGeometry height="35" width="180" x="1120" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="pod2_hc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;dashed=1;fontSize=9;" value="Health check /&#xa;readiness probe" vertex="1">
+          <mxGeometry height="30" width="180" x="1120" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-9" edge="1" parent="1" source="pod3" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="YylXXy4FzsxSt8aHbr34-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pod3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Под 3: Spring Boot + Camunda Engine&#xa;(автоскейлинг: HPA по CPU / очереди задач)" vertex="1">
+          <mxGeometry height="270" width="220" x="1330" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="pod3_apps" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="Process App:&#xa;Открытие точки / KYC / Скоринг&#xa;(идентичный набор моделей)" vertex="1">
+          <mxGeometry height="55" width="190" x="1345" y="205" as="geometry" />
+        </mxCell>
+        <mxCell id="pod3_job" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Job Executor" vertex="1">
+          <mxGeometry height="35" width="190" x="1345" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="pod3_rest" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Engine REST API" vertex="1">
+          <mxGeometry height="35" width="190" x="1345" y="315" as="geometry" />
+        </mxCell>
+        <mxCell id="pod3_dashed" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontColor=#82b366;fontStyle=2;fontSize=10;" value="+N реплик по нагрузке" vertex="1">
+          <mxGeometry height="20" width="190" x="1345" y="355" as="geometry" />
+        </mxCell>
+        <mxCell id="db" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" value="Общая БД Camunda&#xa;(история, переменные, runtime-таблицы)&#xa;кластерная блокировка задач (optimistic locking)&#xa;history-level: full" vertex="1">
+          <mxGeometry height="80" width="360" x="1030" y="-110" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#9673a6;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Отдельный под: Admin/UI-приложение" vertex="1">
+          <mxGeometry height="180" width="250" x="1660" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="cockpit" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Cockpit&#xa;(мониторинг всех подов через общую БД)" vertex="1">
+          <mxGeometry height="50" width="170" x="1700" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="tasklist" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Tasklist&#xa;(пользовательские задачи, QA)" vertex="1">
+          <mxGeometry height="50" width="170" x="1700" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#d79b00;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Внешние системы банка (доступны всем подам)" vertex="1">
+          <mxGeometry height="120" width="1300" x="520" y="602.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ext1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="АБС банка" vertex="1">
+          <mxGeometry height="55" width="180" x="890" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="ext2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Бюро кредитных историй /&#xa;госсистемы" vertex="1">
+          <mxGeometry height="55" width="180" x="1100" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="ext3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Message Broker&#xa;(Kafka/RabbitMQ, если есть&#xa;межпроцессная асинхронность)" vertex="1">
+          <mxGeometry height="55" width="230" x="1310" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="frontend1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="frontend2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="frontend3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="gateway" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="lb" value="External Task fetch/complete">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="lb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="pod1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="lb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="pod2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="710" y="60" />
+              <mxPoint x="1210" y="60" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="lb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="pod3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="710" y="60" />
+              <mxPoint x="1440" y="60" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="pod1" style="rounded=0;html=1;endArrow=block;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="db">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1090" y="272.5" as="sourcePoint" />
+            <mxPoint x="1420" y="27.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="pod2" style="rounded=0;html=1;endArrow=block;" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="pod3" style="rounded=0;html=1;endArrow=block;exitX=0.805;exitY=0.015;exitDx=0;exitDy=0;exitPerimeter=0;" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="cockpit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="db">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1650" y="260" />
+              <mxPoint x="1650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="tasklist" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="db">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1775" y="60" />
+              <mxPoint x="1650" y="60" />
+              <mxPoint x="1650" y="-10" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-2" parent="1" style="text;html=1;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;" value="Внутреннее устройство одного пода Camunda Engine" vertex="1">
+          <mxGeometry height="30" width="650" x="2670" y="-990" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;verticalAlign=top;fontSize=13;fontStyle=1;align=center;" value="Под (Kubernetes Pod)" vertex="1">
+          <mxGeometry height="865" width="1160" x="2400" y="-945" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;dashed=1;fontSize=10;fontStyle=2;align=center;" value="requests/limits: CPU 1-2 vCPU, RAM 2-4 GB (пример)&#xa;JVM: -Xms / -Xmx настроены под лимиты контейнера" vertex="1">
+          <mxGeometry height="45" width="370" x="3160" y="-925" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f4ea;strokeColor=#82b366;verticalAlign=top;fontSize=12;fontStyle=1;align=center;" value="Контейнер: Spring Boot Application (JVM)" vertex="1">
+          <mxGeometry height="680" width="1100" x="2430" y="-870" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" value="Входящий трафик от Load Balancer" vertex="1">
+          <mxGeometry height="40" width="300" x="3135" y="-835" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=top;align=center;" value="Встроенный Tomcat / HTTP-слой (Spring MVC)" vertex="1">
+          <mxGeometry height="85" width="725" x="2635" y="-760" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;" value="engine-rest API&#xa;(REST-эндпоинты движка)" vertex="1">
+          <mxGeometry height="45" width="160" x="3000" y="-730" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;" value="External Task API&#xa;(fetch &amp; lock, complete, fail)" vertex="1">
+          <mxGeometry height="45" width="140" x="2650" y="-730" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;" value="Spring Actuator&#xa;/health /readiness /liveness /metrics" vertex="1">
+          <mxGeometry height="45" width="180" x="2810" y="-730" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-3" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="LOU6W0FggTf-lCZ_p-wn-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;" value="Auth-фильтр&#xa;(SSO/LDAP токен-валидация)" vertex="1">
+          <mxGeometry height="45" width="160" x="3180" y="-730" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;verticalAlign=top;align=center;" value="Process Engine (ядро Camunda, ProcessEngineConfiguration)" vertex="1">
+          <mxGeometry height="165" width="710" x="2800" y="-640" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="RepositoryService&#xa;(деплой BPMN-моделей)" vertex="1">
+          <mxGeometry height="50" width="150" x="3052.5" y="-547.5" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="RuntimeService&#xa;(запуск / состояние процессов)" vertex="1">
+          <mxGeometry height="50" width="155" x="3050" y="-610" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="TaskService&#xa;(пользовательские задачи)" vertex="1">
+          <mxGeometry height="50" width="150" x="3220" y="-610" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="HistoryService&#xa;(history-level: full)" vertex="1">
+          <mxGeometry height="50" width="105" x="3380" y="-610" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="ManagementService&#xa;(джобы, метрики, инциденты)" vertex="1">
+          <mxGeometry height="45" width="150" x="3220" y="-545" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="BPMN-парсер /&#xa;Execution Listener&#39;ы" vertex="1">
+          <mxGeometry height="45" width="105" x="3380" y="-545" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-21" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;verticalAlign=top;align=center;" value="Задеплоенные Process Applications (classloader-изоляция)" vertex="1">
+          <mxGeometry height="135" width="505" x="2932.5" y="-430" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;" value="Process App: Открытие точки&#xa;— BPMN-модель&#xa;— Java Delegates&#xa;— своя ветка версий" vertex="1">
+          <mxGeometry height="90" width="155" x="3107.5" y="-400" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;" value="Process App: KYC&#xa;— BPMN-модель&#xa;— Java Delegates&#xa;— своя ветка версий" vertex="1">
+          <mxGeometry height="90" width="140" x="2960" y="-400" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;" value="Process App: Скоринг&#xa;— BPMN-модель&#xa;— Java Delegates&#xa;— своя ветка версий" vertex="1">
+          <mxGeometry height="90" width="140" x="3275" y="-400" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;verticalAlign=top;align=center;" value="Job Executor (планировщик асинхронных задач)" vertex="1">
+          <mxGeometry height="317.5" width="190" x="2510" y="-647.5" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;" value="Job Acquisition Thread&#xa;(вычитывает задачи из БД,&#xa;лочит через optimistic locking)" vertex="1">
+          <mxGeometry height="80" width="160" x="2520" y="-610" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;" value="Thread Pool исполнения&#xa;core-pool-size / max-pool-size&#xa;/ queue-size" vertex="1">
+          <mxGeometry height="80" width="160" x="2525" y="-517.5" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=1;verticalAlign=top;align=center;" value="External Task Client&lt;br&gt;(подписка Gateway на топики задач, long-polling к engine-rest)" vertex="1">
+          <mxGeometry height="77.5" width="360" x="2475" y="-853.75" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-29" parent="1" style="text;html=1;fontSize=9;align=left;verticalAlign=top;fontStyle=2;" value="Примечание: если Gateway — внешний сервис (отдельный под),&lt;br&gt;этот блок — точка входа его подписки в текущий под.&amp;nbsp;&lt;div&gt;Camunda сама балансирует задачи между всеми подами-репликами.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="32.5" width="300" x="2485" y="-823.75" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" value="HikariCP&#xa;(пул соединений к общей БД Camunda)" vertex="1">
+          <mxGeometry height="45" width="260" x="2475" y="-290" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-31" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" value="Общая БД Camunda&#xa;(вне пода, отдельный сервис)" vertex="1">
+          <mxGeometry height="50" width="300" x="2750" y="-160" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-32" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;dashed=1;fontSize=10;" value="Sidecar (опционально):&#xa;service mesh proxy (Istio/Envoy),&#xa;log shipper (Fluent Bit)" vertex="1">
+          <mxGeometry height="80" width="200" x="2440" y="-180" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-33" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-6" style="rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-34" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-8" style="rounded=0;html=1;endArrow=block;entryX=0.436;entryY=0.018;entryDx=0;entryDy=0;entryPerimeter=0;" target="YylXXy4FzsxSt8aHbr34-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-35" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-9" style="rounded=0;html=1;endArrow=block;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="LOU6W0FggTf-lCZ_p-wn-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-36" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-37" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-21" style="rounded=0;html=1;endArrow=block;exitX=-0.004;exitY=0.444;exitDx=0;exitDy=0;exitPerimeter=0;" target="LOU6W0FggTf-lCZ_p-wn-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-38" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-28" style="rounded=0;html=1;endArrow=block;fontSize=9;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-9" value="long polling">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-39" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-40" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-12" style="rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-41" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-30" style="rounded=0;html=1;endArrow=block;fontSize=9;" target="LOU6W0FggTf-lCZ_p-wn-31" value="JDBC">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-42" parent="1" style="text;html=1;fontSize=11;fontStyle=1;" value="Легенда" vertex="1">
+          <mxGeometry height="20" width="100" x="2430" y="-915" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-43" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="HTTP-слой" vertex="1">
+          <mxGeometry height="22" width="110" x="2430" y="-895" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-44" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="Ядро движка" vertex="1">
+          <mxGeometry height="22" width="110" x="2550" y="-895" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-45" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" value="Process App" vertex="1">
+          <mxGeometry height="22" width="110" x="2670" y="-895" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-46" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" value="Job Executor / Gateway-клиент" vertex="1">
+          <mxGeometry height="22" width="180" x="2790" y="-895" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-47" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="БД / соединения" vertex="1">
+          <mxGeometry height="22" width="120" x="2980" y="-895" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-48" parent="1" style="text;html=1;fontSize=20;fontStyle=1;align=center;verticalAlign=middle;" value="Архитектура: Перенос банка на Camunda BPM" vertex="1">
+          <mxGeometry height="30" width="650" x="480" y="-1060" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-49" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;fontColor=#6c8ebf;" value="Frontend-слой (удалённое размещение)" vertex="1">
+          <mxGeometry height="20" width="320" x="60" y="-1000" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-50" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;fontColor=#d79b00;" value="Gateway-слой" vertex="1">
+          <mxGeometry height="20" width="260" x="440" y="-1000" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-51" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;fontColor=#82b366;" value="Camunda BPM Engine (Spring Boot, embedded)" vertex="1">
+          <mxGeometry height="20" width="620" x="740" y="-1000" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-52" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;fontColor=#b85450;" value="Delegate / Backend-сервисы" vertex="1">
+          <mxGeometry height="20" width="360" x="740" y="-650" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-53" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;fontColor=#9673a6;" value="Инструменты администрирования и моделирования" vertex="1">
+          <mxGeometry height="20" width="230" x="1130" y="-900" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-54" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;fontColor=#b85450;" value="Внешние системы банка" vertex="1">
+          <mxGeometry height="20" width="360" x="860" y="-540" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-55" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Frontend-приложение&#xa;(клиентский портал банка)" vertex="1">
+          <mxGeometry height="60" width="180" x="70" y="-950" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-56" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Frontend-приложение&#xa;(внутренняя система сотрудников)" vertex="1">
+          <mxGeometry height="60" width="180" x="70" y="-860" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-57" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Мобильное приложение /&#xa;удалённый клиент" vertex="1">
+          <mxGeometry height="60" width="180" x="70" y="-770" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-58" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1;" value="Custom Gateway&#xa;(REST-слой поверх&#xa;Camunda External Task API)" vertex="1">
+          <mxGeometry height="90" width="220" x="450" y="-860" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-59" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#82b366;dashed=1;verticalAlign=top;fontSize=11;" value="" vertex="1">
+          <mxGeometry height="290" width="620" x="740" y="-960" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-60" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" value="Process App:&#xa;Открытие торговой точки" vertex="1">
+          <mxGeometry height="60" width="170" x="770" y="-930" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-61" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" value="Process App:&#xa;KYC / проверка клиента" vertex="1">
+          <mxGeometry height="60" width="170" x="965" y="-930" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-62" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" value="Process App:&#xa;Кредитный скоринг" vertex="1">
+          <mxGeometry height="60" width="170" x="1160" y="-930" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-63" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Job Executor&#xa;(асинхронные шаги, таймеры)" vertex="1">
+          <mxGeometry height="50" width="220" x="780" y="-790" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-64" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Authorization API&#xa;(роли, права доступа)" vertex="1">
+          <mxGeometry height="50" width="220" x="1100" y="-800" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-65" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Взаимодействие процессов между собой:&#xa;Call Activity / Message Events&#xa;(независимость и перекомпоновка модулей)" vertex="1">
+          <mxGeometry height="50" width="560" x="770" y="-730" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-66" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Camunda Modeler&#xa;(проектирование BPMN,&#xa;хранится в Git)" vertex="1">
+          <mxGeometry height="60" width="180" x="1500" y="-1020" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-67" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Camunda Cockpit&#xa;(мониторинг, incidents)" vertex="1">
+          <mxGeometry height="60" width="180" x="1570" y="-920" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-68" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Camunda Tasklist&#xa;(пользовательские задачи,&#xa;QA / интеграционное тестирование)" vertex="1">
+          <mxGeometry height="70" width="180" x="1570" y="-775" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-69" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="SSO / LDAP&#xa;(корпоративная аутентификация)" vertex="1">
+          <mxGeometry height="50" width="180" x="1490" y="-650" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-70" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Java Delegate&#xa;(адаптер, без бизнес-логики)" vertex="1">
+          <mxGeometry height="55" width="170" x="550" y="-510" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-71" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Сервисный слой&#xa;(бизнес-логика банка)" vertex="1">
+          <mxGeometry height="55" width="170" x="960" y="-510" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-72" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="БД Camunda&#xa;(история, переменные,&#xa;history-level: full)" vertex="1">
+          <mxGeometry height="55" width="170" x="1310" y="-520" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-73" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" value="АБС банка&#xa;(автоматизированная&#xa;банковская система)" vertex="1">
+          <mxGeometry height="60" width="170" x="770" y="-430" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-74" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" value="Внешние интеграции&#xa;(бюро кредитных историй,&#xa;госсистемы и др.)" vertex="1">
+          <mxGeometry height="60" width="170" x="980" y="-430" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-75" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" value="Прочие команды /&#xa;смежные BPM-процессы" vertex="1">
+          <mxGeometry height="60" width="170" x="1190" y="-430" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-76" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-77" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-78" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-79" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;" target="LOU6W0FggTf-lCZ_p-wn-60" value="External Task&#xa;fetch &amp; complete">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-80" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-63">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-81" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-64">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-82" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-65">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-83" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-65">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-84" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-65">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1245.03" y="-839.97" />
+              <mxPoint x="1050" y="-839.97" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-85" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-70">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-86" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-71">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-87" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-72">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-88" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-73">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-89" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-74">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-90" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="LOU6W0FggTf-lCZ_p-wn-75">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-91" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-62" value="деплой BPMN">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-92" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-59" value="мониторинг">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-93" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-59" value="user tasks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-94" edge="1" parent="1" source="LOU6W0FggTf-lCZ_p-wn-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;dashed=1;" target="LOU6W0FggTf-lCZ_p-wn-64" value="auth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-95" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;verticalAlign=top;fontStyle=1;fontSize=12;align=left;spacingLeft=8;" value="Легенда" vertex="1">
+          <mxGeometry height="200" width="380" x="70" y="-630" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-96" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Frontend-слой (клиентские приложения)" vertex="1">
+          <mxGeometry height="25" width="220" x="80" y="-600" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-97" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Gateway / интеграционный слой" vertex="1">
+          <mxGeometry height="25" width="220" x="80" y="-570" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-98" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Camunda процессы (BPMN)" vertex="1">
+          <mxGeometry height="25" width="220" x="80" y="-540" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-99" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Инфраструктура / администрирование" vertex="1">
+          <mxGeometry height="25" width="220" x="80" y="-510" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-100" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="Backend / внешние системы" vertex="1">
+          <mxGeometry height="25" width="220" x="80" y="-480" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=21;verticalAlign=top;" value="&lt;div style=&quot;line-height: 130%;&quot;&gt;Доступ на уровне процессов&lt;/div&gt;" vertex="1">
+          <mxGeometry height="115" width="230" x="2810" y="-615" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;verticalAlign=top;" value="IdentityService&lt;br&gt;(пользователи, группы, роли)&lt;div&gt;&amp;nbsp;LDAP-плагин Camunda&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="150" x="2850" y="-590" as="geometry" />
+        </mxCell>
+        <mxCell id="LOU6W0FggTf-lCZ_p-wn-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" value="AuthorizationService&#xa;(права доступа)" vertex="1">
+          <mxGeometry height="35" width="150" x="2850" y="-540" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="SSO / LDAP" vertex="1">
+          <mxGeometry height="55" width="230" x="1560" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Camunda Modeler&lt;br&gt;(BPMN-модели в Git)" vertex="1">
+          <mxGeometry height="55" width="180" x="700" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-8" edge="1" parent="1" source="pod2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YylXXy4FzsxSt8aHbr34-7" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1210" y="410" as="sourcePoint" />
+            <mxPoint x="1190" y="635" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="MinIO" vertex="1">
+          <mxGeometry height="55" width="140" x="1140" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-10" edge="1" parent="1" source="pod1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" target="YylXXy4FzsxSt8aHbr34-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-11" edge="1" parent="1" source="pod1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.34;entryY=0.021;entryDx=0;entryDy=0;entryPerimeter=0;" target="ext_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YylXXy4FzsxSt8aHbr34-12" edge="1" parent="1" source="pod3" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.744;entryY=-0.004;entryDx=0;entryDy=0;entryPerimeter=0;" target="ext_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-1" parent="1" style="text;html=1;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;" value="Camunda BPM: финальная архитектура кластера&#xa;Read Replica + History Cleanup + MinIO (S3-совместимое хранилище)" vertex="1">
+          <mxGeometry height="50" width="700" x="690" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Frontend&#xa;(клиентский портал)" vertex="1">
+          <mxGeometry height="50" width="160" x="250" y="1145" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Внутр. система&#xa;сотрудников" vertex="1">
+          <mxGeometry height="50" width="160" x="250" y="1215" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=1;" value="Custom Gateway&#xa;(External Task API client)" vertex="1">
+          <mxGeometry height="70" width="180" x="500" y="1090" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-6" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" value="Load Balancer&#xa;(k8s Service / Ingress)" vertex="1">
+          <mxGeometry height="80" width="150" x="700" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#82b366;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Kubernetes-кластер: реплики Camunda Engine (Process App)" vertex="1">
+          <mxGeometry height="165" width="560" x="890" y="1115" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Под 1&#xa;Process App&#xa;(открытие точки / KYC /&#xa;скоринг)" vertex="1">
+          <mxGeometry height="80" width="160" x="910" y="1155" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Под 2&#xa;Process App&#xa;(открытие точки / KYC /&#xa;скоринг)" vertex="1">
+          <mxGeometry height="80" width="160" x="1075" y="1155" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Под N (HPA)&#xa;Process App&#xa;(открытие точки / KYC /&#xa;скоринг)" vertex="1">
+          <mxGeometry height="80" width="160" x="1250" y="1157.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-11" parent="1" style="text;html=1;fontSize=9;fontStyle=2;align=center;" value="stateless реплики — всё состояние в общей БД" vertex="1">
+          <mxGeometry height="20" width="520" x="910" y="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#9673a6;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Под: Admin/UI-приложение" vertex="1">
+          <mxGeometry height="270" width="200" x="1580" y="1155" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Cockpit&#xa;(мониторинг, incidents)" vertex="1">
+          <mxGeometry height="55" width="130" x="1610" y="1182.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Tasklist&#xa;(user tasks, QA)" vertex="1">
+          <mxGeometry height="55" width="130" x="1610" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="Admin&#xa;(управление правами)" vertex="1">
+          <mxGeometry height="55" width="130" x="1610" y="1330" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="SSO / LDAP" vertex="1">
+          <mxGeometry height="55" width="150" x="1785" y="1490" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#b85450;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="Слой БД Camunda" vertex="1">
+          <mxGeometry height="180" width="560" x="890" y="1635" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" value="Master БД Camunda&#xa;(write: runtime + history)&#xa;managed-сервис или StatefulSet&#xa;+ партиционирование history-таблиц" vertex="1">
+          <mxGeometry height="90" width="240" x="910" y="1675" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" value="Read Replica&#xa;(streaming replication)&#xa;только для чтения:&#xa;Cockpit, отчётность, BI" vertex="1">
+          <mxGeometry height="90" width="240" x="1190" y="1675" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-21" parent="1" style="text;html=1;fontSize=9;fontStyle=2;" value="streaming replication" vertex="1">
+          <mxGeometry height="40" width="40" x="1150" y="1700" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#d79b00;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;" value="MinIO (S3-совместимое, on-premise)" vertex="1">
+          <mxGeometry height="180" width="480" x="270" y="1410" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="MinIO node 1" vertex="1">
+          <mxGeometry height="45" width="100" x="310" y="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="MinIO node 2" vertex="1">
+          <mxGeometry height="45" width="100" x="420" y="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="MinIO node 3" vertex="1">
+          <mxGeometry height="45" width="100" x="530" y="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="MinIO node 4" vertex="1">
+          <mxGeometry height="45" width="100" x="640" y="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-27" parent="1" style="text;html=1;fontSize=9;fontStyle=2;align=center;" value="distributed mode, erasure coding,&#xa;бакеты: kyc-documents, credit-applications&#xa;шифрование at-rest, lifecycle policy (TTL)" vertex="1">
+          <mxGeometry height="60" width="430" x="310" y="1530" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-28" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-29" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-31" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-32" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-33" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-34" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-35" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-8" style="rounded=0;html=1;endArrow=block;fontSize=9;" target="YwLbGq00pOSrlPOj4cvM-19" value="write (runtime + history)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-36" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-9" style="rounded=0;html=1;endArrow=block;fontSize=9;" target="YwLbGq00pOSrlPOj4cvM-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-37" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-10" style="rounded=0;html=1;endArrow=block;fontSize=9;" target="YwLbGq00pOSrlPOj4cvM-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-38" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="YwLbGq00pOSrlPOj4cvM-22" value="хранение тяжёлых JSON&#xa;(ссылка сохраняется в БД)">
+          <mxGeometry relative="1" x="0.7397" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="850.03" y="1195.03" />
+              <mxPoint x="850.03" y="1500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-39" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;strokeColor=#b85450;" target="YwLbGq00pOSrlPOj4cvM-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-40" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;entryX=1.008;entryY=0.454;entryDx=0;entryDy=0;entryPerimeter=0;" target="YwLbGq00pOSrlPOj4cvM-20" value="read-only">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1510" y="1215" />
+              <mxPoint x="1510" y="1720" />
+              <mxPoint x="1431.9" y="1720" />
+            </Array>
+            <mxPoint x="1610" y="1215" as="sourcePoint" />
+            <mxPoint x="1470" y="1725" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-41" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="YwLbGq00pOSrlPOj4cvM-20" value="read-only">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1480" y="1282.52" />
+              <mxPoint x="1480" y="1720" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-42" edge="1" parent="1" source="YwLbGq00pOSrlPOj4cvM-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YwLbGq00pOSrlPOj4cvM-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YwLbGq00pOSrlPOj4cvM-45" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;fontStyle=2;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;whiteSpace=wrap;spacing=8;" value="1) Read Replica снимает нагрузку чтения Cockpit/Tasklist/отчётности с мастера — обычная streaming-репликация СУБД, не CQRS.&#xa;2) History Cleanup — встроенный batch-job Camunda, удаляет/архивирует завершённые процессы старше TTL, синхронизировать с lifecycle policy MinIO.&#xa;3) MinIO хранит тяжёлые JSON-документы; в БД Camunda остаётся только ключ объекта (process variable) — БД остаётся компактной.&#xa;4) Все три компонента (Master DB, Replica, MinIO) — общие ресурсы кластера, НЕ привязаны к конкретному поду процессов." vertex="1">
+          <mxGeometry height="100" width="1160" x="290" y="1855" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" value="History Cleanup&lt;br&gt;(встроенный batch-job Camunda,&lt;br&gt;запускается по расписанию,&lt;br&gt;напр. 22:00, TTL=P180D)&lt;div&gt;&lt;span style=&quot;font-size: 9px; font-weight: 400; white-space: nowrap; background-color: rgb(255, 255, 255);&quot;&gt;DELETE (батчами)&lt;/span&gt;&lt;br style=&quot;font-size: 9px; font-weight: 400; white-space: nowrap;&quot;&gt;&lt;span style=&quot;font-size: 9px; font-weight: 400; white-space: nowrap; background-color: rgb(255, 255, 255);&quot;&gt;только завершённые процессы&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="170" x="2520" y="-430" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-2" parent="1" style="text;html=1;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;" value="BPMN: Процесс «Открытие торговой точки» и подпроцессы KYC / Скоринг с внешними системами" vertex="1">
+          <mxGeometry height="30" width="1200" x="2810" y="5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#333333;verticalAlign=top;align=left;spacingLeft=10;fontSize=12;fontStyle=1;" value="Пул: Банк — Процесс «Открытие торговой точки» (родительский, оркестрирующий)" vertex="1">
+          <mxGeometry height="430" width="2120" x="2280" y="205" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-4" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=8;" value="Заявка&#xa;получена" vertex="1">
+          <mxGeometry height="50" width="50" x="2320" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Валидация&#xa;данных заявки&#xa;(Service Task)" vertex="1">
+          <mxGeometry height="60" width="150" x="2410" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#2d5016;strokeWidth=4;fontSize=11;fontStyle=1;" value="Call Activity:&#xa;KYC" vertex="1">
+          <mxGeometry height="60" width="160" x="2600" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-7" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=14;fontStyle=1;" value="X" vertex="1">
+          <mxGeometry height="50" width="50" x="2800" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-8" parent="1" style="text;html=1;fontSize=9;align=center;" value="KYC пройден?" vertex="1">
+          <mxGeometry height="20" width="80" x="2785" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#2d5016;strokeWidth=4;fontSize=11;fontStyle=1;" value="Call Activity:&#xa;Скоринг" vertex="1">
+          <mxGeometry height="60" width="160" x="2890" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-10" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=14;fontStyle=1;" value="X" vertex="1">
+          <mxGeometry height="50" width="50" x="3090" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-11" parent="1" style="text;html=1;fontSize=9;align=center;" value="Балл достаточен?" vertex="1">
+          <mxGeometry height="20" width="90" x="3070" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Создание клиента&#xa;и счёта в АБС&#xa;(asyncBefore)" vertex="1">
+          <mxGeometry height="60" width="160" x="3190" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Генерация&#xa;договора" vertex="1">
+          <mxGeometry height="60" width="160" x="3380" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Подписание&#xa;договора (ЭЦП)" vertex="1">
+          <mxGeometry height="60" width="160" x="3580" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-15" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;strokeWidth=3;fontSize=8;" value="Callback&#xa;подписи" vertex="1">
+          <mxGeometry height="50" width="50" x="3780" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Активация&#xa;точки" vertex="1">
+          <mxGeometry height="60" width="150" x="3870" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Уведомление&#xa;клиента (asyncAfter)" vertex="1">
+          <mxGeometry height="60" width="150" x="4060" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-18" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=4;fontSize=8;" value="Точка&#xa;открыта" vertex="1">
+          <mxGeometry height="50" width="50" x="4250" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-19" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=4;fontSize=8;" value="Отказ&#xa;(KYC)" vertex="1">
+          <mxGeometry height="50" width="50" x="2800" y="455" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" value="Ручное рассмотрение&#xa;кредитным аналитиком&#xa;(User Task)" vertex="1">
+          <mxGeometry height="60" width="160" x="3130" y="425" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-21" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=14;fontStyle=1;" value="X" vertex="1">
+          <mxGeometry height="50" width="50" x="3350" y="445" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-22" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=4;fontSize=8;" value="Отказ&#xa;(скоринг)" vertex="1">
+          <mxGeometry height="50" width="50" x="3070" y="525" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-23" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eef7ee;strokeColor=#2d5016;verticalAlign=top;align=left;spacingLeft=10;fontSize=12;fontStyle=1;" value="Пул (подпроцесс, разворачивается из Call Activity «KYC»)" vertex="1">
+          <mxGeometry height="320" width="1050" x="2430" y="835" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-24" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=8;" value="Данные&#xa;клиента" vertex="1">
+          <mxGeometry height="50" width="50" x="2460" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-25" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=16;fontStyle=1;" value="+" vertex="1">
+          <mxGeometry height="50" width="50" x="2560" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Проверка в&#xa;ЕГРЮЛ/ЕГРИП" vertex="1">
+          <mxGeometry height="55" width="170" x="2660" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Проверка AML /&#xa;санкционных списков" vertex="1">
+          <mxGeometry height="55" width="170" x="2660" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Верификация&#xa;документов (OCR)" vertex="1">
+          <mxGeometry height="55" width="170" x="2660" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-29" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=16;fontStyle=1;" value="+" vertex="1">
+          <mxGeometry height="50" width="50" x="2890" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-30" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=14;fontStyle=1;" value="X" vertex="1">
+          <mxGeometry height="50" width="50" x="2990" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-31" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=4;fontSize=8;" value="KYC&#xa;успешен" vertex="1">
+          <mxGeometry height="60" width="60" x="3110" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-32" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" value="Ручная проверка&#xa;комплаенс-офицером&#xa;(User Task)" vertex="1">
+          <mxGeometry height="55" width="170" x="3220" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-33" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=4;fontSize=8;" value="KYC отклонён&#xa;(санкции)" vertex="1">
+          <mxGeometry height="60" width="60" x="3110" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-34" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eef7ee;strokeColor=#2d5016;verticalAlign=top;align=left;spacingLeft=10;fontSize=12;fontStyle=1;" value="Пул (подпроцесс, разворачивается из Call Activity «Скоринг»)" vertex="1">
+          <mxGeometry height="320" width="730" x="3520" y="835" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-35" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=8;" value="Данные&#xa;заявителя" vertex="1">
+          <mxGeometry height="50" width="50" x="3550" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-36" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Запрос кредитной&#xa;истории" vertex="1">
+          <mxGeometry height="60" width="170" x="3640" y="985" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-37" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Расчёт&#xa;скоринг-балла" vertex="1">
+          <mxGeometry height="60" width="170" x="3840" y="985" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-38" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=14;fontStyle=1;" value="X" vertex="1">
+          <mxGeometry height="50" width="50" x="4050" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-39" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=4;fontSize=8;" value="Высокий балл&#xa;(auto-approve)" vertex="1">
+          <mxGeometry height="65" width="70" x="4150" y="925" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-40" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=4;fontSize=8;" value="Средний&#xa;(review)" vertex="1">
+          <mxGeometry height="65" width="70" x="4150" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-41" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=4;fontSize=8;" value="Низкий&#xa;(auto-reject)" vertex="1">
+          <mxGeometry height="65" width="70" x="4150" y="1055" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-42" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Пул: АБС банка&#xa;(core banking system)" vertex="1">
+          <mxGeometry height="60" width="160" x="3190" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-43" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="&lt;div&gt;REST&lt;/div&gt;Пул: ФНС —&lt;br&gt;ЕГРЮЛ/ЕГРИП API" vertex="1">
+          <mxGeometry height="60" width="140" x="2675" y="745" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-44" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="&lt;span style=&quot;font-size: 9px; font-weight: 400;&quot;&gt;Fin Monitor&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="115" x="2890" y="745" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-45" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="&lt;span style=&quot;font-size: 9px; font-weight: 400;&quot;&gt;OCR Service&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="200" x="2645" y="1185" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-46" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="&lt;span style=&quot;font-size: 9px; font-weight: 400;&quot;&gt;CreditBureauService&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="3650" y="1185" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-47" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Пул: Сервис&#xa;электронной подписи (ЭЦП)" vertex="1">
+          <mxGeometry height="60" width="160" x="3615" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-48" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Пул: Сервис&#xa;документооборота" vertex="1">
+          <mxGeometry height="60" width="150" x="3385" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-49" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Пул: SMS/Email-шлюз" vertex="1">
+          <mxGeometry height="60" width="150" x="4060" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-50" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-4" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-51" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-5" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-52" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-6" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-53" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-7" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-9" value="да">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-54" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-7" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-19" value="нет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-55" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-9" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-56" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-10" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-12" value="высокий балл">
+          <mxGeometry relative="1" x="-0.2024" y="16" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-57" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-10" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-20" value="погранично">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-58" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-10" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-22" value="низкий балл">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-59" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-20" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-60" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-21" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-12" value="одобрено">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-61" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-21" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-22" value="отказ">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-62" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-12" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-63" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-13" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-64" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-14" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-65" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-15" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-66" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-16" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-67" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-17" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-68" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-24" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-69" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-25" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-70" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-25" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-71" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-25" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-72" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-26" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-73" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-27" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-74" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-28" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-75" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-29" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-76" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-30" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-31" value="все ок">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-77" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-30" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-32" value="При определенных условиях">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-78" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-30" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-33" value="санкции">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-79" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-32" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-31" value="одобрено">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-80" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-32" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-33" value="отклонено">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-81" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-35" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-82" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-36" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-83" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-37" style="endArrow=block;html=1;strokeColor=#000000;" target="YZrR8DOupRYEo43ufBo8-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-84" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-38" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-39" value="высокий">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-85" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-38" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-40" value="средний">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-86" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-38" style="endArrow=block;html=1;strokeColor=#000000;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-41" value="низкий">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-87" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-6" style="dashed=1;endArrow=none;html=1;strokeColor=#999999;fontSize=8;fontStyle=2;" target="YZrR8DOupRYEo43ufBo8-23" value="разворачивается в">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-88" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-9" style="dashed=1;endArrow=none;html=1;strokeColor=#999999;fontSize=8;fontStyle=2;" target="YZrR8DOupRYEo43ufBo8-34" value="разворачивается в">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3050" y="595" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-89" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-12" style="dashed=1;endArrow=open;html=1;strokeColor=#d79b00;" target="YZrR8DOupRYEo43ufBo8-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-90" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-26" style="dashed=1;endArrow=open;html=1;strokeColor=#d79b00;" target="YZrR8DOupRYEo43ufBo8-43">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-91" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-27" style="dashed=1;endArrow=open;html=1;strokeColor=#d79b00;" target="YZrR8DOupRYEo43ufBo8-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-92" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-28" style="dashed=1;endArrow=open;html=1;strokeColor=#d79b00;" target="YZrR8DOupRYEo43ufBo8-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-93" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-36" style="dashed=1;endArrow=open;html=1;strokeColor=#d79b00;" target="YZrR8DOupRYEo43ufBo8-46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-94" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-14" style="dashed=1;endArrow=open;html=1;strokeColor=#d79b00;" target="YZrR8DOupRYEo43ufBo8-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-95" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-47" style="dashed=1;endArrow=open;html=1;strokeColor=#d79b00;fontSize=8;" target="YZrR8DOupRYEo43ufBo8-15" value="callback">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-96" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-13" style="dashed=1;endArrow=open;html=1;strokeColor=#d79b00;" target="YZrR8DOupRYEo43ufBo8-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-97" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-17" style="dashed=1;endArrow=open;html=1;strokeColor=#d79b00;" target="YZrR8DOupRYEo43ufBo8-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-98" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;verticalAlign=top;fontStyle=1;fontSize=12;align=left;spacingLeft=8;" value="Легенда (BPMN-нотация)" vertex="1">
+          <mxGeometry height="180" width="2430" x="2280" y="1335" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-99" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="35" width="35" x="2310" y="1375" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-100" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;" value="Start Event (тонкая рамка)" vertex="1">
+          <mxGeometry height="25" width="220" x="2355" y="1380" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-101" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=4;" value="" vertex="1">
+          <mxGeometry height="35" width="35" x="2310" y="1420" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-102" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;" value="End Event (толстая рамка)" vertex="1">
+          <mxGeometry height="25" width="220" x="2355" y="1425" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-103" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;strokeWidth=3;" value="" vertex="1">
+          <mxGeometry height="35" width="35" x="2310" y="1465" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-104" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;" value="Intermediate Message Event" vertex="1">
+          <mxGeometry height="25" width="220" x="2355" y="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-105" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="35" width="60" x="2640" y="1375" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-106" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;" value="Service Task" vertex="1">
+          <mxGeometry height="25" width="150" x="2710" y="1380" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-107" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="" vertex="1">
+          <mxGeometry height="35" width="60" x="2640" y="1420" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-108" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;" value="User Task" vertex="1">
+          <mxGeometry height="25" width="150" x="2710" y="1425" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-109" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#2d5016;strokeWidth=4;" value="" vertex="1">
+          <mxGeometry height="35" width="60" x="2640" y="1465" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-110" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;" value="Call Activity (двойная/толстая рамка)" vertex="1">
+          <mxGeometry height="25" width="260" x="2710" y="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-111" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontStyle=1;" value="X" vertex="1">
+          <mxGeometry height="40" width="40" x="3040" y="1370" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-112" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;" value="Exclusive Gateway (XOR)" vertex="1">
+          <mxGeometry height="25" width="220" x="3090" y="1375" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-113" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontStyle=1;" value="+" vertex="1">
+          <mxGeometry height="40" width="40" x="3040" y="1420" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-114" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;" value="Parallel Gateway (AND)" vertex="1">
+          <mxGeometry height="25" width="220" x="3090" y="1425" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-115" edge="1" parent="1" style="endArrow=block;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="3400" y="1390" as="sourcePoint" />
+            <mxPoint x="3480" y="1390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-116" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;" value="Sequence Flow" vertex="1">
+          <mxGeometry height="25" width="180" x="3495" y="1380" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-117" edge="1" parent="1" style="dashed=1;endArrow=open;html=1;strokeColor=#d79b00;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="3400" y="1440" as="sourcePoint" />
+            <mxPoint x="3480" y="1440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-118" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;" value="Message Flow (к внешней системе)" vertex="1">
+          <mxGeometry height="25" width="280" x="3495" y="1430" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-119" edge="1" parent="1" style="dashed=1;endArrow=none;html=1;strokeColor=#999999;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="3400" y="1485" as="sourcePoint" />
+            <mxPoint x="3480" y="1485" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-120" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;" value="Association (Call Activity → подпроцесс)" vertex="1">
+          <mxGeometry height="25" width="320" x="3495" y="1475" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-121" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="" vertex="1">
+          <mxGeometry height="35" width="60" x="3870" y="1375" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-122" parent="1" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;" value="Пул внешней системы&#xa;(вне зоны ответственности Camunda)" vertex="1">
+          <mxGeometry height="40" width="320" x="3940" y="1370" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-123" parent="1" style="text;html=1;fontSize=9;fontStyle=2;align=left;" value="Примечание: Camunda оркестрирует процесс, но не вызывает внешние системы напрямую —&#xa;фактический вызов делает внешний worker (Gateway/коннектор) через External Task API." vertex="1">
+          <mxGeometry height="45" width="700" x="3870" y="1430" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-124" parent="1" style="text;html=1;fontSize=16;fontStyle=1;align=center;verticalAlign=middle;" value="Custom Gateway: приём заявок с frontend и работа с внешними системами через External Task API&#xa;(по мотивам docs.camunda.org/manual/7.24/user-guide/process-engine/external-tasks)" vertex="1">
+          <mxGeometry height="45" width="1140" x="4665" y="-1022.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-125" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Frontend&#xa;(клиентский портал)" vertex="1">
+          <mxGeometry height="60" width="150" x="4490" y="-792.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-126" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7e6;strokeColor=#d79b00;strokeWidth=2;verticalAlign=top;align=center;fontSize=13;fontStyle=1;" value="Custom Gateway (под/сервис)" vertex="1">
+          <mxGeometry height="560" width="1180" x="4790" y="-842.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-127" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;" value="Intake REST API&#xa;(приём заявок от frontend:&#xa;POST /applications)" vertex="1">
+          <mxGeometry height="60" width="190" x="4860" y="-792.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-128" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;" value="Status/Callback API&#xa;(GET /applications/{id}/status,&#xa;WebSocket push)" vertex="1">
+          <mxGeometry height="60" width="190" x="4680" y="-872.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-129" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#666666;fontSize=10;" value="Redis / БД Gateway" vertex="1">
+          <mxGeometry height="60" width="190" x="4830" y="-385" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-189" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-130" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="YZrR8DOupRYEo43ufBo8-129">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-190" connectable="0" parent="YZrR8DOupRYEo43ufBo8-189" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="new processId" vertex="1">
+          <mxGeometry relative="1" x="-0.0646" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-130" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Process Starter&#xa;POST /process-definition/key/{key}/start" vertex="1">
+          <mxGeometry height="55" width="190" x="4980" y="-500" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-131" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f4ea;strokeColor=#2d5016;strokeWidth=2;verticalAlign=top;align=center;fontSize=11;fontStyle=1;" value="Topic Subscription Manager (ExternalTaskClient)" vertex="1">
+          <mxGeometry height="300" width="440" x="5080" y="-810" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-132" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2d5016;fontSize=9;" value="Подписка: topic&#xa;egrul-check" vertex="1">
+          <mxGeometry height="45" width="120" x="5100" y="-777.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-133" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2d5016;fontSize=9;" value="Подписка: topic&#xa;aml-check" vertex="1">
+          <mxGeometry height="45" width="120" x="5230" y="-777.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-134" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2d5016;fontSize=9;" value="Подписка: topic&#xa;credit-history" vertex="1">
+          <mxGeometry height="45" width="120" x="5360" y="-777.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-135" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2d5016;fontSize=9;" value="Подписка: topic&#xa;esign-*, abs-*, notify-*" vertex="1">
+          <mxGeometry height="40" width="380" x="5100" y="-725" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-136" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-138" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="YZrR8DOupRYEo43ufBo8-151">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5290" y="-580" />
+              <mxPoint x="6080" y="-580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-137" connectable="0" parent="YZrR8DOupRYEo43ufBo8-136" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="3-4 Запрос external Tasck" vertex="1">
+          <mxGeometry relative="1" x="0.648" as="geometry">
+            <mxPoint x="-114" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-138" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" value="fetchAndLock() — Long Polling&#xa;POST /external-task/fetchAndLock&#xa;(HTTP-соединение держится открытым,&#xa;таймаут ~15-30 сек, если задач нет)" vertex="1">
+          <mxGeometry height="70" width="380" x="5100" y="-675" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-139" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2d5016;fontSize=10;" value="Task Handler Dispatcher&#xa;(маршрутизация полученной задачи&#xa;конкретному обработчику по topicName)" vertex="1">
+          <mxGeometry height="45" width="380" x="5110" y="-565" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-140" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdf0e6;strokeColor=#b85450;strokeWidth=2;verticalAlign=top;align=center;fontSize=11;fontStyle=1;" value="Task Handlers / Коннекторы к внешним системам" vertex="1">
+          <mxGeometry height="220" width="420" x="5530" y="-822.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-141" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=9;" value="Handler:&#xa;ЕГРЮЛ/ЕГРИП" vertex="1">
+          <mxGeometry height="45" width="110" x="5550" y="-777.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-142" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=9;" value="Handler:&#xa;AML/санкции" vertex="1">
+          <mxGeometry height="45" width="110" x="5670" y="-777.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-143" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=9;" value="Handler:&#xa;Бюро кред. историй" vertex="1">
+          <mxGeometry height="45" width="130" x="5790" y="-777.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-144" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=9;" value="Handler:&#xa;ЭЦП" vertex="1">
+          <mxGeometry height="45" width="110" x="5550" y="-722.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-145" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=9;" value="Handler:&#xa;АБС банка" vertex="1">
+          <mxGeometry height="45" width="110" x="5675" y="-722.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-146" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=9;" value="Handler:&#xa;SMS/Email" vertex="1">
+          <mxGeometry height="45" width="130" x="5790" y="-722.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-147" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;dashed=1;fontSize=9;" value="Retry / Timeout политика&#xa;handleFailure(retries, retryTimeout)" vertex="1">
+          <mxGeometry height="50" width="180" x="5550" y="-667.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-148" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;dashed=1;fontSize=9;" value="BPMN Error reporting&#xa;handleBpmnError(errorCode)" vertex="1">
+          <mxGeometry height="50" width="180" x="5750" y="-667.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-149" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;" value="complete(taskId, variables)&#xa;POST /external-task/{id}/complete&#xa;— результат уходит обратно в Camunda" vertex="1">
+          <mxGeometry height="55" width="380" x="5535" y="-382.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-150" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#666666;fontSize=10;" value="Обновление статуса заявки&#xa;(через локальное сопоставление&#xa;processInstanceId → applicationId)" vertex="1">
+          <mxGeometry height="55" width="380" x="5110" y="-382.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-151" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" value="Load Balancer" vertex="1">
+          <mxGeometry height="70" width="120" x="6020" y="-712.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-152" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;" value="Camunda BPM кластер&#xa;(engine-rest:&#xa;/external-task/fetchAndLock&#xa;/external-task/{id}/complete&#xa;/process-definition/.../start)" vertex="1">
+          <mxGeometry height="110" width="210" x="6190" y="-732.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-153" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=center;" value="Внешние системы банка" vertex="1">
+          <mxGeometry height="20" width="640" x="5320" y="-952.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-154" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;verticalAlign=top;" value="ФНС:&lt;br&gt;ЕГРЮЛ/ЕГРИП API&lt;div&gt;(req string ОГРН или ИНН;&lt;/div&gt;&lt;div&gt;key string Ключ к API)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="62.5" width="110" x="5320" y="-920" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-155" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;" value="Росфинмониторинг /&lt;br&gt;санкционные списки&lt;div&gt;???&lt;/div&gt;" vertex="1">
+          <mxGeometry height="55" width="100" x="5440" y="-912.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-156" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;" value="Бюро кредитных&lt;br&gt;историй&lt;div&gt;(запрос в XML)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="55" width="90" x="5550" y="-912.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-157" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;" value="Сервис&#xa;электронной подписи" vertex="1">
+          <mxGeometry height="55" width="100" x="5660" y="-912.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-158" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;" value="АБС банка&#xa;(core banking)" vertex="1">
+          <mxGeometry height="55" width="80" x="5770" y="-912.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-159" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;" value="SMS/Email-шлюз" vertex="1">
+          <mxGeometry height="55" width="100" x="5860" y="-912.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-160" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="Camunda Cockpit:&#xa;incident (retries=0)" vertex="1">
+          <mxGeometry height="55" width="150" x="6160" y="-495" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-164" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-125" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;startArrow=classic;startFill=1;" target="YZrR8DOupRYEo43ufBo8-127" value="1. отправка заявки">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-165" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-127" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;exitX=0.25;exitY=1;exitDx=0;exitDy=0;startArrow=classic;startFill=1;" target="YZrR8DOupRYEo43ufBo8-129">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-166" connectable="0" parent="YZrR8DOupRYEo43ufBo8-165" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Существует такой&amp;nbsp;&lt;div&gt;applicationId&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0012" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-167" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-127" style="rounded=0;html=1;endArrow=block;fontSize=9;exitX=0.75;exitY=1;exitDx=0;exitDy=0;startArrow=classic;startFill=1;" target="YZrR8DOupRYEo43ufBo8-130" value="2. старт процесса">
+          <mxGeometry relative="1" x="-0.4411" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-168" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-130" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;startArrow=classic;startFill=1;" target="YZrR8DOupRYEo43ufBo8-151">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-169" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-151" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YZrR8DOupRYEo43ufBo8-152">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-170" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;entryX=0.211;entryY=0.111;entryDx=0;entryDy=0;entryPerimeter=0;" target="YZrR8DOupRYEo43ufBo8-139">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="5180" y="-600" as="sourcePoint" />
+            <mxPoint x="5180" y="-500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-171" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-139" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-140" value="5. вызов нужного handler&#39;а&#xa;по topicName">
+          <mxGeometry relative="1" x="0.4428" y="-21" as="geometry">
+            <mxPoint x="-1" y="8" as="offset" />
+            <Array as="points">
+              <mxPoint x="5600" y="-530.01" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-172" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-141" style="rounded=0;html=1;endArrow=block;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" target="YZrR8DOupRYEo43ufBo8-154">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-173" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-142" style="rounded=0;html=1;endArrow=block;" target="YZrR8DOupRYEo43ufBo8-155">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-174" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-143" style="rounded=0;html=1;endArrow=block;" target="YZrR8DOupRYEo43ufBo8-156">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-175" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-144" style="rounded=0;html=1;endArrow=block;" target="YZrR8DOupRYEo43ufBo8-157">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-176" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-145" style="rounded=0;html=1;endArrow=block;" target="YZrR8DOupRYEo43ufBo8-158">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-177" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-146" style="rounded=0;html=1;endArrow=block;" target="YZrR8DOupRYEo43ufBo8-159">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-178" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-140" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-149" value="6.успех">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5730" y="-552.5" />
+              <mxPoint x="5730" y="-552.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-179" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-147" style="rounded=0;html=1;endArrow=block;fontSize=8;dashed=1;" target="YZrR8DOupRYEo43ufBo8-160" value="retries=0 → incident">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5930" y="-510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-180" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-149" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-151" value="7. complete → через LB">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-181" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-149" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YZrR8DOupRYEo43ufBo8-150">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-182" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-150" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="YZrR8DOupRYEo43ufBo8-129">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-183" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-128" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" target="YZrR8DOupRYEo43ufBo8-125" value="8. push статуса /&#xa;фронт опрашивает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-184" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-127" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" target="YZrR8DOupRYEo43ufBo8-128">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="4740" y="-777.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-185" connectable="0" parent="YZrR8DOupRYEo43ufBo8-184" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Заявка уже есть" vertex="1">
+          <mxGeometry relative="1" x="0.0618" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-186" parent="1" style="text;html=1;fontSize=9;align=left;verticalAlign=middle;fontStyle=2;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;whiteSpace=wrap;spacing=8;" value="Ключевые моменты (по официальной документации Camunda):&#xa;• Три шага паттерна: (1) движок создаёт external task instance и кладёт в топик; (2) worker делает fetchAndLock; (3) worker вызывает complete() — только после этого процесс продолжает выполнение.&#xa;• Long Polling: обычный HTTP-запрос сразу получает ответ независимо от наличия задач — это дорого при частом опросе. Long polling держит запрос открытым до появления задачи или истечения таймаута — значительно снижает число запросов.&#xa;• Lock — временная метка: задача блокируется на время выполнения; если worker не ответил (упал), по истечении лока задачу может забрать другой worker — silently failing worker не блокирует выполнение навсегда.&#xa;• fetch-and-lock-queue-capacity (по умолчанию 200) — сколько одновременных long-polling запросов может держать движок; при росте числа реплик Gateway стоит увеличивать через web.xml engine-rest.&#xa;• Worker не обязан быть на Java/в той же сети — обязателен только доступ к REST/Java API движка, поэтому Gateway можно писать на любом стеке и масштабировать независимо от самого движка." vertex="1">
+          <mxGeometry height="150" width="1620" x="4790" y="-152.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-187" parent="1" style="text;html=1;fontSize=9;fontStyle=2;align=left;fontColor=#666666;" value="Источник паттерна: docs.camunda.org/manual/7.24/user-guide/process-engine/external-tasks" vertex="1">
+          <mxGeometry height="20" width="700" x="4790" y="7.5" as="geometry" />
+        </mxCell>
+        <mxCell id="YZrR8DOupRYEo43ufBo8-188" edge="1" parent="1" source="YZrR8DOupRYEo43ufBo8-134" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;innerLoopWaypoints=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="YZrR8DOupRYEo43ufBo8-134">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-1" parent="1" style="text;html=1;fontSize=17;fontStyle=1;align=center;verticalAlign=middle;" value="Полный процесс подписания договора через ЭЦП с использованием Kafka" vertex="1">
+          <mxGeometry height="35" width="900" x="5640" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eef7ee;strokeColor=#2d5016;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="Camunda BPMN (Open-Point Engine)" vertex="1">
+          <mxGeometry height="150" width="1820" x="5200" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff7e6;strokeColor=#d79b00;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="Custom Gateway" vertex="1">
+          <mxGeometry height="150" width="1820" x="5200" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="Провайдер ЭЦП (внешняя система)" vertex="1">
+          <mxGeometry height="130" width="1820" x="5200" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff7e6;strokeColor=#d79b00;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="Webhook-приёмник (Gateway)" vertex="1">
+          <mxGeometry height="130" width="1820" x="5200" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8e8e8;strokeColor=#231f20;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;Kafka" vertex="1">
+          <mxGeometry height="150" width="1820" x="5200" y="1060" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff7e6;strokeColor=#d79b00;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="Gateway: Kafka Consumer" vertex="1">
+          <mxGeometry height="190" width="1820" x="5200" y="1210" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eef7ee;strokeColor=#2d5016;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontStyle=1;" value="Camunda BPMN — продолжение" vertex="1">
+          <mxGeometry height="170" width="1820" x="5200" y="1390" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Service Task&#xa;«Подписание договора»&#xa;(External Task, topic: esign-sign)" vertex="1">
+          <mxGeometry height="65" width="200" x="5240" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-10" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;strokeWidth=3;fontSize=9;" value="Intermediate Message&#xa;Catch Event&#xa;«Ожидание подписи»" vertex="1">
+          <mxGeometry height="90" width="90" x="5540" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-11" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=8;" value="Boundary Timer&#xa;P3D (3 дня)" vertex="1">
+          <mxGeometry height="40" width="40" x="5660" y="595" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="Напоминание /&#xa;отмена заявки" vertex="1">
+          <mxGeometry height="50" width="140" x="5830" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-13" parent="1" style="text;html=1;fontSize=8;fontStyle=2;align=center;" value="ACT_RU_EVENT_SUBSCR&#xa;процесс «спит»,&#xa;ресурсы Job Executor&#39;а&#xa;не расходуются" vertex="1">
+          <mxGeometry height="40" width="90" x="5670" y="505" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="fetchAndLock&#xa;(topic: esign-sign)" vertex="1">
+          <mxGeometry height="55" width="180" x="5230" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="esignClient.initiateSigning(&#xa;documentKey, clientPhone)" vertex="1">
+          <mxGeometry height="55" width="220" x="5460" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;" value="complete(task,&#xa;{esignSessionId})" vertex="1">
+          <mxGeometry height="55" width="180" x="5720" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-17" parent="1" style="text;html=1;fontSize=8;fontStyle=2;align=left;fillColor=#ffffff;strokeColor=#d79b00;rounded=1;whiteSpace=wrap;" value="ВАЖНО: complete() вызывается сразу после\nотправки на подпись — НЕ после реального\nподписания клиентом (это может занять дни)" vertex="1">
+          <mxGeometry height="55" width="320" x="5940" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" value="Отправка SMS/push&#xa;клиенту с кодом" vertex="1">
+          <mxGeometry height="55" width="180" x="5240" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Клиент вводит код,&#xa;подписывает документ&#xa;(вне системы банка)" vertex="1">
+          <mxGeometry height="55" width="200" x="5480" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" value="POST /esign-webhook&#xa;{sessionId, status: SIGNED}&#xa;+ HMAC-подпись" vertex="1">
+          <mxGeometry height="55" width="220" x="5740" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-21" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Проверка HMAC-подписи&#xa;(доверяем ли отправителю)" vertex="1">
+          <mxGeometry height="55" width="200" x="5240" y="975" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;" value="kafkaProducer.send(&#xa;topic, key=sessionId, callback)" vertex="1">
+          <mxGeometry height="55" width="240" x="5480" y="975" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="HTTP 200 OK&#xa;провайдеру (сразу,&#xa;не дожидаясь обработки)" vertex="1">
+          <mxGeometry height="55" width="200" x="5760" y="975" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="401 Unauthorized&#xa;(подпись не совпала —&#xa;НЕ публикуем в Kafka)" vertex="1">
+          <mxGeometry height="45" width="200" x="5240" y="1035" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-25" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#231f20;fontColor=#ffffff;strokeColor=#000000;fontSize=10;fontStyle=1;" value="topic: external.callbacks.esign&#xa;partition key = sessionId&#xa;(гарантирует порядок событий одной сессии)" vertex="1">
+          <mxGeometry height="65" width="320" x="5460" y="1105" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3d3d3d;fontColor=#ffffff;strokeColor=#000000;fontSize=9;" value="topic: external.callbacks.esign&#xa;.dead-letter-queue" vertex="1">
+          <mxGeometry height="65" width="220" x="5940" y="1102.5" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-27" parent="1" style="text;html=1;fontSize=8;fontStyle=2;align=left;" value="Retention (напр. 7 дней) — если Gateway недоступен,&#xa;событие не теряется, будет обработано при восстановлении" vertex="1">
+          <mxGeometry height="30" width="500" x="5460" y="1175" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Проверка идемпотентности&#xa;(eventId уже обработан?)" vertex="1">
+          <mxGeometry height="55" width="200" x="5240" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-29" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="lookupApplicationBySessionId&#xa;(sessionId → businessKey)" vertex="1">
+          <mxGeometry height="55" width="220" x="5480" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;" value="correlateMessage(&#xa;esignCompletedMessage,&#xa;businessKey=applicationId)" vertex="1">
+          <mxGeometry height="55" width="240" x="5770" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-31" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="markProcessed(eventId)&#xa;+ commit offset" vertex="1">
+          <mxGeometry height="55" width="180" x="6100" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-32" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="Исключение:&amp;nbsp;процесс не найден&lt;br&gt;(уже завершён по таймауту)&lt;br&gt;→ отправка в DLQ" vertex="1">
+          <mxGeometry height="40" width="260" x="5560" y="1330" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-33" parent="1" style="text;html=1;fontSize=8;fontStyle=2;align=left;" value="дубликат → просто игнорируем,&#xa;offset коммитим" vertex="1">
+          <mxGeometry height="30" width="200" x="5240" y="1310" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-34" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=9;" value="Message Catch Event&#xa;срабатывает" vertex="1">
+          <mxGeometry height="70" width="90" x="5240" y="1440" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-35" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="Переменная&#xa;signedDocumentUrl&#xa;записана в контекст" vertex="1">
+          <mxGeometry height="60" width="180" x="5390" y="1445" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-36" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="Service Task&#xa;«Активация точки»&#xa;(следующий шаг процесса)" vertex="1">
+          <mxGeometry height="60" width="180" x="5630" y="1445" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-37" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#666666;fontSize=9;" value="DLQ → Ops-панель:&#xa;ручной разбор&#xa;(«клиент подписал, но заявка&#xa;уже отменена по таймауту»)" vertex="1">
+          <mxGeometry height="70" width="220" x="5930" y="1435" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-38" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-39" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-40" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5580" y="770.03" />
+              <mxPoint x="5210" y="770.03" />
+              <mxPoint x="5210" y="872.49" />
+            </Array>
+            <mxPoint x="5579.998571428571" y="750" as="sourcePoint" />
+            <mxPoint x="5249.97" y="872.4857142857143" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-41" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-42" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5810.03" y="670.03" />
+              <mxPoint x="5590.03" y="670.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-43" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="SdBgG4MfuhIz1VseSWwH-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-44" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=8;" target="SdBgG4MfuhIz1VseSWwH-12" value="истёк таймаут">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-45" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-46" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-47" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;exitX=0.444;exitY=0.971;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="SdBgG4MfuhIz1VseSWwH-21">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5837.6900000000005" y="920.03" />
+              <mxPoint x="5340.03" y="920.03" />
+            </Array>
+            <mxPoint x="5740" y="919.9957142857143" as="sourcePoint" />
+            <mxPoint x="5360.028571428571" y="1022.51" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-48" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=8;" target="SdBgG4MfuhIz1VseSWwH-22" value="valid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-49" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=8;dashed=1;" target="SdBgG4MfuhIz1VseSWwH-24" value="invalid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-50" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-51" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-52" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-53" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-54" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-55" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-56" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=8;dashed=1;" target="SdBgG4MfuhIz1VseSWwH-32" value="ошибка">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-57" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="SdBgG4MfuhIz1VseSWwH-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-58" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-34">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="6110.03" y="1380.03" />
+              <mxPoint x="5210.03" y="1380.03" />
+              <mxPoint x="5210.03" y="1475" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-59" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-60" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="SdBgG4MfuhIz1VseSWwH-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-61" edge="1" parent="1" source="SdBgG4MfuhIz1VseSWwH-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;" target="SdBgG4MfuhIz1VseSWwH-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SdBgG4MfuhIz1VseSWwH-62" parent="1" style="text;html=1;fontSize=9;align=left;verticalAlign=middle;fontStyle=2;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;whiteSpace=wrap;spacing=8;" value="Ключевая идея всей схемы: движок Camunda «засыпает» на Intermediate Message Catch Event сразу после отправки документа на подпись — вместо того, чтобы ждать&#xa;синхронно (клиент может подписывать от секунд до дней). Webhook от провайдера ЭЦП проходит через Kafka, а не напрямую в Camunda — это даёт устойчивость к временной&#xa;недоступности Gateway/кластера, идемпотентность через partition key, и защиту от потери события благодаря retention. Boundary Timer гарантирует, что заявка не «зависнет» навечно,&#xa;если клиент так и не подписал документ." vertex="1">
+          <mxGeometry height="70" width="1820" x="5200" y="1560" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
