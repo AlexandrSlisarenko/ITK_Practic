@@ -1,5 +1,9 @@
 package ru.slisarenko.hw;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.specification.RequestSpecification;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +15,9 @@ import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+
+@Epic("Task Manager")
+@Feature("Аутентификация")
 public class SlisarenkoAuthApiTest {
     private static Map<String, String> credentials;
 
@@ -28,6 +35,7 @@ public class SlisarenkoAuthApiTest {
     }
     @Test
     @DisplayName("Получение токена по email и паролю")
+    @Story("Получение токена по email и паролю")
     public void givenEmailAndPassword_whenLogin_thenAccessToken() {
         // Отправляем POST и извлекаем токен
         String token = given()
@@ -39,14 +47,17 @@ public class SlisarenkoAuthApiTest {
                 .statusCode(200)
                 .extract()
                 .path("accessToken");   // предполагаем, что токен в поле "token"
-
+        Allure.step("Получили токен", () -> {
+            Allure.attachment("Ответ", token);
+        });
         assertFalse(token.isEmpty());
     }
 
     @Test
     @DisplayName("Получение информации о пользователе по токену")
+    @Story("Получение информации о пользователе по токену")
     public void givenToken_whenMe_thenInfo() {
-        // Данные для логина
+
         String token = given()
                 .spec(commonRequestSpec())
                 .body(credentials)
@@ -56,6 +67,9 @@ public class SlisarenkoAuthApiTest {
                 .statusCode(200)
                 .extract()
                 .path("accessToken");
+        Allure.step("Получили токен", () -> {
+            Allure.attachment("Ответ", token);
+        });
         // Отправляем POST и извлекаем токен
         String email = given()
                 .spec(commonRequestSpec())
@@ -66,7 +80,9 @@ public class SlisarenkoAuthApiTest {
                 .statusCode(200)
                 .extract()
                 .path("email");
-
+        Allure.step("Получили почту пользователя", () -> {
+            Allure.attachment("email", email);
+        });
         assertEquals(email, credentials.get("email"));
     }
 

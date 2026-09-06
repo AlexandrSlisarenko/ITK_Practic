@@ -11,6 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -73,7 +76,7 @@ public class SlisarenkoTaskLifecycleApiTest {
     @Test
     @DisplayName("Создать задачу в проекте DEMO")
     public void givenTask_whenTasks_thenCreateTask() {
-        givenAccessToken_whenProjects_thenListProjects();
+        /*givenAccessToken_whenProjects_thenListProjects();*/
         if( credentials.get("taskId") == null ) {
             String id = given()
                     .spec(commonRequestSpec())
@@ -104,6 +107,7 @@ public class SlisarenkoTaskLifecycleApiTest {
                     .post("/tasks")
                     .then()
                     .statusCode(201)
+                    .body("id", equalTo(id))
                     .extract()
                     .as(TaskResponse.class);
             assertEquals(task.status(), TaskStatus.TODO);
@@ -117,8 +121,8 @@ public class SlisarenkoTaskLifecycleApiTest {
     @Test
     @DisplayName("Получить созданную задачу по ID")
     public void givenTaskId_whenTasks_thenTask() {
-        givenAccessToken_whenProjects_thenListProjects();
-        givenTask_whenTasks_thenCreateTask();
+        /*givenAccessToken_whenProjects_thenListProjects();
+        givenTask_whenTasks_thenCreateTask();*/
         TaskResponse task = given()
                 .spec(commonRequestSpec())
                 .auth().oauth2(credentials.get("accessToken"))
@@ -140,9 +144,9 @@ public class SlisarenkoTaskLifecycleApiTest {
     @DisplayName("Обновить статус задачи (TODO → IN_PROGRESS)")
     public void givenTaskIdAndStatus_whenTasks_thenUpdateStatusTask() {
         if(credentials.get("statusTask") == null) {
-            givenAccessToken_whenProjects_thenListProjects();
+            /*givenAccessToken_whenProjects_thenListProjects();
             givenTask_whenTasks_thenCreateTask();
-            givenTaskId_whenTasks_thenTask();
+            givenTaskId_whenTasks_thenTask();*/
 
             StatusTaskUpdateRequest request = StatusTaskUpdateRequest.builder()
                     .status(TaskStatus.IN_PROGRESS)
@@ -170,11 +174,11 @@ public class SlisarenkoTaskLifecycleApiTest {
     @Test
     @DisplayName("Удалить задачу")
     public void givenTaskId_whenTasks_thenDeleteTask() {
-        givenAccessToken_whenProjects_thenListProjects();
+        /*givenAccessToken_whenProjects_thenListProjects();
         givenTask_whenTasks_thenCreateTask();
         givenTaskId_whenTasks_thenTask();
         givenTaskIdAndStatus_whenTasks_thenUpdateStatusTask();
-
+*/
         given()
                 .spec(commonRequestSpec())
                 .auth().oauth2(credentials.get("accessToken"))
@@ -188,11 +192,11 @@ public class SlisarenkoTaskLifecycleApiTest {
     @Test
     @DisplayName("Проверить, что задача удалена")
     public void givenTaskId_whenTasks_thenNotFoundTask() {
-        givenAccessToken_whenProjects_thenListProjects();
+        /*givenAccessToken_whenProjects_thenListProjects();
         givenTask_whenTasks_thenCreateTask();
         givenTaskId_whenTasks_thenTask();
         givenTaskIdAndStatus_whenTasks_thenUpdateStatusTask();
-        givenTaskId_whenTasks_thenDeleteTask();
+        givenTaskId_whenTasks_thenDeleteTask();*/
 
         given()
                 .spec(commonRequestSpec())
