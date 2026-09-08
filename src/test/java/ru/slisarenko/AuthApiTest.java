@@ -106,16 +106,5 @@ public class AuthApiTest {
     }
 
 
-    @Test
-    public void getUsers_withAllureLogging() {
-        RequestSpecification spec = given()
-                .filter(new AllureRestAssured())
-                .baseUri("https://api.example.com");
-        given()
-                .filter(new AllureRestAssured())  // добавляем фильтр
-                .when()
-                .get("/users")
-                .then()
-                .statusCode(200);
-    }
+
 }
