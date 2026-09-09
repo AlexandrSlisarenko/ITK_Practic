@@ -1,16 +1,12 @@
 package ru.slisarenko;
 
-import java.time.Duration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GoogleSearchSeleniumTest {
     private GoogleSearchPage page;
@@ -32,8 +28,56 @@ public class GoogleSearchSeleniumTest {
         assertEquals(expected, actual);
     }
 
-    /*@AfterEach
+    @Test
+    @DisplayName("Проверка активности кнопки 'Мне повезет'")
+    public void checkEnableLuckButton() {
+        boolean isEnabled = page.isEnabledLuckButton();
+
+        Assertions.assertTrue(isEnabled);
+
+    }
+
+    @Test
+    @DisplayName("Проверка isDisplayed кнопки 'Мне повезет'")
+    public void checkDisplayedLuckButton() {
+        boolean isDisplayed = page.isDisplayedLuckButton();
+
+        Assertions.assertTrue(isDisplayed);
+    }
+
+    @Test
+    @DisplayName("Проверка ссылки 'Все о Google'")
+    public void checkLinkSettings() {
+        boolean isEnabledAboutGoogle = page.isEnabledAboutGoogle();
+        boolean isDisplayedAboutGoogle = page.isDisplayedAboutGoogle();
+        boolean checkHref = page.checkHrefAboutGoogleNotExistsOrNotEmpty();
+
+        Assertions.assertTrue(isEnabledAboutGoogle);
+        Assertions.assertTrue(isDisplayedAboutGoogle);
+        Assertions.assertTrue(checkHref);
+    }
+
+    @Test
+    @DisplayName("Проверка логотипа 'Google'")
+    public void checkLogo() {
+        boolean isEnabled = page.isEnabledLogo();
+        boolean isDisplayed = page.isDisplayedLogo();
+
+
+        Assertions.assertTrue(isEnabled);
+        Assertions.assertTrue(isDisplayed);
+    }
+
+    @Test
+    @DisplayName("Проверка ссылки 'Реклама'")
+    public void checkAdvertising() {
+        boolean isContain = page.checkHrefAdvertising("https://www.google.com");
+
+        Assertions.assertTrue(isContain);
+    }
+
+    @AfterEach
     public void quitDriver() {
         page.quit();
-    }*/
+    }
 }
