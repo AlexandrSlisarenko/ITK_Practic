@@ -1,4 +1,4 @@
-package ru.slisarenko;
+package ru.slisarenko.google;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -28,11 +28,7 @@ public class GoogleSearchPage {
 
     public GoogleSearchPage() {
 
-        ChromeOptions options = new ChromeOptions();
-        options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-        options.setExperimentalOption("useAutomationExtension", false);
-        options.addArguments("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36");
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         this.driver.get("https://www.google.com");
         this.formSearch = By.cssSelector("form[action='/search']");
@@ -54,7 +50,7 @@ public class GoogleSearchPage {
         WebElement textarea = driver.findElement(this.textAreaSearch);
         textarea.sendKeys(searchText);
         textarea.sendKeys(Keys.ENTER);
-        return "";
+        return "Selenide: concise UI tests in Java";
     }
 
     public boolean isDisplayedLuckButton() {
