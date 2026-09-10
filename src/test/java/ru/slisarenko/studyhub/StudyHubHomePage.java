@@ -1,8 +1,8 @@
 package ru.slisarenko.studyhub;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -12,7 +12,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.element;
 import static com.codeborne.selenide.Selenide.open;
 
 public class StudyHubHomePage {
@@ -29,6 +28,11 @@ public class StudyHubHomePage {
     private final SelenideElement divSliderBody = $("div[class='sidebar__body']");
     private final ElementsCollection spanLinkText = $$("div[class='sidebar__body'] span.sidebar__link-text");
     private final ElementsCollection aLink = $$("div[class='sidebar__body'] a.sidebar__link");
+    private final SelenideElement buttonToggle = $(".theme-toggle");
+    private final SelenideElement gridThemes = $(".theme-picker__grid");
+    private final SelenideElement divLearningPage = $(".learning-page");
+    private final SelenideElement aBtnLarge = $("a.btn--large");
+
 
     public StudyHubHomePage() {
         Configuration.browser = "chrome";
@@ -37,6 +41,29 @@ public class StudyHubHomePage {
         Configuration.reportsFolder = "target/selenide-reports";
         Configuration.baseUrl = "https://academy.siamsoftware.tech";
         //Configuration.holdBrowserOpen = true;
+    }
+
+    public void clickButtonContinue() {
+        aBtnLarge.shouldBe(visible).click();
+    }
+
+    public void checkLearningPage() {
+        divLearningPage.shouldBe(visible);
+    }
+
+    public String getThemeName() {
+        return buttonToggle.getAttribute("title");
+    }
+    public String getPageTheme() {
+        return $("html").getAttribute("data-scheme");
+    }
+
+    public void switchTheme() {
+        buttonToggle.click();
+        gridThemes.shouldBe(visible);
+        gridThemes.$$("button.theme-picker__option").stream()
+                .filter(element -> !element.has(Condition.cssClass("theme-picker__option--active")))
+                .findFirst().orElseThrow(() -> new RuntimeException("Темы нет <UNK>")).click();
     }
 
     public boolean checkLogin() {
@@ -84,10 +111,7 @@ public class StudyHubHomePage {
             aLink.forEach(element -> element.shouldHave(attribute("title", "")));
             return false;
         }
-
-
     }
-
 
     private void loginToPlatform() {
         loginPage.should(visible);

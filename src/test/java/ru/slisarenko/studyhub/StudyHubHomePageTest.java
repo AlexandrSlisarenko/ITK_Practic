@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Epic("Домашняя страница Study Hub")
@@ -61,6 +62,34 @@ public class StudyHubHomePageTest {
        sliderIsOpen = homePage.isDisplayedLinkTextAndBrandText(false);
        assertTrue(sliderIsOpen);
        Allure.step("Слайдер развернулся");
+   }
+
+   @Test
+   @DisplayName("Проверка функционала переключения темы")
+   @Story("Проверка функционала переключения темы")
+   public void checkSwitchingThemes(){
+       homePage.viewHomePage();
+       String themeName = homePage.getThemeName();
+       String htmlSchema = homePage.getPageTheme();
+       Allure.step("Сейчас установлена тема => " + themeName);
+       Allure.step("Схема страницы => " + htmlSchema);
+       homePage.switchTheme();
+       String newThemeName = homePage.getThemeName();
+       htmlSchema = homePage.getPageTheme();
+       Allure.step("Сейчас установлена тема => " + newThemeName);
+       Allure.step("Схема страницы => " + htmlSchema);
+       assertNotEquals(themeName, newThemeName);
+   }
+
+   @Test
+   @DisplayName("Проверка результата по нажатию на кнопку 'Продолжить обучение'")
+   @Story("Проверка результата по нажатию на кнопку 'Продолжить обучение'")
+   public void checkResultClickForButtonContinue(){
+       homePage.viewHomePage();
+       homePage.clickButtonContinue();
+       Allure.step("Нажал на кнопку 'Продолжить обучение'");
+       homePage.checkLearningPage();
+       Allure.step("Перешел на страницу модуля обучения");
    }
 
    @AfterEach
