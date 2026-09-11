@@ -1,8 +1,10 @@
 package ru.slisarenko.taskmanager;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class HomePage extends BasePage{
@@ -28,4 +30,15 @@ public class HomePage extends BasePage{
     private final SelenideElement columnDone = boardKanban.$("[data-testid='kanban-column-DONE']");
     private final ElementsCollection cardsDone = columnDone.$$("[data-testid^='task-card']");
 
+    public void waitForBoardLoaded(){
+        boardPage.shouldBe(visible);
+    }
+
+    public String getUserName(){
+        return userName.getText();
+    }
+
+    public void createTask(String taskName, String priority, String dueDate){
+
+    }
 }
