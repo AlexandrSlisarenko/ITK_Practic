@@ -4,8 +4,10 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.readonly;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.page;
 
 public class HomePage extends BasePage{
 
@@ -29,16 +31,55 @@ public class HomePage extends BasePage{
     private final ElementsCollection cardsReview = columnReview.$$("[data-testid^='task-card']");
     private final SelenideElement columnDone = boardKanban.$("[data-testid='kanban-column-DONE']");
     private final ElementsCollection cardsDone = columnDone.$$("[data-testid^='task-card']");
+    private final ElementsCollection cardsBoardKanban = boardKanban.$$("[data-testid^='task-card']");
 
-    public void waitForBoardLoaded(){
+
+    public HomePage waitForBoardLoaded(){
         boardPage.shouldBe(visible);
+        return this;
     }
 
     public String getUserName(){
         return userName.getText();
     }
 
-    public void createTask(String taskName, String priority, String dueDate){
+    public LoginPage logout(){
+        logout.click();
+        return page(LoginPage.class);
+    }
 
+    public HomePage createTask(String taskName, String priority, String dueDate){
+        return openTaskModal()
+                .setTitle(taskName)
+                .setPriority(priority)
+                .setDueDate(dueDate)
+                .save();
+    }
+
+    public TaskModal openTaskByTitle(String title){
+        cardsBoardKanban.stream()
+                .filter(element -> element.$("[data-testid='task-title']").getText().equals(title))
+                .findFirst().orElseThrow(()->new RuntimeException("Task not found"))
+                .click();
+        return page(TaskModal.class);
+    }
+
+    public SelenideElement getTaskCardByTitle(String title){
+        return cardsBoardKanban.stream()
+                .filter(element -> element.$("[data-testid='task-title']").getText().equals(title))
+                .findFirst().orElseThrow(()->new RuntimeException("Task not found"));
+    }
+
+    public SelenideElement getColumn(String status){
+        return boardKanban.$("[data-testid$='" + status + "']");
+    }
+
+    public String getStatValue(String statTestId){
+        return statsBar.$("[data-testid$='stat-" + statTestId + "']").getText();
+    }
+
+    private TaskModal openTaskModal(){
+        taskCreate.click();
+        return page(TaskModal.class);
     }
 }

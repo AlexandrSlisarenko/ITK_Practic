@@ -1,11 +1,11 @@
 package ru.slisarenko.taskmanager;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.page;
 
 public class LoginPage extends BasePage{
 
@@ -16,22 +16,24 @@ public class LoginPage extends BasePage{
     private final SelenideElement loginError = $("[data-testid='login-error']");
 
 
-    public void open(){
+    public LoginPage open(){
         Selenide.open("/login");
+        return this;
     }
 
-    public void login(String email, String password){
+    public HomePage login(String email, String password){
         inputLoginEmail.setValue(email);
         inputLoginPassword.setValue(password);
         buttonLoginSubmit.click();
+        return page(HomePage.class);
     }
 
     public String getErrorMessage(){
         return loginError.getText();
     }
 
-    public boolean isOnLoginPage(){
+    public LoginPage isOnLoginPage(){
         divLoginPage.shouldBe(visible);
-        return true;
+        return this;
     }
 }

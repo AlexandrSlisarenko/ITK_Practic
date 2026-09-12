@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.page;
 
 public class TaskModal extends BasePage{
     private final SelenideElement overlay = $("[data-testid='task-modal-overlay']");
@@ -24,37 +25,45 @@ public class TaskModal extends BasePage{
     private final SelenideElement messageError = $("[data-testid='task-form-error']");
 
 
-    public void setTitle(String title) {
+    public TaskModal setTitle(String title) {
         titleTask.setValue(title);
+        return this;
     }
 
-    public void setDescription(String description) {
+    public TaskModal setDescription(String description) {
         descriptionTask.setValue(description);
+        return this;
     }
 
-    public void setPriority(String priority) {
+    public TaskModal setPriority(String priority) {
         priorityTask.selectOptionContainingText(priority);
+        return this;
     }
 
-    public void setStatus(String status) {
+    public TaskModal setStatus(String status) {
         priorityTask.selectOptionContainingText(status);
+        return this;
     }
 
-    public void setDueDate(String due_Date) {
+    public TaskModal setDueDate(String due_Date) {
         dueDate.setValue(due_Date);
+        return this;
     }
 
-    public void save(){
+    public HomePage save(){
         saveBtn.click();
+        return page(HomePage.class);
     }
 
-    public void cancel(){
+    public HomePage cancel(){
         cancelBtn.click();
+        return page(HomePage.class);
     }
 
-    public void addComment(String comment) {
+    public TaskModal addComment(String comment) {
         this.comment.setValue(comment);
         submitCommitBtn.click();
+        return this;
     }
 
     public SelenideElement getCommentByText(String text) {
