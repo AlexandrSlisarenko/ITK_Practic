@@ -1,0 +1,7 @@
+recaptcha:
+  enabled: false
+  verification:
+    disabled: true
+google:
+  recaptcha:
+    enabled: false
