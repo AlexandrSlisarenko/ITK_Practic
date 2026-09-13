@@ -6,14 +6,13 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.url;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Epic("Task Manager Test")
 @Feature("Проверка функционала входа")
@@ -26,7 +25,6 @@ public class LoginPageTest {
         Configuration.pollingInterval = 1000;
         Configuration.reportsFolder = "target/selenide-reports";
         Configuration.baseUrl = "http://45.141.103.56:8090";
-        Configuration.holdBrowserOpen = true;
     }
 
     @Test

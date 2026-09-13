@@ -1,14 +1,16 @@
 package ru.slisarenko.taskmanager;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.page;
 
-public class HomePage extends BasePage{
+public class HomePage {
 
 
     private final String boardKanbanSelector = "[data-testid='kanban-board'] ";
@@ -82,7 +84,13 @@ public class HomePage extends BasePage{
         return boardKanban.$("[data-testid$='" + status + "']");
     }
 
+    public HomePage refreshTotalStat (String oldText, String statTestId){
+        statsBar.$("[data-testid$='stat-" + statTestId + "']")
+                .$("strong").shouldNotHave(text(oldText));
+        return this;
+    }
     public String getStatValue(String statTestId){
+
         return statsBar.$("[data-testid$='stat-" + statTestId + "']")
                 .$("strong")
                 .getText();
@@ -103,6 +111,7 @@ public class HomePage extends BasePage{
     }
 
     public boolean existsCardWithTitleInColumnIN_PROGRESS(String title){
+        cardsInProgress.shouldHave(CollectionCondition.sizeGreaterThan(cardsInProgress.size()));
         return existsCardInCollect(cardsInProgress, title);
     }
 

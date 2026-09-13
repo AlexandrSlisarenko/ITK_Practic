@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 
-public class LoginPage extends BasePage{
+public class LoginPage {
 
     private final SelenideElement divLoginPage = $("div[data-testid='login-page']");
     private final SelenideElement inputLoginEmail = $("input[data-testid='login-email-input']");
@@ -37,8 +37,8 @@ public class LoginPage extends BasePage{
         return loginError.getText();
     }
 
-    public LoginPage isOnLoginPage(){
+    public boolean isOnLoginPage(){
         divLoginPage.shouldBe(visible);
-        return this;
+        return true;
     }
 }

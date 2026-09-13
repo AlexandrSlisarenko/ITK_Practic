@@ -3,13 +3,12 @@ package ru.slisarenko.taskmanager;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.page;
 
-public class TaskModalForm extends BasePage{
+public class TaskModalForm {
     private final SelenideElement overlay = $("[data-testid='task-modal-overlay']");
     private final SelenideElement windowModalTask = $("[data-testid='task-modal']");
     private final SelenideElement titleModalTask = $("[data-testid='task-modal-title']");
@@ -52,11 +51,11 @@ public class TaskModalForm extends BasePage{
         return this;
     }
 
-    public void save(){
+    public void save() {
         saveBtn.click();
     }
 
-    public HomePage cancel(){
+    public HomePage cancel() {
         cancelBtn.click();
         return page(HomePage.class);
     }
@@ -68,9 +67,9 @@ public class TaskModalForm extends BasePage{
     }
 
     public boolean existsCommentByText(String text) {
-       comments.shouldHave(CollectionCondition.sizeGreaterThan(1), Duration.ofSeconds(3));
-       return comments.stream()
-                .anyMatch(comment -> comment.$("span").getText().equals(text));
+        comments.shouldBe(CollectionCondition.sizeGreaterThan(comments.size()));
+        return comments.stream()
+                .anyMatch(comment -> comment.$(" span").getText().equals(text));
     }
 
     public String getErrorMessage() {

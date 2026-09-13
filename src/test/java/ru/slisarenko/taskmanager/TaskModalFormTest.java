@@ -29,7 +29,6 @@ public class TaskModalFormTest {
         Configuration.pollingInterval = 1000;
         Configuration.reportsFolder = "target/selenide-reports";
         Configuration.baseUrl = "http://45.141.103.56:8090";
-        Configuration.holdBrowserOpen = true;
     }
 
     @Test
@@ -46,13 +45,14 @@ public class TaskModalFormTest {
                 .loadHomePage()
                 .waitForBoardLoaded();
 
-        int totalTaskBefore = Integer.parseInt(homePage.getStatValue("total-tasks"));
+        String totalTaskBefore = homePage.getStatValue("total-tasks");
         homePage.createTask(titleTest, priorityTest, dateTest);
-        int totalTaskAfter = Integer.parseInt(homePage.getStatValue("total-tasks"));
+        String totalTaskAfter = homePage.refreshTotalStat(totalTaskBefore,"total-tasks")
+                .getStatValue("total-tasks");
         boolean existsNewTitleInColumnTODO = homePage.existsCardWithTitleInColumnTODO(titleTest);
 
         assertTrue(existsNewTitleInColumnTODO);
-        assertEquals(1, totalTaskAfter - totalTaskBefore);
+        assertEquals(1, Integer.parseInt(totalTaskAfter) - Integer.parseInt(totalTaskBefore));
     }
 
     @Test
@@ -89,13 +89,11 @@ public class TaskModalFormTest {
                 .waitForBoardLoaded();
 
         String testTitle = homePage.getFirstTitleCardInColumn("IN_PROGRESS");
-        TaskModalForm taskModalForm = homePage.openTaskByTitle(testTitle);
-        taskModalForm = taskModalForm.addComment(titleComment);
-        boolean existNewComment = taskModalForm.existsCommentByText(titleComment);
-
+        boolean existNewComment = homePage.openTaskByTitle(testTitle)
+                .addComment(titleComment)
+                .existsCommentByText(titleComment);
 
         assertTrue(existNewComment);
-
     }
 
     @AfterEach
