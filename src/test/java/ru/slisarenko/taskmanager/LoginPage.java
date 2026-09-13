@@ -21,14 +21,19 @@ public class LoginPage extends BasePage{
         return this;
     }
 
-    public HomePage login(String email, String password){
+    public LoginPage login(String email, String password){
         inputLoginEmail.setValue(email);
         inputLoginPassword.setValue(password);
         buttonLoginSubmit.click();
+        return this;
+    }
+
+    public HomePage loadHomePage(){
         return page(HomePage.class);
     }
 
     public String getErrorMessage(){
+        loginError.shouldBe(visible);
         return loginError.getText();
     }
 
