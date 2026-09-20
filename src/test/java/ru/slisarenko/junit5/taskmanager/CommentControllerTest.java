@@ -1,15 +1,9 @@
 package ru.slisarenko.junit5.taskmanager;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import io.restassured.RestAssured;
-import io.restassured.config.ObjectMapperConfig;
-import io.restassured.config.RestAssuredConfig;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ru.slisarenko.junit5.taskmanager.Specifications.commonRequestSpec;
 import static ru.slisarenko.junit5.taskmanager.Specifications.getCommentId;
+import static ru.slisarenko.junit5.taskmanager.Specifications.initMapper;
 
 @Epic("Task Manager Test")
 @Feature("Проверка функционала Комментарии")
@@ -31,13 +26,7 @@ import static ru.slisarenko.junit5.taskmanager.Specifications.getCommentId;
 public class CommentControllerTest {
     @BeforeAll
     public static void setup() {
-        ObjectMapper mapper = new ObjectMapper()
-                .registerModule(new JavaTimeModule())
-                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-
-        RestAssured.config = RestAssuredConfig.config()
-                .objectMapperConfig(ObjectMapperConfig.objectMapperConfig()
-                        .jackson2ObjectMapperFactory((type, charset) -> mapper));
+        initMapper();
     }
 
     @Test
