@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Epic("Task Manager Test")
 @Feature("Проверка функционала работы с задачами в модальном окне")
+@DisplayName("Проверка функционала работы с задачами в модальном окне")
 public class TaskModalFormTest {
 
     @BeforeAll

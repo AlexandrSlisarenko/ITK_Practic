@@ -9,6 +9,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.url;
@@ -16,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Epic("Task Manager Test")
 @Feature("Проверка функционала входа")
+@DisplayName("Проверка функционала входа")
 public class LoginPageTest {
 
     @BeforeAll
@@ -31,17 +34,17 @@ public class LoginPageTest {
     @DisplayName("Проверка процедуры входа")
     @Story("Проверка процедуры входа")
     public void checkLoginProcedureHappyPath() {
-       HomePage homePage = open("/login", LoginPage.class)
-               .login("qa@demo.com", "Demo123!")
-               .loadHomePage()
-               .waitForBoardLoaded();
-       String userName = homePage.getUserName();
+        HomePage homePage = open("/login", LoginPage.class)
+                .login("qa@demo.com", "Demo123!")
+                .loadHomePage()
+                .waitForBoardLoaded();
+        String userName = homePage.getUserName();
 
-       String actualUrlPage = url();
-       String expectedUrlPage = Configuration.baseUrl + "/";
+        String actualUrlPage = url();
+        String expectedUrlPage = Configuration.baseUrl + "/";
 
-       assertEquals("QA Engineer", userName);
-       assertEquals(expectedUrlPage, actualUrlPage);
+        assertEquals("QA Engineer", userName);
+        assertEquals(expectedUrlPage, actualUrlPage);
     }
 
     @Test
@@ -70,6 +73,29 @@ public class LoginPageTest {
 
         assertEquals(expectedUrlPage, actualUrlPage);
         assertEquals("Authentication failed", errorMessage);
+    }
+
+    @ParameterizedTest(name = "Проверка процедуры входа с email =>{0}, password => {1}")
+    @DisplayName("Проверка процедуры входа с email и password")
+    @CsvSource({"qa@demo.com, Demo123!, http://45.141.103.56:8090/",
+            "qa123@demo.com, Demo123!, http://45.141.103.56:8090/login",
+            "qa@demo.com, Demo!, http://45.141.103.56:8090/login"
+    })
+    public void checkLoginProcedure(String email, String password, String expected) {
+        if(expected.equals("http://45.141.103.56:8090/")) {
+            open("/login", LoginPage.class)
+                    .login("qa@demo.com", "Demo123!")
+                    .loadHomePage()
+                    .waitForBoardLoaded();
+        } else {
+            open("/login", LoginPage.class)
+                    .login(email, password)
+                    .getErrorMessage();
+        }
+
+        String actualUrlPage = url();
+
+        assertEquals(expected, actualUrlPage);
     }
 
     @AfterEach

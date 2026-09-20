@@ -24,7 +24,6 @@ public class GoogleSearchPage {
     private By aboutGoogle;
     private By reklama;
     private By howsearchworks;
-    ;
 
     public GoogleSearchPage() {
 

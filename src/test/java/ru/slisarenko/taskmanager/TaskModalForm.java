@@ -4,8 +4,10 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
 public class TaskModalForm {
@@ -75,6 +77,9 @@ public class TaskModalForm {
     public String getErrorMessage() {
         return messageError.getText();
     }
+
+
+
 }
 
 
