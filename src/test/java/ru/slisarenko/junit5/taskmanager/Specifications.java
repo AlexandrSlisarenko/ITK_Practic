@@ -47,7 +47,8 @@ public class Specifications {
 
     private static Map<String, String> getCredentials(){
         Map<String, String> credentials = new HashMap<>();
-        credentials.put("email", "qa@demo.com");
+        //credentials.put("email", "qa@demo.com");
+        credentials.put("email", "admin@demo.com");
         credentials.put("password", "Demo123!");
         return credentials;
     }

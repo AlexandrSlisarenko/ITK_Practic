@@ -87,6 +87,7 @@ public class CommentControllerTest {
                 .when()
                 .patch("/comments/{commentId}")
                 .then()
+                .log().all()
                 .statusCode(200)
                 .extract()
                 .as(CommentResponse.class);
