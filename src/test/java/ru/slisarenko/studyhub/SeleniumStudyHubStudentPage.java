@@ -27,7 +27,7 @@ public class SeleniumStudyHubStudentPage {
 
 
     public SeleniumStudyHubStudentPage() {
-        this.driver = new ChromeDriver();
+            this.driver = new ChromeDriver();
         this.waitElement = new WebDriverWait(this.driver, Duration.ofSeconds(10));
         this.driver.get("https://academy.siamsoftware.tech");
 
