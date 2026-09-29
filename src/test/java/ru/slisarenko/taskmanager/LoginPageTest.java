@@ -27,7 +27,7 @@ public class LoginPageTest {
         Configuration.timeout = 20000;
         Configuration.pollingInterval = 1000;
         Configuration.reportsFolder = "target/selenide-reports";
-        Configuration.baseUrl = "http://45.141.103.56:8090";
+        Configuration.baseUrl = "https://demo.itklabs.online";
     }
 
     @Test
@@ -77,12 +77,12 @@ public class LoginPageTest {
 
     @ParameterizedTest(name = "Проверка процедуры входа с email =>{0}, password => {1}")
     @DisplayName("Проверка процедуры входа с email и password")
-    @CsvSource({"qa@demo.com, Demo123!, http://45.141.103.56:8090/",
-            "qa123@demo.com, Demo123!, http://45.141.103.56:8090/login",
-            "qa@demo.com, Demo!, http://45.141.103.56:8090/login"
+    @CsvSource({"qa@demo.com, Demo123!, https://demo.itklabs.online/",
+            "qa123@demo.com, Demo123!, https://demo.itklabs.online/login",
+            "qa@demo.com, Demo!, https://demo.itklabs.online/login"
     })
     public void checkLoginProcedure(String email, String password, String expected) {
-        if(expected.equals("http://45.141.103.56:8090/")) {
+        if(expected.equals("https://demo.itklabs.online/")) {
             open("/login", LoginPage.class)
                     .login("qa@demo.com", "Demo123!")
                     .loadHomePage()

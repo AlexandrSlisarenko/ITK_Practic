@@ -30,7 +30,7 @@ public class HomePageTest {
         Configuration.timeout = 20000;
         Configuration.pollingInterval = 1000;
         Configuration.reportsFolder = "target/selenide-reports";
-        Configuration.baseUrl = "http://45.141.103.56:8090";
+        Configuration.baseUrl = "https://demo.itklabs.online";
     }
 
     @Test

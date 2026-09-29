@@ -3,7 +3,6 @@ package ru.slisarenko.junit5.taskmanager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import io.qameta.allure.Allure;
 import io.restassured.RestAssured;
 import io.restassured.config.ObjectMapperConfig;
 import io.restassured.config.RestAssuredConfig;
@@ -17,7 +16,6 @@ import ru.slisarenko.dto.response.ProjectResponse;
 import ru.slisarenko.dto.response.TaskResponse;
 import ru.slisarenko.dto.response.User;
 import ru.slisarenko.enums.TaskStatus;
-
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.empty;
@@ -39,7 +37,7 @@ public class Specifications {
     public static RequestSpecification commonRequestSpec() {
         String token = getToken();
         return given()
-                .baseUri("http://45.141.103.56:8090")
+                .baseUri("https://demo.itklabs.online")
                 .auth().oauth2(token)
                 .contentType("application/json")
                 .basePath("api/v1");
@@ -57,7 +55,7 @@ public class Specifications {
         Map<String, String> credentials = getCredentials();
 
         String token = given()
-                .baseUri("http://45.141.103.56:8090")
+                .baseUri("https://demo.itklabs.online")
                 .contentType("application/json")
                 .basePath("api/v1")
                 .body(credentials)
@@ -74,7 +72,7 @@ public class Specifications {
     public static User getUser() {
         Map<String, String> credentials = getCredentials();
         return given()
-                .baseUri("http://45.141.103.56:8090")
+                .baseUri("https://demo.itklabs.online")
                 .contentType("application/json")
                 .basePath("api/v1")
                 .body(credentials)
