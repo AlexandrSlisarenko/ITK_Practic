@@ -23,18 +23,3 @@ jobs:
         with:
           name: allure-report
           path: target/allure-results
-  report:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download test results
-        uses: actions/download-artifact@v3
-        with:
-          name: test-results
-      - name: Generate Allure report
-        run: mvn allure:report
-      - name: Upload Allure report
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: allure-report
-          path: target/site/allure-maven-plugin/
