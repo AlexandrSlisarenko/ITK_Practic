@@ -16,8 +16,9 @@ public class ScenarioWorld {
     private String titleTask;
     private int version;
     private int stausLastAnswer;
+    private String bodyRequest;
     private String bodyLastAnswer;
-    private String credentials;
+    private Map<String,String> creds;
     private HttpClient client;
     private HttpRequest request;
 }

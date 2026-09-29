@@ -1,2 +1,0 @@
-QA = {"email": qa@demo.com","password":"Demo123!"}
-ADMIN = {"email": "admin@demo.com","password":"Demo123!"}
