@@ -1,9 +1,9 @@
 name: CI
 on:
   push:
-    branches: [slisarenko_ci]      # своя ветка — прогон при разработке
+    branches: [slisarenko_ci]
   pull_request:
-    branches: [main]      # прогон на PR перед сдачей
+    branches: [main]
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -12,17 +12,30 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 21, cache: maven }
+      - run: mvn -B -ntp test
+      - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          distribution: temurin
-          java-version: 21
-          cache: maven
-      - name: Run tests
-        run: mvn test
-      - name: Upload Allure report
-        if: always()  # даже если тесты упали, загружаем отчёт
-        uses: actions/upload-artifact@v3
+          name: allure-results
+          path: target/allure-results
+
+  report:
+    needs: tests
+    if: always()               # ← обязательно, иначе при падении тестов отчёт не соберётся
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 21, cache: maven }
+      - uses: actions/download-artifact@v4
+        with:
+          name: allure-results
+          path: target/allure-results
+      - run: mvn -B -ntp allure:report
+      - uses: actions/upload-artifact@v4
         with:
           name: allure-report
-          path: target/allure-results
+          path: target/site/allure-maven-plugin
