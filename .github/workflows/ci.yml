@@ -4,6 +4,9 @@ on:
     branches: [slisarenko_ci]      # своя ветка — прогон при разработке
   pull_request:
     branches: [main]      # прогон на PR перед сдачей
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   tests:
     runs-on: ubuntu-latest
