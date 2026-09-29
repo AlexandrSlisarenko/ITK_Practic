@@ -1,4 +1,4 @@
-name: NewCI
+name: NewCISlisarenko
 on:
   push:
     branches: [slisarenko_ci]
@@ -24,7 +24,7 @@ jobs:
 
   report:
     needs: tests
-    if: always()               # ← обязательно, иначе при падении тестов отчёт не соберётся
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
