@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: ['**']      # своя ветка — прогон при разработке
+    branches: [slisarenko_ci]      # своя ветка — прогон при разработке
   pull_request:
     branches: [main]      # прогон на PR перед сдачей
 
