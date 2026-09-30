@@ -39,6 +39,7 @@ public class HomePageTest {
         options.addArguments("--disable-dev-shm-usage"); // Часто решает проблемы с памятью
         options.addArguments("--disable-gpu");
         options.addArguments("--window-size=1366,768");
+        options.addArguments("--headless=new");
 
         Configuration.browserCapabilities = options;
     }

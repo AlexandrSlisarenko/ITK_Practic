@@ -1,5 +1,6 @@
 package ru.slisarenko.studyhub;
 
+import com.codeborne.selenide.Configuration;
 import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -33,7 +34,8 @@ public class SeleniumStudyHubStudentPage {
         options.addArguments("--disable-dev-shm-usage"); // Часто решает проблемы с памятью
         options.addArguments("--disable-gpu");
         options.addArguments("--window-size=1366,768");
-
+        options.addArguments("--headless=new");
+        Configuration.headless = true;
         this.driver = new ChromeDriver(options);
 
         this.waitElement = new WebDriverWait(this.driver, Duration.ofSeconds(10));
