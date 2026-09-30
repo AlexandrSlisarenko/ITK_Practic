@@ -2,7 +2,7 @@ name: NewCISlisarenko
 run-name: ${{ github.actor }} is legn GitHub Action
 on:
   push:
-    branches: [slisarenko_ci]
+    branches: [slisarenko-ci]
 jobs:
   build-project-test:
     runs-on: ubuntu-latest
