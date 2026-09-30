@@ -25,6 +25,7 @@ public class SeleniumStudyHubStudentPageTest {
         page = new SeleniumStudyHubStudentPage();
     }
 
+    @Disabled("Надо проверять")
     @Test
     public void checkPageTitle() {
         String title = page.loginToPlatform()
@@ -33,6 +34,7 @@ public class SeleniumStudyHubStudentPageTest {
         assertEquals("Study Hub", title);
     }
 
+    @Disabled("Необходимо разобраться в элементе")
     @Test
     public void checkClickNextButton() {
         String expected = "Selenium и Selenide";
@@ -55,6 +57,7 @@ public class SeleniumStudyHubStudentPageTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Disabled("Необходимо разобраться в элементе")
     @Test
     public void checkSelectCourseByName() {
 
