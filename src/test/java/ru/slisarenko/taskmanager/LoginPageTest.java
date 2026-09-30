@@ -30,12 +30,13 @@ public class LoginPageTest {
         Configuration.pollingInterval = 1000;
         Configuration.reportsFolder = "target/selenide-reports";
         Configuration.baseUrl = "https://demo.itklabs.online";
+        Configuration.headless = true;
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");            // Обязательно для CI
         options.addArguments("--disable-dev-shm-usage"); // Часто решает проблемы с памятью
         options.addArguments("--disable-gpu");
         options.addArguments("--window-size=1366,768");
-
+        options.addArguments("--headless=new");
         Configuration.browserCapabilities = options;
     }
 
