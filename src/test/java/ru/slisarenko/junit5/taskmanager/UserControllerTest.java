@@ -5,6 +5,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,11 +17,18 @@ import ru.slisarenko.enums.TaskStatus;
 
 import static io.restassured.RestAssured.given;
 import static ru.slisarenko.junit5.taskmanager.Specifications.commonRequestSpec;
+import static ru.slisarenko.junit5.taskmanager.Specifications.getUser;
 
 @Epic("Task Manager Test")
 @Feature("Проверка функционала работы с пользователем")
 @DisplayName("Проверка функционала работы с пользователем")
 public class UserControllerTest {
+    private static User userTest;
+
+    @BeforeAll
+    public static void setup() {
+        userTest = getUser();
+    }
 
     @Story("Получаем список пользователей")
     @DisplayName("Получаем список пользователей")
@@ -46,16 +54,13 @@ public class UserControllerTest {
         Assertions.assertFalse(users.isEmpty());
     }
 
-    @Disabled("Необходимы корректные данные")
     @Story("Получаем пользователя по Id")
     @DisplayName("Получаем пользователя по Id")
     @Test
     public void getUserByIdTest(){
-        String id = "1745baa9-d847-45ab-8a07-29ebf9020b79";
-
         User user = given()
                 .spec(commonRequestSpec())
-                .pathParam("userId", id)
+                .pathParam("userId", userTest.getId())
                 .when()
                 .get("/users/{userId}")
                 .then()
@@ -65,19 +70,16 @@ public class UserControllerTest {
                 .as(User.class);
 
         Assertions.assertNotNull(user);
-        Assertions.assertEquals("lead@demo.com", user.getEmail());
     }
 
-    @Disabled("Необходимы корректные данные")
+    @Disabled("Надо подумать как данные брать")
     @Story("Мягко удаляем пользователя по Id")
     @DisplayName("Мягко удаляем пользователя по Id")
     @Test
     public void softDeleteUserByIdTest(){
-        String id = "1745baa9-d847-45ab-8a07-29ebf9020b79";
-
-            given()
+                given()
                 .spec(commonRequestSpec())
-                .pathParam("userId", id)
+                .pathParam("userId", userTest)
                 .when()
                 .delete("/users/{userId}")
                 .then()
@@ -86,16 +88,13 @@ public class UserControllerTest {
 
     }
 
-    @Disabled("Необходимы корректные данные")
     @Story("Обновляем пользователя по Id")
     @DisplayName("Обновляем пользователя по Id")
     @Test
     public void updateUserByIdTest(){
-        String id = "c620d776-e7f9-435b-b2a5-710981e5c44d";
-
         User user = given()
                 .spec(commonRequestSpec())
-                .pathParam("userId", id)
+                .pathParam("userId", userTest.getId())
                 .when()
                 .get("/users/{userId}")
                 .then()
@@ -114,7 +113,7 @@ public class UserControllerTest {
 
         User result = given()
                 .spec(commonRequestSpec())
-                .pathParam("userId", id)
+                .pathParam("userId", userTest.getId())
                 .body(updateUser)
                 .when()
                 .patch("/users/{userId}")
@@ -128,12 +127,10 @@ public class UserControllerTest {
         Assertions.assertEquals(user.getFirstName() + "1", result.getFirstName());
 
     }
-    @Disabled("Необходимы корректные данные")
     @Story("Получаем задачи пользователя по Id")
     @DisplayName("Получаем задачи пользователя по Id")
     @Test
     public void getTasksByUserIdTest(){
-        String id = "5404a5c9-1559-49de-99a8-12a5c5ed3f89";
         String testStatus = TaskStatus.TODO.name();
         RequestPage requestPage = RequestPage.builder()
                 .page(1)
@@ -143,7 +140,7 @@ public class UserControllerTest {
 
         List<TaskResponse> listTask = given()
                 .spec(commonRequestSpec())
-                .pathParam("userId", id)
+                .pathParam("userId", userTest.getId())
                 .queryParam("status", testStatus)
                 .body(requestPage)
                 .when()
@@ -158,7 +155,6 @@ public class UserControllerTest {
         Assertions.assertNotNull(listTask);
         Assertions.assertFalse(listTask.isEmpty());
     }
-    @Disabled("Необходимы корректные данные")
     @Story("Получаем задачи пользователя по Id")
     @DisplayName("Получаем задачи пользователя по Id")
     @Test

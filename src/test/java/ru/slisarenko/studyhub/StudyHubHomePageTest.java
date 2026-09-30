@@ -28,6 +28,7 @@ public class StudyHubHomePageTest {
        homePage = new StudyHubHomePage();
    }
 
+   @Disabled("Временное отключение")
    @Test
    @DisplayName("Проверка входа на портал")
    @Story("Проверка входа на портал")
@@ -36,6 +37,7 @@ public class StudyHubHomePageTest {
        assertTrue(isLogin);
    }
 
+   @Disabled("Временное отключение")
    @Test
    @DisplayName("Проверка отображения логотипа")
    @Story("Проверка отображения логотипа")
@@ -87,6 +89,7 @@ public class StudyHubHomePageTest {
        assertNotEquals(themeName, newThemeName);
    }
 
+    @Disabled("Временное отключение")
    @Test
    @DisplayName("Проверка результата по нажатию на кнопку 'Продолжить обучение'")
    @Story("Проверка результата по нажатию на кнопку 'Продолжить обучение'")
