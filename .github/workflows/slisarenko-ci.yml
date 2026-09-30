@@ -3,6 +3,10 @@ run-name: ${{ github.actor }} is legn GitHub Action
 on:
   push:
     branches: [slisarenko-ci]
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-project-test:
     runs-on: ubuntu-latest
@@ -15,4 +19,12 @@ jobs:
           java-version: '21'
           cache: 'maven'
       - name: packaging
-        run: mvn clean package
+        run: mvn -B -ntp test
+        env:
+          SELENIDE_HEADLESS: 'true'
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: target/allure-results
