@@ -1,9 +1,14 @@
 package ru.slisarenko.cucumber.hooks;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.BeforeStep;
+import io.restassured.RestAssured;
+import io.restassured.config.ObjectMapperConfig;
+import io.restassured.config.RestAssuredConfig;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -64,6 +69,7 @@ public class ApiHooks {
             ObjectMapper objectMapper = new ObjectMapper();
             ResponseAuthorization responseAuthorization = objectMapper.readValue(response.body(), ResponseAuthorization.class);
             world.setToken(responseAuthorization.getAccessToken());
+            world.setUserId(responseAuthorization.getUser().getId());
         }  catch (IOException | InterruptedException exception){
             System.out.println(exception.getMessage());
         }

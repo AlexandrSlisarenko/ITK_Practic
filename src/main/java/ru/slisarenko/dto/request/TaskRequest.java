@@ -1,10 +1,13 @@
 package ru.slisarenko.dto.request;
 
+import java.time.Instant;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.slisarenko.enums.TaskPriority;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,9 +15,10 @@ import lombok.Setter;
 @Setter
 @Builder
 public class TaskRequest {
-    private String  title;
-    private String  description;
-    private String  priority;
-    private String dueDate;
-    private String assigneeId;
+    private UUID projectId;
+    private String title;
+    private String description;
+    private TaskPriority priority;
+    private Instant dueDate;
+    private UUID assigneeId;
 }

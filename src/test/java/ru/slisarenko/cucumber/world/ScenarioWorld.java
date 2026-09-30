@@ -14,11 +14,12 @@ public class ScenarioWorld {
     private String idProject;
     private String idCreatedTask;
     private String titleTask;
-    private int version;
+    private Long version;
     private int stausLastAnswer;
     private String bodyRequest;
     private String bodyLastAnswer;
     private Map<String,String> creds;
     private HttpClient client;
     private HttpRequest request;
+    private String userId;
 }
