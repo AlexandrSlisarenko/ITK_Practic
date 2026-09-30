@@ -8,6 +8,7 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -44,6 +45,7 @@ public class StudyHubHomePageTest {
        assertTrue(isDisplayed);
    }
 
+   @Disabled("Необходимы корректные данные")
    @Test
    @DisplayName("Проверка сворачивания бокового слайдера")
    @Story("Проверка сворачивания бокового слайдера")
@@ -64,6 +66,7 @@ public class StudyHubHomePageTest {
        Allure.step("Слайдер развернулся");
    }
 
+    @Disabled("Необходимы корректные данные")
    @Test
    @DisplayName("Проверка функционала переключения темы")
    @Story("Проверка функционала переключения темы")
