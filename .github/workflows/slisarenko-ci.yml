@@ -19,7 +19,7 @@ jobs:
           java-version: '21'
           cache: 'maven'
       - name: Run tests
-        run: ./mvnw -B -ntp test
+        run: mvn -B -ntp test
         env:
           SELENIDE_HEADLESS: 'true'
       - name: Upload Allure results
