@@ -18,8 +18,8 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'maven'
-      - name: packaging
-        run: mvn -B -ntp test
+      - name: Run tests
+        run: ./mvnw -B -ntp test
         env:
           SELENIDE_HEADLESS: 'true'
       - name: Upload Allure results
