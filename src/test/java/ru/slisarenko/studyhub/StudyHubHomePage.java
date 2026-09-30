@@ -6,6 +6,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.visible;
@@ -40,7 +41,14 @@ public class StudyHubHomePage {
         Configuration.pollingInterval = 1000;
         Configuration.reportsFolder = "target/selenide-reports";
         Configuration.baseUrl = "https://academy.siamsoftware.tech";
-        //Configuration.holdBrowserOpen = true;
+        Configuration.headless = true;
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox");            // Обязательно для CI
+        options.addArguments("--disable-dev-shm-usage"); // Часто решает проблемы с памятью
+        options.addArguments("--disable-gpu");
+        options.addArguments("--window-size=1366,768");
+
+        Configuration.browserCapabilities = options;
     }
 
     public void clickButtonContinue() {

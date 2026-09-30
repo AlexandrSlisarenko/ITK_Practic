@@ -1,12 +1,15 @@
 package ru.slisarenko.studyhub;
 
+import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Feature("Проверка функционала")
 public class SeleniumStudyHubStudentPageTest {
     private SeleniumStudyHubStudentPage page;
+
+
 
     @BeforeEach
     public void setUpBeforeClass() throws Exception {

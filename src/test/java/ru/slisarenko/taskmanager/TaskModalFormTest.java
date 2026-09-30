@@ -12,6 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,6 +31,13 @@ public class TaskModalFormTest {
         Configuration.pollingInterval = 1000;
         Configuration.reportsFolder = "target/selenide-reports";
         Configuration.baseUrl = "https://demo.itklabs.online";
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox");            // Обязательно для CI
+        options.addArguments("--disable-dev-shm-usage"); // Часто решает проблемы с памятью
+        options.addArguments("--disable-gpu");
+        options.addArguments("--window-size=1366,768");
+
+        Configuration.browserCapabilities = options;
     }
 
     @Test
