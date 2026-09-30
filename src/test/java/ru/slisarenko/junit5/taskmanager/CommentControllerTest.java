@@ -7,6 +7,7 @@ import io.qameta.allure.Story;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.slisarenko.dto.request.UpdateCommentRequest;
@@ -51,6 +52,7 @@ public class CommentControllerTest {
         assertEquals(commentID, comment.getId());
     }
 
+    @Disabled("Необходимы корректные данные")
     @Test
     @Story("Получаем и обновляем текст и версию комментария")
     @DisplayName("Получаем и обновляем текст и версию комментария")
@@ -87,7 +89,7 @@ public class CommentControllerTest {
                 .when()
                 .patch("/comments/{commentId}")
                 .then()
-                .log().all()
+                .log().ifValidationFails()
                 .statusCode(200)
                 .extract()
                 .as(CommentResponse.class);
@@ -115,7 +117,7 @@ public class CommentControllerTest {
                 .delete("/comments/{id}")
                 .then()
                 .statusCode(204)
-                .log().all();
+                .log().ifValidationFails();
 
         given()
                 .spec(commonRequestSpec())

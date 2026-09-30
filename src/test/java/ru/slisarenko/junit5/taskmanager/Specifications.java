@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import ru.slisarenko.dto.request.Comment;
 import ru.slisarenko.dto.response.CommentResponse;
 import ru.slisarenko.dto.response.ProjectResponse;
 import ru.slisarenko.dto.response.TaskResponse;
@@ -130,13 +131,22 @@ public class Specifications {
     }
 
     public static String getCommentId(int commentNumber) {
-        int i = 0;
+
         CommentResponse comment = null;
         String token = getToken();
         UUID projectId = getProjectByName("DEMO").getId();
         List<TaskResponse> tasks = getTasksByProjectId(projectId, TaskStatus.TODO);
+        comment = findComment(commentNumber, tasks, token);
+        if(comment == null){
+            addCommentForTest(tasks.getFirst().getId());
+            comment = findComment(commentNumber, tasks, token);
+        }
+        return comment.getId().toString();
+    }
 
-
+    private static CommentResponse findComment(int commentNumber, List<TaskResponse> tasks, String token) {
+        int i = 0;
+        CommentResponse comment = null;
         while (i < tasks.size()) {
             List<CommentResponse> comments = given()
                     .spec(commonRequestSpec())
@@ -155,13 +165,34 @@ public class Specifications {
                     comment = comments.get(commentNumber);
                     break;
                 } else {
-                    comment = comments.get(0);
+                    comment = comments.getFirst();
                     break;
                 }
             }
             i++;
         }
-
-        return comment == null ? "" : comment.getId().toString();
+        return comment;
     }
+
+    private static void addCommentForTest(UUID taskId){
+        String token = getToken();
+        Comment comment = Comment.builder()
+                .body("Необходимо для тестирования функционала комментариев")
+                .build();
+        given()
+                .spec(commonRequestSpec())
+                .auth().oauth2(token)
+                .pathParam("taskId", taskId)
+                .body(comment)
+                .when()
+                .post("/tasks/{taskId}/comments")
+                .then()
+                .statusCode(201)
+                .body("content", not(empty()))
+                .log().ifValidationFails()
+                .extract()
+                .jsonPath()
+                .getList("content", TaskResponse.class);
+        }
+
 }

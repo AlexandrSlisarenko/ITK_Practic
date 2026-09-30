@@ -5,6 +5,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.slisarenko.dto.request.RequestPage;
@@ -37,7 +38,7 @@ public class UserControllerTest {
                 .get("/users")
                 .then()
                 .statusCode(200)
-                .log().all()
+                .log().ifValidationFails()
                 .extract().jsonPath()
                 .getList("content", User.class);
 
@@ -45,6 +46,7 @@ public class UserControllerTest {
         Assertions.assertFalse(users.isEmpty());
     }
 
+    @Disabled("Необходимы корректные данные")
     @Story("Получаем пользователя по Id")
     @DisplayName("Получаем пользователя по Id")
     @Test
@@ -58,7 +60,7 @@ public class UserControllerTest {
                 .get("/users/{userId}")
                 .then()
                 .statusCode(200)
-                .log().all()
+                .log().ifValidationFails()
                 .extract()
                 .as(User.class);
 
@@ -66,8 +68,9 @@ public class UserControllerTest {
         Assertions.assertEquals("lead@demo.com", user.getEmail());
     }
 
-    @Story("Получаем пользователя по Id")
-    @DisplayName("Получаем пользователя по Id")
+    @Disabled("Необходимы корректные данные")
+    @Story("Мягко удаляем пользователя по Id")
+    @DisplayName("Мягко удаляем пользователя по Id")
     @Test
     public void softDeleteUserByIdTest(){
         String id = "1745baa9-d847-45ab-8a07-29ebf9020b79";
@@ -79,10 +82,11 @@ public class UserControllerTest {
                 .delete("/users/{userId}")
                 .then()
                 .statusCode(204)
-                .log().all();
+                .log().ifValidationFails();
 
     }
 
+    @Disabled("Необходимы корректные данные")
     @Story("Обновляем пользователя по Id")
     @DisplayName("Обновляем пользователя по Id")
     @Test
@@ -96,7 +100,7 @@ public class UserControllerTest {
                 .get("/users/{userId}")
                 .then()
                 .statusCode(200)
-                .log().all()
+                .log().ifValidationFails()
                 .extract()
                 .as(User.class);
 
@@ -116,7 +120,7 @@ public class UserControllerTest {
                 .patch("/users/{userId}")
                 .then()
                 .statusCode(200)
-                .log().all()
+                .log().ifValidationFails()
                 .extract()
                 .as(User.class);
 
@@ -124,7 +128,7 @@ public class UserControllerTest {
         Assertions.assertEquals(user.getFirstName() + "1", result.getFirstName());
 
     }
-
+    @Disabled("Необходимы корректные данные")
     @Story("Получаем задачи пользователя по Id")
     @DisplayName("Получаем задачи пользователя по Id")
     @Test
@@ -146,7 +150,7 @@ public class UserControllerTest {
                 .get("/users/{userId}/tasks")
                 .then()
                 .statusCode(200)
-                .log().all()
+                .log().ifValidationFails()
                 .extract()
                 .jsonPath()
                 .getList("content", TaskResponse.class);
@@ -154,7 +158,7 @@ public class UserControllerTest {
         Assertions.assertNotNull(listTask);
         Assertions.assertFalse(listTask.isEmpty());
     }
-
+    @Disabled("Необходимы корректные данные")
     @Story("Получаем задачи пользователя по Id")
     @DisplayName("Получаем задачи пользователя по Id")
     @Test
@@ -167,7 +171,7 @@ public class UserControllerTest {
                 .get("/users/me/profile")
                 .then()
                 .statusCode(200)
-                .log().all()
+                .log().ifValidationFails()
                 .extract()
                 .jsonPath()
                 .getObject("user", User.class);

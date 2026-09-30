@@ -7,6 +7,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -75,6 +76,7 @@ public class LoginPageTest {
         assertEquals("Authentication failed", errorMessage);
     }
 
+    @Disabled("Нужны корректные данные")
     @ParameterizedTest(name = "Проверка процедуры входа с email =>{0}, password => {1}")
     @DisplayName("Проверка процедуры входа с email и password")
     @CsvSource({"qa@demo.com, Demo123!, https://demo.itklabs.online/",

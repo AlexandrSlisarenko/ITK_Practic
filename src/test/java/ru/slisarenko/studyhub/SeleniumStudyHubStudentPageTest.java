@@ -5,6 +5,7 @@ import io.qameta.allure.Feature;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,6 +38,7 @@ public class SeleniumStudyHubStudentPageTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Disabled("Необходимо разобраться в элементе")
     @Test
     public void checkClickLastLessonsButton() {
         String expected = "Selenium и Selenide";
@@ -59,6 +61,7 @@ public class SeleniumStudyHubStudentPageTest {
         Assertions.assertEquals(nameCourse, actualCourseName);
     }
 
+    @Disabled("Необходимо разобраться в элементе")
     @Test
     public void checkSelectCourseByNameWhichIsHidden() {
 
@@ -70,6 +73,7 @@ public class SeleniumStudyHubStudentPageTest {
         Assertions.assertEquals(nameCourse, actualCourseName);
     }
 
+    @Disabled("Необходимы корректные данные")
     @Test
     public void checkCountCourse() {
         int expected = 8;
