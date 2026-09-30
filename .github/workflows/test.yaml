@@ -1,20 +1,42 @@
 name: Test
+
 on:
   push:
-    branches: [slisarenko_ci]
+    branches: [main, slisarenko_ci]
   pull_request:
     branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  tests:
+  buildAndTest:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 20
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with: { distribution: temurin, java-version: 21, cache: maven }
-      - run: mvn -B -ntp test
-      - uses: actions/upload-artifact@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+
+      - name: Run tests
+        run: mvn -B -ntp test
+
+      - name: Upload Allure results
         if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: allure-results
           path: target/allure-results
+          if-no-files-found: ignore
+          retention-days: 7
