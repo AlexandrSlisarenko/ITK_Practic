@@ -15,7 +15,7 @@ public class SeleniumStudyHubCoursePage {
 
     public SeleniumStudyHubCoursePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(this.driver, Duration.ofSeconds(4));
+        this.wait = new WebDriverWait(this.driver, Duration.ofSeconds(10));
         this.navigation = By.className("breadcrumbs");
     }
     public SeleniumStudyHubCoursePage loadPage (){

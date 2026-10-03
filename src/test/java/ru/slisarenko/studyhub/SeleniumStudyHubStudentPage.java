@@ -27,7 +27,7 @@ public class SeleniumStudyHubStudentPage {
 
 
     public SeleniumStudyHubStudentPage() {
-            this.driver = new ChromeDriver();
+        this.driver = new ChromeDriver();
         this.waitElement = new WebDriverWait(this.driver, Duration.ofSeconds(10));
         this.driver.get("https://academy.siamsoftware.tech");
 
@@ -92,9 +92,8 @@ public class SeleniumStudyHubStudentPage {
         doneCourse.sendKeys(Keys.ENTER);
         //actions.sendKeys(doneCourse, Keys.ENTER).perform();
         js.executeScript("arguments[0].setAttribute('open','');", doneCourse);
-        String result = doneCourse.getAttribute("open");
-        WebElement course = getClickableElement(By.cssSelector("a[aria-label*='"+nameCourse+"']"));
-        course.click();
+        WebElement course = getClickableElement(By.xpath("//a[contains(@aria-label,'" + nameCourse + "')]"));
+        actions.sendKeys(course, Keys.ENTER).perform();
         return new SeleniumStudyHubCoursePage(driver);
     }
 
@@ -111,6 +110,7 @@ public class SeleniumStudyHubStudentPage {
     private WebElement getElementWithWait(By locator) {
         return waitElement.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
     private WebElement getClickableElement(By locator) {
         return waitElement.until(ExpectedConditions.elementToBeClickable(locator));
     }
